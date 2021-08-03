@@ -1,0 +1,53 @@
+@import "../../assets//styles/variable.scss";
+
+.footer {
+  //   height: 553px;
+  background: #000000;
+  padding-top: 6em;
+  color: #b0b0b0;
+  z-index: -1;
+  &-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+  }
+  li {
+    margin-top: 1em;
+    margin-left: -2em;
+  }
+  form {
+    margin-top: 2em;
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      border: 1px solid #e5e5e5;
+      box-sizing: border-box;
+      border-radius: 3px;
+      color: #b0b0b0;
+      font-weight: normal;
+      font-size: 14px;
+      background: #000000;
+      width: 208px;
+      height: 38px;
+    }
+    button {
+      background: #ffffff;
+      border-radius: 5px;
+      color: #131313;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+  &-social {
+    width: 150px;
+  }
+  hr {
+    border: 1px solid #262626;
+  }
+  &-bottom {
+    span {
+        color: #ffd601;
+      }
+  }
+}

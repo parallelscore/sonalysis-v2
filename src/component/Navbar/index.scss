@@ -1,0 +1,38 @@
+@import "../../assets//styles/variable.scss";
+
+
+.navbar{
+background-color: #27282C;
+color: white !important;
+    .navbar-collapse {
+        flex-grow: 0;
+        align-items: center;
+        .nav-item{
+            
+            .nav-link{
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                color: #fff !important;
+                text-transform: uppercase;
+                margin-right: 2em;
+                margin-top: 2em;
+                button{
+                    text-transform: uppercase;
+                    border: 1.5px solid #FFFFFF;
+                    padding: 8px 20px;
+                    box-sizing: border-box;
+                    border-radius: 3px;
+                    font-weight: 600;
+                    margin-top: -1em;
+                    background-color: transparent;
+                    color: #FFFFFF;
+                }
+            }
+
+        }
+    }
+    .navbar-toggler{
+        background-color: #fff !important;
+    }
+}

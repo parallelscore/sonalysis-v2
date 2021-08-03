@@ -1,0 +1,91 @@
+.analyzed-match {
+  .tab-section {
+    background: #000000;
+    border-radius: 5px;
+    // width: 404px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1em;
+    .tab {
+      color: #fff;
+
+      border-radius: 5px;
+      padding: 0.3em 1em;
+      cursor: pointer;
+    }
+    .active-tab {
+      background: #811aff;
+    }
+  }
+  .select-section {
+    margin-top: 3em;
+    .text {
+      span {
+        background: #000000;
+        border-radius: 3px;
+        padding: 0.5em 1em;
+        margin-left: 1em;
+      }
+    }
+    select {
+      background: #242424;
+      border-radius: 3px;
+      color: #ffffff;
+      padding: 0.5em;
+      border: none;
+      margin-left: 1em;
+    }
+  }
+  .football-vidoe {
+    img {
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+  .mini-map {
+    .team {
+      background: #000000;
+      border-radius: 3px;
+      font-size: 16px;
+      &:nth-child(1) {
+        width: 300px;
+      }
+      &:nth-child(2) {
+        width: 250px;
+      }
+      span {
+        color: #c0c0c0;
+      }
+    }
+
+    .video-section {
+      img {
+        object-fit: cover;
+        width: 100%;
+      }
+    }
+  }
+
+  .stats-card{
+    background: #000000;
+border-radius: 10px;
+
+.stats{
+  background: rgba(36, 36, 36, 0.2);
+  border-radius: 3px;
+  color: #fff;
+  width: 100%;
+  border: 1px solid rgba(36, 36, 36, 0.2);
+  margin-top: 2em;
+  padding: 1em 3em;
+  &:hover{
+    border: 1px solid #811AFF;
+    cursor: pointer;
+  }
+}
+  }
+
+  .comming-soon{
+    background: #000000;
+  }
+}
