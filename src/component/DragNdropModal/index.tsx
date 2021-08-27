@@ -38,12 +38,46 @@ console.log({postLoading, progress})
     setVideoFile(file)
   }
 
-  const handleSubmit = () => {
-    const formData = new FormData()
-    const file: any = videoFile
-    formData.append("file", file,);
-    dispatch(createUploadRequest(file, handleChangeTab, setOpenDragNdropModal)) 
+  const handleSubmit = (videoFile) => {
+    // const formData = new FormData()
+    // const file: any = videoFile
+    // formData.append("file", file,);
+    dispatch(createUploadRequest(videoFile, handleChangeTab, setOpenDragNdropModal)) 
   }
+
+  const downloadVideo = () => {
+    const link: any = document.getElementById("link")
+    const linkValue = link.value
+    // setLinkLoading(true)
+    // "https://res.cloudinary.com/sirsuccess/video/upload/v1616574885/pscore/Chelsea_0-2_Manchester_United___Premier_League_Highlights_msbcqa.mp4"
+    axios({
+      url: linkValue, //your url
+      method: "GET",
+      responseType: "blob" // important
+    }).then(response => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link_upload = new Blob([response.data], {
+        type: `video/mp4`
+      });
+      // console.log({link_upload })
+      const formData = new FormData();
+
+    formData.append("file", link_upload, "url upload.mp4");
+    // console.log("formData", formData.get("file"));
+      handleSubmit(formData)
+      // uploadURL(link_upload)
+      // setLinkLoading(false)
+    }).catch((error) => {
+      console.log({ error })
+      // setLinkLoading(false)
+      // return toast({
+      //   status: "error",
+      //   description:
+      //     "We can't get the video from the link, please try again",
+      // });
+
+    })
+  };
 
   
 
@@ -75,11 +109,14 @@ console.log({postLoading, progress})
               <FileDrop
                 onTargetClick={onTargetClick} />
             </div>
-            <button className="primary mt-3" onClick={handleSubmit} disabled={postLoading}>
+            <button className="primary mt-3" onClick={()=>handleSubmit(videoFile)} disabled={postLoading}>
              {postLoading?<div>Uploading... <div className="spinner-border text-light spinner-border-sm" role="status">
                 <span className="visually-hidden">Loading...</span>
               </div></div>:" Analyze Video"}
             </button>
+            <div className="input-container">
+            <input type="text"  id="link" placeholder="Paste link here..." /> <button onClick={downloadVideo}>Analyse link</button>
+          </div>
           </>
           {postLoading && <div className="progress-section mt-5">
 
@@ -105,6 +142,7 @@ console.log({postLoading, progress})
             </div>
 
           </div>}
+         
           <div className="d-flex min-cancel justify-content-between mt-5 col-lg-9 mx-auto">
             <button onClick={() => setOpenDragNdropModal(false)} className="cancel">
               Minimize

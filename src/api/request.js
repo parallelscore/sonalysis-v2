@@ -1,7 +1,7 @@
 import axios from "axios"
 import cookie from "js-cookie"
-// export const baseURL = "http://165.22.0.66:3000";
-export const baseURL = "http://localhost:3001";
+export const baseURL = "http://165.22.0.66:3000";
+// export const baseURL = "http://localhost:3001";
 
 const logOut = (error) => {
     if (error.response?.status === 401) {

@@ -38,9 +38,9 @@ export const createUploadRequest = (file, handleChangeTab,setOpenDragNdropModal)
         const {filename,signedUrl} = resLink.data.data
         const postDatadata = {
           filename,
-          originalFilename: file.name
+          originalFilename: file.name || file.get("file").name
         }
-        console.log({postDatadata})
+        console.log({postDatadata, file})
         const config = {
           onUploadProgress: function(progressEvent) {
             var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
@@ -156,7 +156,7 @@ export const fetchUploadRequest = (userId, page, analyzed) => {
 };
 
 export const deleteRequest = (videoId) => {
-  alert("here")
+  // alert("here")
   return async(dispatch) => {
     dispatch(deleteUploadRequest())
     await deleteCall(endPoints.deleteVideo(videoId))

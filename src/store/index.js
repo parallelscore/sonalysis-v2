@@ -17,7 +17,7 @@ if(process.env.NODE_ENV !== "production") {
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["profile"],
+    whitelist: ["profile", "upload"],
     keyPrefix: ""
 }
 

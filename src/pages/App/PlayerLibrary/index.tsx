@@ -7,15 +7,14 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 import {useEffect} from "react"
-import Home from "./Home"
-import AllUploadVideo from "./AllUploadVideo"
-import AnalyzedMatch from "./AnalyzedMatch"
-import PlayerDetail from "./PlayerDetail"
+import AllClub from "./AllClub"
+import CreateClub from "./CreateClub"
+
 import { io } from "socket.io-client";
 import {baseURL} from "../../../api/request";
 import {updateUpload} from "../../../store/upload/actions"
 import {useDispatch} from "react-redux"
-import MatchStats from "./MatchStats"
+
 export interface CardProps {
   number?: number;
   desc?: string;
@@ -40,29 +39,18 @@ const Analystic = (props) => {
 
   return (
     <div className="">
-     
         <Switch>
-          <Route exact path={path}>
-            <Redirect to={`${path}/home`} />
+          {/* <Route exact path={path}>
+            <Redirect to={`${path}`} />
+          </Route> */}
+          <Route exact path={`${path}`}>
+            <AllClub />
           </Route>
-          <Route exact path={`${path}/home`}>
-            <Home/>
+ 
+          <Route path={`${path}/create-club`}>
+            <CreateClub/>
           </Route>
-          <Route exact path={`${path}/all-video`}>
-            <AllUploadVideo />
-           
-          </Route>
-          <Route path={`${path}/stats/:id`}>
-            <MatchStats/>
-          </Route>
-          <Route path={`${path}/match/:id`}>
-            <AnalyzedMatch/>
-          </Route>
-          <Route path={`${path}/player/:id`}>
-            <PlayerDetail/>
-          </Route>
-         
-        
+
         </Switch>
 
       

@@ -47,6 +47,12 @@ const Home = () => {
       title: "Highlight Reels",
       link: "/app/highlight-reels",
     },
+    {
+      id: 5,
+      icon: ReelIconBlack,
+      title: "Player Library",
+      link: "/app/player-library",
+    },
   ]
 
   return (

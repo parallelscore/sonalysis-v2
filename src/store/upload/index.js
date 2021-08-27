@@ -35,7 +35,11 @@ export default (state = defaultState, action) => {
     case actions.DELETE_UPLOAD_ERROR:
       return { ...state, getLoading: false, deleteLoading: false };
     case actions.UPDATE_UPLOAD:
-      return { ...state, data: action.data, };
+      const data = state.allUploadData.data.map((item) => {
+        if (item._id === action.data._id) return action.data;
+        return item;
+      });
+      return { ...state, allUploadData: { ...state.allUploadData, data } };
     default:
       return state;
   }

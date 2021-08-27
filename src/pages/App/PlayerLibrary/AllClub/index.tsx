@@ -3,6 +3,7 @@ import "./index.scss"
 import UploadIcon from "../../../../assets/icons/upload-icon.svg"
 import SearchIcon from "../../../../assets/icons/search-icon.svg"
 import EmptyFile from "../../../../assets/icons/empty-file.svg"
+import NoClub from "../../../../assets/images/no-club.svg"
 import DragNdropModal from "../../../../component/DragNdropModal"
 import UploadProgressModal from "../../../../component/UploadProgressModal"
 import { useDispatch, useSelector } from "react-redux"
@@ -10,6 +11,7 @@ import { fetchUploadRequest, deleteRequest } from "../../../../store/upload/acti
 import moment from "moment"
 import { LoopingRhombusesSpinner } from 'react-epic-spinners'
 import swal from 'sweetalert';
+import { Link } from "react-router-dom"
 
 const Analytics = () => {
   const { profile, upload }: any = useSelector((state) => state);
@@ -31,7 +33,7 @@ const Analytics = () => {
     dispatch(fetchUploadRequest(userId, page, analyzed))
   }
 
-  const handleVideoDelete = ({id, name})=>{
+  const handleVideoDelete = ({ id, name }) => {
     swal({
       title: `You are about deleting ${name}`,
       text: "Once deleted, you will not be able to recover this video",
@@ -39,20 +41,20 @@ const Analytics = () => {
       buttons: ["Cancel", "Delete"],
       dangerMode: true,
     })
-    .then(async(willDelete) => {
-      if (willDelete) {
-        await dispatch(deleteRequest(id))
-        setOpenProgressModal(false)
-        swal("Video deleted successfully", {
-          icon: "success",
-        });
-        const userId = profile._id;
-        handleFetchData({ userId, page: 1, analyzed: "all" })
-      } 
-      // else {
-      //   swal("Your imaginary file is safe!");
-      // }
-    });
+      .then(async (willDelete) => {
+        if (willDelete) {
+          await dispatch(deleteRequest(id))
+          setOpenProgressModal(false)
+          swal("Video deleted successfully", {
+            icon: "success",
+          });
+          const userId = profile._id;
+          handleFetchData({ userId, page: 1, analyzed: "all" })
+        }
+        // else {
+        //   swal("Your imaginary file is safe!");
+        // }
+      });
   }
 
   const handleChangeTab = (tab, analyzed) => {
@@ -64,46 +66,52 @@ const Analytics = () => {
 
   const handleOpenModal = (progress) => {
     setShowProgressOnly(progress)
-    !progress &&setOpenDragNdropModal(true)
-    progress&&setOpenProgressModal(true)
+    !progress && setOpenDragNdropModal(true)
+    progress && setOpenProgressModal(true)
   }
   const handleRedirect = (isRedirect, state) => {
     setSingleData(state)
-    isRedirect? window.location.replace(`/app/analytics/match/${state._id}`):setOpenProgressModal(true)
+    isRedirect ? window.location.replace(`/app/analytics/match/${state._id}`) : setOpenProgressModal(true)
   }
-  
+
   return (
     <div className="all-video">
 
       <div className="top-hero col-lg-8">
-        <h2 className="col-lg-7 text-center mx-auto mb-4">
-          Start Your Analysis by
-          uploading a video
+        <h2 className="col-lg-10 text-center mx-auto mb-4">
+          Build your own football
+          gaints
         </h2>
         <div className="text mb-4">
-          Get to see materics based on teams and players
+          Create your own football club and build yout team
         </div>
-        <button onClick={() => handleOpenModal(false)}>
-          <img src={UploadIcon} alt="upload icon" className="mr-1" />
-          {" "} Upload a video
-        </button>
+        <Link to="/app/player-library/create-club">
+
+          <button >
+            Create Your club
+          </button>
+        </Link>
       </div>
       <div className="all-files">
-        <div className="search-section">
-          <input type="text" placeholder="Search for  your uploads" /> <img src={SearchIcon} alt="search icon" />
+        <div className="search-container d-flex">
+
+          <div className="search-section ">
+            <input type="text" placeholder="Search for  your club" /> <img src={SearchIcon} alt="search icon" />
+          </div>
+          <button>Search</button>
         </div>
         <div className="video-tab">
-          <h3 className="mb-4">Video Uploads</h3>
+          <h3 className="mb-4">Clubs Created</h3>
           <div className="tab-section">
             <div className={`tab ${tab === 1 && "active-tab"}`} onClick={() => handleChangeTab(1, "all")}>All</div>
-            <div className={`tab ${tab === 2 && "active-tab"}`} onClick={() => handleChangeTab(2, true)}>Complete</div>
-            <div className={`tab ${tab === 3 && "active-tab"}`} onClick={() => handleChangeTab(3, false)}>Incomplete</div>
+            <div className={`tab ${tab === 2 && "active-tab"}`} onClick={() => handleChangeTab(2, true)}>Approved</div>
+            <div className={`tab ${tab === 3 && "active-tab"}`} onClick={() => handleChangeTab(3, false)}>Pending</div>
 
           </div>
 
-          <div className="table-head d-flex mt-5">
+          <div className="col-10 table-head d-flex mt-5">
             <div className="col-5 pl-5">
-              File
+              Club
             </div>
             <div className="col-2">
               Status
@@ -115,9 +123,9 @@ const Analytics = () => {
           {getLoading ? <div className="d-flex align-items-center justify-content-center mt-5"><LoopingRhombusesSpinner color="#811aff" /></div> :
             <div>
               {
-                allUploadData?.data && allUploadData?.data?.map((item, id) => (
+                !allUploadData?.data && allUploadData?.data?.map((item, id) => (
 
-                  <div className="table-row d-flex align-items-center p-3 mt-4">
+                  <div className="col-lg-10 table-row d-flex align-items-center p-3 mt-4">
                     <div className="col-5 d-flex align-items-center">
                       <div className="mr-2 ml-3"><img src={EmptyFile} alt="empty-file" /></div> <div className="pl-5 ml-5">{item.filename}</div>
                     </div>
@@ -127,10 +135,10 @@ const Analytics = () => {
                     <div className="col-2">
                       {moment(item.createdAt).startOf('minutes').fromNow()}
                     </div>
-                    <div className="col-2">
+                    {/* <div className="col-2">
                       <button className={item.analyzed ? "view" : "analyzing"} onClick={() => handleRedirect(item.analyzed, item)}>{item.analyzed ? "View analytics" : item.model_data.isFootballVideo? "Not a football" : "Analyzing"}</button>
-                    </div>
-                    <div className="col-2 delete" onClick={()=>handleVideoDelete({id:item._id, name:item.filename})}>
+                    </div> */}
+                    <div className="col-2 delete" onClick={() => handleVideoDelete({ id: item._id, name: item.filename })}>
                       Delete
                     </div>
                   </div>
@@ -138,13 +146,13 @@ const Analytics = () => {
               }
 
               {
-                !allUploadData?.data?.length &&
-                <div className="no-file col-8 mx-auto mt-5">
-                  <img src={EmptyFile} alt="empty-file" className="mx-auto mt-4 mb-4" />
+                allUploadData?.data?.length &&
+                <div className="no-file col-lg-8  mt-5">
+                  <img src={NoClub} alt="empty-file" className="mx-auto mt-4 mb-4" />
                   <h3>
-                    No Files Found
+                    No Clubs created yet
                   </h3>
-                  <div className="text mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.</div>
+                  <div className="text mt-4 col-lg-5 mx-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.</div>
                 </div>}
 
             </div>}
@@ -152,8 +160,8 @@ const Analytics = () => {
         </div>
 
       </div>
-      {openProgressModal && <UploadProgressModal setOpenProgressModal={setOpenProgressModal} singleData={singleData}  handleChangeTab={handleChangeTab} handleVideoDelete={handleVideoDelete}/>}
-      {openDragNdropModal && <DragNdropModal setOpenDragNdropModal={setOpenDragNdropModal}  handleChangeTab={handleChangeTab}/>}
+      {openProgressModal && <UploadProgressModal setOpenProgressModal={setOpenProgressModal} singleData={singleData} handleChangeTab={handleChangeTab} handleVideoDelete={handleVideoDelete} />}
+      {openDragNdropModal && <DragNdropModal setOpenDragNdropModal={setOpenDragNdropModal} handleChangeTab={handleChangeTab} />}
     </div>
 
   );

@@ -12,6 +12,7 @@ import Analytics from "./Analystics"
 import Dashboard from "./Dashboard"
 import Recruitment from "./Recruitment"
 import Hightlight from "./Highlight"
+import PlayerLibrary from "./PlayerLibrary"
 
 export interface CardProps {
   number?: number;
@@ -44,6 +45,9 @@ const App = (props) => {
           </Route>
           <Route exact path={`${path}/highlight-reels`}>
             <Hightlight />
+          </Route>
+          <Route  path={`${path}/player-library`}>
+            <PlayerLibrary />
           </Route>
         </Switch>
 
