@@ -114,9 +114,25 @@ console.log({postLoading, progress})
                 <span className="visually-hidden">Loading...</span>
               </div></div>:" Analyze Video"}
             </button>
+            <div className="upload-section">
+
             <div className="input-container">
-            <input type="text"  id="link" placeholder="Paste link here..." /> <button onClick={downloadVideo}>Analyse link</button>
+            <input type="text"  id="link" placeholder="Paste link here..." /> 
+            
           </div>
+          <div className="form-group ">
+
+         <div className="mt-2 ">
+           <label htmlFor="">select video link type</label>
+           </div> 
+            <select name="" id="" className="ml-5">
+            <option value="youtube">Youtube link</option>
+            <option value="google_drive">Google drive link</option>
+            <option value="others">Other link</option>
+            </select>
+          </div>
+             <button className="mt-3" onClick={downloadVideo}>Analyse link</button>
+            </div>
           </>
           {postLoading && <div className="progress-section mt-5">
 

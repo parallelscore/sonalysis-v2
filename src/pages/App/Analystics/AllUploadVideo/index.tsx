@@ -128,7 +128,7 @@ const Analytics = () => {
                       {moment(item.createdAt).startOf('minutes').fromNow()}
                     </div>
                     <div className="col-2">
-                      <button className={item.analyzed ? "view" : "analyzing"} onClick={() => handleRedirect(item.analyzed, item)}>{item.analyzed ? "View analytics" : item.model_data.isFootballVideo? "Not a football" : "Analyzing"}</button>
+                      <button className={item.analyzed ? "view" : "analyzing"} onClick={() => handleRedirect(item.analyzed, item)}>{item.analyzed ? "View analytics" :  "Analyzing"}</button>
                     </div>
                     <div className="col-2 delete" onClick={()=>handleVideoDelete({id:item._id, name:item.filename})}>
                       Delete

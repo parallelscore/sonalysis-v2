@@ -20,7 +20,7 @@ const CreateClub = ({ handleChangeStep }) => {
   console.log(allUploadData.data)
   // const { url, TeamA, TeamB } = model_data;
   const [tab, setTab] = useState(1)
-  const [showEditModal, setShowEditModal] = useState(true)
+  const [showEditModal, setShowEditModal] = useState(false)
   const [clubTeam, setClubTeam] = useState<any>("TeamA");
   // const team: any = clubTeam === "TeamB" ? TeamB : TeamA;
 
@@ -41,7 +41,7 @@ const CreateClub = ({ handleChangeStep }) => {
       <div className=" form col-lg-8 mt-5">
         <div className="form-group  mt-5 ">
           <div >Upload your players details</div>
-          <button  className="upload-player px-3" onClick={() => setShowEditModal(true)}>Upload player</button> <label htmlFor="csvFile"  className="upload-player pt-2 px-3" >Upload players from CSV file</label> <button className="btn players-add">2</button>
+          <button  className="upload-player px-3" onClick={() => setShowEditModal(true)}>Upload player</button> <label htmlFor="csvFile"  className="upload-player pt-2 px-3 csv-btn" >Upload players from CSV file</label> <button className="btn players-add">2</button>
           <input type="file" name="csvFile" id="csvFile" className="logo-file" />
         </div>
       </div>

@@ -37,9 +37,9 @@ const AnalyzedMatch = (props) => {
       b: 0
     },
     {
-      a: "0%",
+      a: "47%",
       name: "Ball Possession",
-      b: "0%"
+      b: "53%"
     },
     {
       a: 0,

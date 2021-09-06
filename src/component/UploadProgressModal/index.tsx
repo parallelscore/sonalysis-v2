@@ -20,7 +20,7 @@ const DragNdrop = ({
     <Modal>
       <div className="container">
         <div className="drop-n-drop col-lg-6 mx-auto p-5">
-          {!updatedUploadData.model_data.isFootballVideo ? (
+          {updatedUploadData.model_data.isFootballVideo ? (
             <div className="progress-section mt-5">
               {/* <h4>Your video is being analysed</h4> */}
               <div className="text mb-5">Your video is being analysed</div>

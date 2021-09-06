@@ -47,20 +47,7 @@
       .logo-file {
         display: none;
       }
-      .upload-video {
-        margin-top: 1em;
-        background: #131313;
-        border: 1px solid #ffffff;
-        box-sizing: border-box;
-        border-radius: 5px;
-        width: 210px;
-        height: 48px;
-        font-size: 20px;
-        text-align: center;
-        // padding-top: 8px;
-        cursor: pointer;
-        color: #fff;
-      }
+      
       .upload-player {
         margin-top: 1em;
         background: #131313;
@@ -75,6 +62,10 @@
         cursor: pointer;
         
         color: #fff;
+      }
+      .csv-btn {
+        background: #811aff;
+        border: 1px solid #811aff;
       }
     }
   }

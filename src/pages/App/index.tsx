@@ -11,7 +11,9 @@ import DashboardLayout from "../../component/layouts/DashboardLayout"
 import Analytics from "./Analystics"
 import Dashboard from "./Dashboard"
 import Recruitment from "./Recruitment"
-import Hightlight from "./Highlight"
+import Hightlight from "./Highlight/index"
+import Actions from "./Highlight/hight"
+
 import PlayerLibrary from "./PlayerLibrary"
 
 export interface CardProps {
@@ -45,6 +47,9 @@ const App = (props) => {
           </Route>
           <Route exact path={`${path}/highlight-reels`}>
             <Hightlight />
+          </Route>
+          <Route  path={`${path}/highlight-reels/actions/:id`}>
+            <Actions />
           </Route>
           <Route  path={`${path}/player-library`}>
             <PlayerLibrary />
