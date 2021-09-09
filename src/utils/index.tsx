@@ -1,6 +1,6 @@
 import cookie from "js-cookie"
 import data from "../assets/data";
-export const BASE_URL = "http://165.22.0.66:3000";
+export const BASE_URL = "https:api.sonalysis.io";
 
 
 export const logOut = () => {
