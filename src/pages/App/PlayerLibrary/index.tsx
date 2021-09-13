@@ -10,10 +10,7 @@ import {useEffect} from "react"
 import AllClub from "./AllClub"
 import CreateClub from "./CreateClub"
 
-import { io } from "socket.io-client";
-import {baseURL} from "../../../api/request";
-import {updateUpload} from "../../../store/upload/actions"
-import {useDispatch} from "react-redux"
+
 
 export interface CardProps {
   number?: number;
@@ -27,15 +24,9 @@ const Analystic = (props) => {
     match: { path },
   } = props;
 
-  const dispatch = useDispatch();
+ 
 
-  useEffect(() => {
-    const socket = io(`${baseURL}`);
 
-    socket.on("analyzed video", (uploadProgress) => {
-      uploadProgress && dispatch(updateUpload(uploadProgress));
-    });
-  }, []);
 
   return (
     <div className="">
