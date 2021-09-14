@@ -18,7 +18,8 @@ const CreateClub = (props) => {
   const { profile, upload }: any = useSelector((state) => state);
   const { allUploadData, getLoading, getError } = upload
 
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(2)
+  const [clubDetail, setClubDetail] = useState({})
 
   const handleVideoDelete = ({ id, name }) => {
 
@@ -45,7 +46,7 @@ const CreateClub = (props) => {
         </div>
       </div>
       {
-step===1?<StepOne handleChangeStep={handleChangeStep } />:<StepTwo handleChangeStep={handleChangeStep } />
+step===1?<StepOne handleChangeStep={handleChangeStep } setClubDetail={setClubDetail}/>:<StepTwo handleChangeStep={handleChangeStep }  clubDetail={clubDetail}/>
 }
       
     </div>

@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
-import example from "./example";
 import profile from "./profile";
 import upload from "./upload"
 import location from "./locations"
+import club from "./club"
+
 
 
 
@@ -11,5 +12,5 @@ export default combineReducers({
    location,
    upload,
    profile,
-   example
+   club
 });

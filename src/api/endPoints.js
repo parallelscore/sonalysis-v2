@@ -14,4 +14,11 @@ export default {
   postUpload: `${baseURL}/upload/update-link`,
   getS3Link: `${baseURL}/upload/presigned-upload-url`,
   deleteVideo: (videoId) =>`${baseURL}/upload/${videoId}`,
+  
+  
+  createClub: `${baseURL}/club`,
+  getClubsByCoachId: (coachId, status) =>`${baseURL}/club/coach/${coachId}?staus=${status}`,
+  getS3ImgLink: `${baseURL}/club/presigned-img-url`,
+  createManyPlayers: `${baseURL}/player/many`,
+  createPlayer: `${baseURL}/player`,
 };
