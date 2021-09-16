@@ -22,7 +22,7 @@ const PlayerCard = ({player, removePlayer}) => {
         <div>{player.position}</div>
         <div className="no">No. {player.jersey_no}</div>
       </div>
-      {showModal&&<EditPlayer setShowModal={setShowModal} addPlayer="" />}
+      {showModal&&<EditPlayer setShowModal={setShowModal} addPlayer="" player={player} />}
     </div>
 
   );

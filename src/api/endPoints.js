@@ -1,7 +1,6 @@
 
 import {baseURL} from "./request";
 
-
 export default {
   register: `${baseURL}/users/sign_up`,
   login: `${baseURL}/users/login`,

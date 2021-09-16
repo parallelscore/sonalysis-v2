@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
@@ -14,20 +14,33 @@ import { LoopingRhombusesSpinner } from "react-epic-spinners";
 import EditPlayer from "../../../../../component/EditPlayer";
 import PlayerCard from "../../../../../component/PlayerCard";
 import axios from "axios";
-
 import "./index.scss";
 import moment from "moment";
+import * as XLSX from 'xlsx';
+import CSVReader from "react-csv-reader";
 
 const StepTwo = ({ handleChangeStep, clubDetail }) => {
   const { profile, upload }: any = useSelector((state) => state);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { allUploadData, getLoading, getError } = upload;
-
   const [playersData, setPlayersData]: any = useState([]);
-
   const [tab, setTab] = useState(1);
   const [showEditModal, setShowEditModal] = useState(false);
+ 
+  const [csvData, setCsvData] = useState([])
+  
+  const handleForce = (data, fileInfo) => {
+    setCsvData(data)
+     
+  };
+ 
+const papaparseOptions = {
+  header: true,
+  dynamicTyping: true,
+  skipEmptyLines: true,
+  transformHeader: header => header.toLowerCase().replace(/\W/g, "_")
+};
 
   function addPlayer(player) {
     setPlayersData([player, ...playersData]);
@@ -106,6 +119,9 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
     });
   }
 
+  const csvValue = csvData.map(d => d)
+  console.log(csvValue);
+
   return (
     <div className="step-two">
       <div className="tab-section mt-5">
@@ -142,22 +158,38 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
             Upload players from CSV file
           </label>{" "}
           <button className="btn players-add">2</button>
-          <input
+          {/* <input
             type="file"
             name="csvFile"
             id="csvFile"
             className="logo-file"
-          />
+            accept=".xlsx, .xls, .csv"
+          /> */}
+
+            <CSVReader
+            cssClass="react-csv-input"
+            label="Select CSV"
+            onFileLoaded={handleForce}
+            parserOptions={papaparseOptions}
+            />
         </div>
       </div>
 
-      <div className="player-card-section-cards mt-5">
+        <div className="player-card-section-cards mt-5">
         {playersData.map((playeri, index) => (
           <div key={index}>
             <PlayerCard player={playeri} removePlayer={removePlayer} />
           </div>
         ))}
-      </div>
+      </div>  
+
+       <div className="player-card-section-cards mt-5">
+        {csvData.map((playeri, index) => (
+          <div key={index}>
+            <PlayerCard player={playeri} removePlayer={removePlayer} />
+          </div>
+        ))}
+      </div>   
 
       <div className="col-lg-7 d-flex justify-content-between">
         <button
@@ -184,11 +216,18 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
           )}
         </button>
       </div>
-      {showEditModal && (
+        {showEditModal && (
         <EditPlayer
           setShowModal={setShowEditModal}
           addPlayer={addPlayer}
           clubDetail={clubDetail}
+        />
+      )}  
+       {showEditModal && (
+        <EditPlayer
+          setShowModal={setShowEditModal}
+          addPlayer={addPlayer}
+          clubDetail={csvValue}
         />
       )}
     </div>
