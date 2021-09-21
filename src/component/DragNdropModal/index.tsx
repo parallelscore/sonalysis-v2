@@ -114,7 +114,7 @@ console.log({postLoading, progress})
                 <span className="visually-hidden">Loading...</span>
               </div></div>:" Analyze Video"}
             </button>
-            <div className="upload-section">
+            {/* <div className="upload-section">
 
             <div className="input-container">
             <input type="text"  id="link" placeholder="Paste link here..." /> 
@@ -132,7 +132,7 @@ console.log({postLoading, progress})
             </select>
           </div>
              <button className="mt-3" onClick={downloadVideo}>Analyse link</button>
-            </div>
+            </div> */}
           </>
           {postLoading && <div className="progress-section mt-5">
 

@@ -18,23 +18,19 @@ const AnalyzedMatch = (props) => {
   const [selectedVideo, setSelectedVideo] = useState("dribble")
   const [clubTeam, setClubTeam] = useState<any>("TeamA")
   const { upload }: any = useSelector((state) => state);
-  let id = "613366d36f015007e8ccf95d";
+  let { id } = useParams();
+  // let id = "6144bd73b397ec753b3819dd";
   const uploadData = upload.allUploadData.data.filter((item) => item._id === id)[0]
   console.log({ uploadData })
-  const { url, TeamA, TeamB } = uploadData.model_data
+  const { url, TeamA, TeamB, highlightreels } = uploadData.model_data
 
   console.log({ url, TeamA, TeamB })
 
 
 
-  const teamAName = TeamA.Players[0].Team.toUpperCase()
-  const teamBName = TeamB.Players[0].Team.toUpperCase()
-  const selectOptionArr = Object.keys(url)
+  
 
-  const team: any = clubTeam === "TeamB" ? TeamB : TeamA
-  const dataReels:any = { freekick: 'https://parallelscore-staging.s3.amazonaws.com//home/pmunis/SonalysisFile/SonalysisVideoProcessingService//jobs/2b278203-fc32-42a1-bfbe-fb487b372722/actionsdetected/vjnVWZKDGTQjiUn7qFkjDu_0_3.mp4', dribble: 'https://parallelscore-staging.s3.amazonaws.com//home/pmunis/SonalysisFile/SonalysisVideoProcessingService//jobs/2b278203-fc32-42a1-bfbe-fb487b372722/actionsdetected/vjnVWZKDGTQjiUn7qFkjDu_4_6.mp4', tackle: 'https://parallelscore-staging.s3.amazonaws.com//home/pmunis/SonalysisFile/SonalysisVideoProcessingService//jobs/2b278203-fc32-42a1-bfbe-fb487b372722/highlightreels/26cf1c79-f92d-422a-9b7c-d728f6112e23.mp4' }
-
-  const keyReel:any = Object.keys(dataReels)
+  const keyReel:any = Object.keys(highlightreels)
 
   const handleVideoChange = (video) => {
     const vid: any = document.getElementById("playBackVideo")
@@ -55,15 +51,15 @@ const AnalyzedMatch = (props) => {
  
 
   return (
-    <div className="match-stats">
+    <div className="match-stat">
 
       <h3 className="mb-4 mt-5">HeghtLight Reels Actions</h3>
 
     <h3 className="mt-5">Playing: {selectedVideo}</h3>
-      <div className="video-section d-lg-flex ">
+      <div className="video-section d-lg-flex mt-2 ">
         <div className="col-lg-6 football-vidoe mt-">
           <video width="320" height="240" controls id="playBackVideo">
-            <source src={dataReels[selectedVideo]} type="video/mp4" />
+            <source src={highlightreels[selectedVideo]} type="video/mp4" />
             {/* <source src="movie.ogg" type="video/ogg"> */}
             Your browser does not support the video tag.
           </video>
@@ -71,7 +67,7 @@ const AnalyzedMatch = (props) => {
         </div>
         <div className="video-section-right ml-5">
           <h3>Actions</h3>
-          <div>
+          <div className="d-flex flex-wrap">
             {
               keyReel.map((item) => (
                 <div className="card-img" onClick={()=>handleVideoChange(item)}>

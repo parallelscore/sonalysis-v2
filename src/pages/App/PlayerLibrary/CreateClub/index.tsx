@@ -18,7 +18,7 @@ const CreateClub = (props) => {
   const { profile, upload }: any = useSelector((state) => state);
   const { allUploadData, getLoading, getError } = upload
 
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(1)
   const [clubDetail, setClubDetail] = useState({})
 
   const handleVideoDelete = ({ id, name }) => {

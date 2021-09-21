@@ -10,6 +10,9 @@ import { fetchUploadRequest, deleteRequest } from "../../../../store/upload/acti
 import moment from "moment"
 import { LoopingRhombusesSpinner } from 'react-epic-spinners'
 import swal from 'sweetalert';
+import {updateUpload} from "../../../../store/upload/actions"
+import {baseURL} from "../../../../api/request";
+import { io } from "socket.io-client";
 
 const Analytics = () => {
   const { profile, upload }: any = useSelector((state) => state);
@@ -22,10 +25,21 @@ const Analytics = () => {
   const [showProgressOnly, setShowProgressOnly] = useState(false)
   const [singleData, setSingleData] = useState({})
 
+
+
+  useEffect(() => {
+    const socket = io(`${baseURL}`);
+
+    socket.on("analyzed video", (uploadProgress) => {
+      uploadProgress && dispatch(updateUpload(uploadProgress));
+    });
+  }, []);
+
   useEffect(() => {
     const userId = profile._id;
     handleFetchData({ userId, page: 1, analyzed: "all" })
   }, [])
+
 
   const handleFetchData = ({ userId, page = 1, analyzed }) => {
     dispatch(fetchUploadRequest(userId, page, analyzed))

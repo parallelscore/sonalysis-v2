@@ -7,15 +7,15 @@ import {updateUpload} from "../../../store/upload/actions"
 import {useDispatch} from "react-redux"
 
 const Dashbaord = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    const socket = io(`${baseURL}`);
+  // useEffect(() => {
+  //   const socket = io(`${baseURL}`);
 
-    socket.on("analyzed video", (uploadProgress) => {
-      uploadProgress && dispatch(updateUpload(uploadProgress));
-    });
-  }, []);
+  //   socket.on("analyzed video", (uploadProgress) => {
+  //     uploadProgress && dispatch(updateUpload(uploadProgress));
+  //   });
+  // }, []);
 
   return (
     <div className="text-center">

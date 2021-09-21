@@ -21,4 +21,5 @@ export default {
   getS3ImgLink: `${baseURL}/club/presigned-img-url`,
   createManyPlayers: `${baseURL}/player/many`,
   createPlayer: `${baseURL}/player`,
+  deleteClub: (clubId) =>`${baseURL}/club/${clubId}`,
 };

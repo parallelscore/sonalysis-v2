@@ -20,46 +20,110 @@ const AnalyzedMatch = (props) => {
   const uploadData = upload.allUploadData.data.filter((item) => item._id === id)[0]
   const { url, TeamA, TeamB } = uploadData.model_data
 
-  console.log({ url, TeamA, TeamB })
+  console.log({ url, TeamA, TeamB }, uploadData.model_data)
 
   // useEffect(()=>{
   //   setSelectedVideo("object_detection") 
   // }, [selectedVideo])
+  // team1_longpass: 0
+  
+  // team1_cross: 0
+  //   team1_cornerkick: 0
+  // team1_dribble: 0
+  // team1_freethrow: 0
+  // team1_longshot: 0
+  // team1_save: 0
+  // team1_shortpass: 0
+  // team1_shots: 0
+  // team1_foul: 0
+  // team1_tackle: 0
+  // team1_goals: 0
+// team1_penalty: 0
+// team1_free_kick: 0
+// team1_possession: 0
+// team1_redcard: 0
+// team1_yellowcard: 0
+
   const data = [
     {
-      a: 0,
+      a: uploadData.model_data.team1_goals,
       name: "Goals Scored",
-      b: 0
+      b: uploadData.model_data.team2_goals
     },
     {
-      a: 0,
+      a: uploadData.model_data.team1_shots,
       name: "Shot Attempts",
-      b: 0
+      b: uploadData.model_data.team2_shots
     },
     {
-      a: "47%",
+      a: uploadData.model_data.team1_shortpass,
+      name: "Short Pass",
+      b: uploadData.model_data.team2_shortpass
+    },
+    {
+      a: uploadData.model_data.team1_longpass,
+      name: "Long Pass",
+      b: uploadData.model_data.team2_longpass,
+    },
+    {
+      a: uploadData.model_data.team1_cross,
+      name: "Cross",
+      b: uploadData.model_data.team2_cross,
+    },
+    {
+      a: uploadData.model_data.team1_save,
+      name: "Ball saved",
+      b: uploadData.model_data.team2_save,
+    },
+    {
+      a: uploadData.model_data.team1_freethrow,
+      name: "Free Throw",
+      b: uploadData.model_data.team2_freethrow,
+    },
+    {
+      a: `${uploadData.model_data.team1_possession}%`,
       name: "Ball Possession",
-      b: "53%"
+      b: `${uploadData.model_data.team2_possession}%`,
     },
     {
-      a: 0,
+      a: uploadData.model_data.team1_free_kick,
       name: "Free Kicks",
-      b: 0
+      b:  uploadData.model_data.team2_free_kick,
     },
     {
-      a: 0,
+      a: uploadData.model_data.team1_cornerkick,
+      name: "Corner Kicks",
+      b: uploadData.model_data.team2_cornerkick,
+    },
+    {
+      a: uploadData.model_data.team1_tackle,
+      name: "Tackle",
+      b: uploadData.model_data.team2_tackle,
+    },
+    {
+      a: uploadData.model_data.team1_dribble,
+      name: "Dribble",
+      b: uploadData.model_data.team2_dribble,
+    },
+    {
+      a: uploadData.model_data.team1_foul,
+      name: "Foul",
+      b: uploadData.model_data.team2_foul,
+    },
+    {
+      a: uploadData.model_data.team1_penalty,
       name: "Penalties",
-      b: 0
+      b: uploadData.model_data.team2_penalty,
     },
     {
-      a: 0,
+      a: uploadData.model_data.team1_yellowcard,
       name: "Yellow Cards",
-      b: 0
+      b: uploadData.model_data.team2_yellowcard,
     },
     {
-      a: 0,
+      a: uploadData.model_data.team1_redcard,
       name: "Red Cards",
-      b: 0
+      b: uploadData.model_data.team2_redcard,
     },
   ]
 
@@ -118,7 +182,7 @@ const AnalyzedMatch = (props) => {
         <div className="mini-map pt-5 col-lg-10 mt-5">
 
           <div className="team p-2"><span>Teams:</span>  {teamAName} vs {teamBName}</div>
-          <div className="team p-2 mt-5"><span>Competition: </span>  Premier League</div>
+          {/* <div className="team p-2 mt-5"><span>Competition: </span>  Premier League</div> */}
           <div className="text mt-5 mb-5"> Mini Map (Bird’s eye view) </div>
 
           <div className="video-section">
@@ -142,7 +206,7 @@ const AnalyzedMatch = (props) => {
               </div>
               <div className="logo-section-center">
 
-                0-0
+                {uploadData.model_data.team1_goals}-{uploadData.model_data.team2_goals}
               </div>
               <div className="logo-section-left">
                 <img src={Chelsea} alt="club logo" />

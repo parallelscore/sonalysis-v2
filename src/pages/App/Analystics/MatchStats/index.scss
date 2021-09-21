@@ -1,4 +1,17 @@
-.match-stats {
+.match-stat {
+  .card{
+    color: #000000;
+    cursor: pointer;
+    border: 2px solid #000000;
+    width: 150px;
+    
+  }
+  .active-card{
+    border: 2px solid #811aff;
+    color: #811aff;
+    font-weight: 600;
+    
+  }
   .select-section {
     margin-top: 3em;
     .text {

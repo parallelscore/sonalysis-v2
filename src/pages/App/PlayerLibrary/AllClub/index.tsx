@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import "./index.scss"
 import { useDispatch, useSelector } from "react-redux";
-import { postCall, getCall } from "../../../../api/request";
+import { postCall, getCall, deleteCall } from "../../../../api/request";
 import endPoint from "../../../../api/endPoints";
-import UploadIcon from "../../../../assets/icons/upload-icon.svg"
 import SearchIcon from "../../../../assets/icons/search-icon.svg"
 import EmptyFile from "../../../../assets/icons/empty-file.svg"
 import NoClub from "../../../../assets/images/no-club.svg"
 import DragNdropModal from "../../../../component/DragNdropModal"
 import UploadProgressModal from "../../../../component/UploadProgressModal"
+
 
 import { fetchUploadRequest, deleteRequest } from "../../../../store/upload/actions"
 import moment from "moment"
@@ -63,13 +63,13 @@ const AllClubs = () => {
     })
       .then(async (willDelete) => {
         if (willDelete) {
-          await dispatch(deleteRequest(id))
+          await deleteClub(id)
           setOpenProgressModal(false)
           swal("Video deleted successfully", {
             icon: "success",
           });
           const userId = profile._id;
-          handleFetchData({ userId, page: 1, analyzed: "all" })
+          getAllClubs("")
         }
         // else {
         //   swal("Your imaginary file is safe!");
@@ -82,6 +82,22 @@ const AllClubs = () => {
     const userId = profile._id;
     setTab(tab)
     getAllClubs(status)
+  }
+
+  const deleteClub = async(clubId)=>{
+    await deleteCall(endPoint.deleteClub(clubId))
+      .then((response) => {
+        console.log("response.data.data", response.data);
+        if (response.status === 200) {
+          
+        }
+        if (response.status === 404 || response.status === 403) {
+          
+        }
+      })
+      .catch(() => {
+        
+      });
   }
 
   const handleOpenModal = (progress) => {
