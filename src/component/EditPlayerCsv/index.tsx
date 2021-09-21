@@ -19,7 +19,6 @@ export interface CardProps {
 
 const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
   const [singlePlayer, setSinglePlayer] = useState(player);
-  console.log(singlePlayer);
 
   const [isOpen, setIsOpen] = useState(false);
   const [videoFile, setVideoFile] = useState<any>('');
@@ -30,31 +29,21 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
   });
   const [filePhoto, setFilePhoto] = useState('');
 
-  const [playerData, setPlayerData] = useState({
-    name: '',
-    photo: '',
-    club_name: clubDetail?.name || '',
-    position: '',
-    jersey_no: '',
-    reason: '',
-    status: 'pending',
-    club_id: clubDetail?._id || '',
-  });
-
   const handleOnchange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     console.log({ name });
     if (name == 'photo') {
       name == 'photo' && setFilePhoto(URL.createObjectURL(e.target.files[0]));
-      return setPlayerData({ ...playerData, [name]: e.target.files[0] });
+      return setSinglePlayer({ ...singlePlayer, [name]: e.target.files[0] });
     }
-    return setPlayerData({ ...playerData, [name]: value });
+    return setSinglePlayer({ ...singlePlayer, [name]: value });
   };
 
   const addData = (data) => {
-    setSinglePlayer([playerData, data]);
+    setSinglePlayer([singlePlayer, data]);
     setShowModal(false);
+    alert(Object.values(data) + 'Added');
   };
   //This is the bupdated player
   console.log({ singlePlayer });
@@ -87,7 +76,7 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
                       type="text"
                       name="name"
                       className="form-control"
-                      value={playerData?.name}
+                      value={singlePlayer?.name}
                       id="clubName"
                       placeholder="Enter player name"
                       onChange={handleOnchange}
@@ -98,7 +87,7 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
                     <input
                       type="text"
                       name="jersey_no"
-                      value={playerData?.jersey_no}
+                      value={singlePlayer?.jersey_no}
                       className="form-control"
                       id="Abbrivation"
                       placeholder="eg. 9"
@@ -112,7 +101,7 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
                     type="text"
                     name="position"
                     className="form-control"
-                    value={playerData?.position}
+                    value={singlePlayer?.position}
                     id="Location"
                     placeholder="Enter position"
                     onChange={handleOnchange}
@@ -122,7 +111,7 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
             </form>
           </>
           <div className="d-flex min-cancel justify-content-between mt-5 col-lg-9 mx-auto">
-            <button onClick={() => addData(playerData)} className="">
+            <button onClick={() => addData(singlePlayer)} className="">
               Done
             </button>
             <button className="cancel" onClick={() => setShowModal(false)}>
