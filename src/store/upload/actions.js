@@ -30,73 +30,65 @@ const postUploadError = (message) => {
 export const createUploadRequest = (
   file,
   handleChangeTab,
-  setOpenDragNdropModal
+  setOpenDragNdropModal,
+  videoUploadType
 ) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(postUploadRequest());
-    getCall(endPoints.getS3Link)
-      .then(async (resLink) => {
-        if (resLink.status === 200) {
-          console.log({ resLink });
-          const { filename, signedUrl } = resLink.data.data;
-          const postDatadata = {
-            filename,
-            originalFilename: file.name || file.get("file").name,
-          };
-          console.log({ postDatadata, file });
-          const config = {
-            onUploadProgress: function (progressEvent) {
-              var percentCompleted = Math.round(
-                (progressEvent.loaded * 100) / progressEvent.total
-              );
-              dispatch(
-                postUploadProgress({
-                  percentCompleted,
-                  total: progressEvent.total,
-                  progressEvent: progressEvent.loaded,
-                })
-              );
-            },
-          };
 
-          const responseFetch = await axios.put(signedUrl, file, config);
-
-          if (responseFetch.status === 200) {
-            postCall(endPoints.postUpload, postDatadata)
-              .then((response) => {
-                if (response.status === 200) {
-                  dispatch(postUploadequest(response.data.data));
-                  handleChangeTab(1, "all");
-                  setOpenDragNdropModal(false);
-                }
-                if (response.status === 404 || response.status === 403) {
-                  dispatch(
-                    postUploadError({
-                      type: "danger",
-                      message: "Oops! Request is invalid",
-                    })
-                  );
-                }
-              })
-              .catch(() => {
-                dispatch(
-                  postUploadError({
-                    type: "confused",
-                    message: "Oops! something went wrong please try again.",
-                  })
-                );
-              });
-          }
-        }
-      })
-      .catch(() => {
+    const config = {
+      onUploadProgress: function (progressEvent) {
+        var percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
         dispatch(
-          postUploadError({
-            type: "confused",
-            message: "Oops! something went wrong please try again.",
+          postUploadProgress({
+            percentCompleted,
+            total: progressEvent.total,
+            progressEvent: progressEvent.loaded,
           })
         );
-      });
+      },
+    };
+
+    const responseFetch = await axios.post(
+      endPoints.cloudinaryPost,
+      file,
+      config
+    );
+
+    if (responseFetch.status === 200) {
+      const { secure_url, original_filename } = responseFetch.data;
+      const postDatadata = {
+        filename: secure_url,
+        originalFilename: original_filename,
+      };
+
+      postCall(endPoints.postUpload, postDatadata)
+        .then((response) => {
+          if (response.status === 200) {
+            dispatch(postUploadequest(response.data.data));
+            handleChangeTab(1, "all");
+            setOpenDragNdropModal(false);
+          }
+          if (response.status === 404 || response.status === 403) {
+            dispatch(
+              postUploadError({
+                type: "danger",
+                message: "Oops! Request is invalid",
+              })
+            );
+          }
+        })
+        .catch(() => {
+          dispatch(
+            postUploadError({
+              type: "confused",
+              message: "Oops! something went wrong please try again.",
+            })
+          );
+        });
+    }
   };
 };
 

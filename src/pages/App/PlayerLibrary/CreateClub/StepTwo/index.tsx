@@ -1,29 +1,29 @@
-import React, { useState, useContext } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import swal from 'sweetalert';
-import { postCall, getCall } from '../../../../../api/request';
-import endPoint from '../../../../../api/endPoints';
+import React, { useState, useContext } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
+import { postCall, getCall } from "../../../../../api/request";
+import endPoint from "../../../../../api/endPoints";
 
-import { fetchLocation } from '../../../../../store/locations/actions';
-import Back from '../../../../../assets/icons/back-arrow.svg';
-import Step1 from '../../../../../assets/images/step-1.svg';
-import Step2 from '../../../../../assets/images/step-2.svg';
-import EmptyFile from '../../../../../assets/icons/empty-file.svg';
-import { LoopingRhombusesSpinner } from 'react-epic-spinners';
-import EditPlayer from '../../../../../component/EditPlayer';
-import PlayerCard from '../../../../../component/PlayerCard';
-import axios from 'axios';
-import './index.scss';
-import moment from 'moment';
-import * as XLSX from 'xlsx';
-import CSVReader from 'react-csv-reader';
-import CsvPlayerCard from './../../../../../component/csvCard/index';
+import { fetchLocation } from "../../../../../store/locations/actions";
+import Back from "../../../../../assets/icons/back-arrow.svg";
+import Step1 from "../../../../../assets/images/step-1.svg";
+import Step2 from "../../../../../assets/images/step-2.svg";
+import EmptyFile from "../../../../../assets/icons/empty-file.svg";
+import { LoopingRhombusesSpinner } from "react-epic-spinners";
+import EditPlayer from "../../../../../component/EditPlayer";
+import PlayerCard from "../../../../../component/PlayerCard";
+import axios from "axios";
+import "./index.scss";
+import moment from "moment";
+import * as XLSX from "xlsx";
+import CSVReader from "react-csv-reader";
+import CsvPlayerCard from "./../../../../../component/csvCard/index";
 
 const StepTwo = ({ handleChangeStep, clubDetail }) => {
   const { profile, upload }: any = useSelector((state) => state);
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const { allUploadData, getLoading, getError } = upload;
   const [playersData, setPlayersData]: any = useState([]);
   const [tab, setTab] = useState(1);
@@ -33,20 +33,27 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
 
   const handleForce = (data, fileInfo) => {
     setCsvData(data);
-    setPlayersData(data);
-    console.log('hForce', data);
+    setPlayersData([...playersData, ...data]);
+    console.log("hForce", data);
   };
-  console.log('updatedPd', playersData);
+  console.log("updatedPd", playersData);
 
   const papaparseOptions = {
     header: true,
     dynamicTyping: true,
     skipEmptyLines: true,
-    transformHeader: (header) => header.toLowerCase().replace(/\W/g, '_'),
+    transformHeader: (header) => header.toLowerCase().replace(/\W/g, "_"),
   };
 
   function addPlayer(player) {
     setPlayersData([player, ...playersData]);
+    setShowEditModal(false);
+  }
+
+  function editPlayer(index, player) {
+
+    const otherPlayers = playersData.filter((item, i) => i !== index);
+    setPlayersData([player, ...otherPlayers]);
     setShowEditModal(false);
   }
   console.log({ playersData });
@@ -64,7 +71,7 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
     setIsLoading(true);
     // setErrorMessage("");
     playersData.map(async (item, i) => {
-      let photoName = '';
+      let photoName = "";
       getCall(endPoint.getS3ImgLink).then(async (resLink) => {
         if (resLink.status === 200) {
           console.log({ resLink });
@@ -78,21 +85,21 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
               club_name: item.club_name,
               position: item.position,
               jersey_no: item.jersey_no,
-              reason: '',
-              status: 'pending',
+              reason: "",
+              status: "pending",
               club_id: item.club_id,
             };
 
             postCall(endPoint.createPlayer, data).then((res) => {
               setIsLoading(false);
-              if (res.status === 200) {
+              if (res?.status === 200) {
                 // cookie.set("auth", res.data.data.auth_token);
                 // return window.location.replace("/app")
-                swal('Success', 'Players created successfully!', 'success');
+                swal("Success", "Players created successfully!", "success");
                 // handleChangeStep(2)
               }
               setErrorMessage(res.data.message);
-              setInterval(() => setErrorMessage(''), 8000);
+              setInterval(() => setErrorMessage(""), 8000);
             });
             return filename;
           }
@@ -103,7 +110,7 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
       return;
     });
     setTimeout(() => {
-      window.location.replace('/app/player-library');
+      window.location.replace("/app/player-library");
     }, 3000);
   }
 
@@ -123,25 +130,25 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
   }
 
   const csvValue = csvData.map((d) => d);
-  console.log(csvValue);
+  console.log({csvValue});
 
   return (
     <div className="step-two">
       <div className="tab-section mt-5">
         <div
-          className={`tab ${tab === 1 && 'active-tab'}`}
-          onClick={() => handleChangeTab(1, 'all')}
+          className={`tab ${tab === 1 && "active-tab"}`}
+          onClick={() => handleChangeTab(1, "all")}
         >
           Starting {playersData.length}
         </div>
         <div
-          className={`tab ${tab === 2 && 'active-tab'}`}
+          className={`tab ${tab === 2 && "active-tab"}`}
           onClick={() => handleChangeTab(2, true)}
         >
           Substitutes
         </div>
         <div
-          className={`tab ${tab === 3 && 'active-tab'}`}
+          className={`tab ${tab === 3 && "active-tab"}`}
           onClick={() => handleChangeTab(3, false)}
         >
           Reserves
@@ -156,20 +163,14 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
             onClick={() => setShowEditModal(true)}
           >
             Upload player
-          </button>{' '}
-          {/* <label htmlFor="csvFile" className="upload-player pt-2 px-3 csv-btn">
+          </button>{" "}
+          <label htmlFor="csvFile" className="upload-player pt-2 px-3 csv-btn">
             Upload players from CSV file
-          </label>{' '}
-          <button className="btn players-add">2</button> */}
-          {/* <input
-            type="file"
-            name="csvFile"
-            id="csvFile"
-            className="logo-file"
-            accept=".xlsx, .xls, .csv"
-          /> */}
+          </label>{" "}
+          <button className="btn players-add">{csvData.length}</button>
           <CSVReader
             cssClass="react-csv-input"
+            inputId="csvFile"
             label="Select CSV    "
             onFileLoaded={handleForce}
             parserOptions={papaparseOptions}
@@ -183,19 +184,12 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
             <CsvPlayerCard
               player={playeri}
               removePlayer={removePlayer}
-              addPlayer={addPlayer}
+              editPlayer={editPlayer}
+              index={index}
             />
           </div>
         ))}
       </div>
-
-      {/* <div className="player-card-section-cards mt-5">
-        {csvData.map((playeri, index) => (
-          <div key={index}>
-            <CsvPlayerCard player={playeri} removePlayer={removePlayer} />
-          </div>
-        ))}
-      </div> */}
 
       <div className="col-lg-7 d-flex justify-content-between">
         <button
@@ -206,7 +200,7 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
         </button>
         <button
           className={`btn btn-primary ${
-            playersData.length > 1 && 'btn-color'
+            playersData.length > 1 && "btn-color"
           } mt-5`}
           onClick={handleSubmit}
           disabled={playersData.length < 2 || isLoading}

@@ -48,7 +48,7 @@ const SignUp = ({ setIsSignUpOpen, handleLoginOpenModal }) => {
     .then((res) => {
       setIsLoading(false)
       console.log({ res })
-      if (res.status === 200) {
+      if (res?.status === 200) {
         // cookie.set("auth", res.data.data.auth_token);
         // return window.location.replace("/app")
         swal ( "Success" ,  "Account created successfully!" ,  "success" )

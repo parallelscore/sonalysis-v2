@@ -27,11 +27,9 @@ const PlayerStats = (props) => {
  
 
   const getObjectValue = (obj)=>{
-    const key:any = Object.keys(obj||{0:0})
-    if(key.length==1 && key[0]==0){
-      return 0
-    }
-    return key.length
+    const key:any = Object.values(obj||{0:0})
+    const sum = key.reduce((acc,item)=>acc+Number(item),0)  
+    return sum
   }
 
   const team: any = clubTeam === "TeamB" ? TeamB : TeamA;
@@ -44,6 +42,8 @@ const PlayerStats = (props) => {
       behavior: 'smooth'
     });
   }
+
+  const otherPlayers = team.Players.filter(item=>item.Name!==playerDetails.Name)
 
   return (
     <div className="player">
@@ -208,7 +208,7 @@ const PlayerStats = (props) => {
         <h3 className="mb-4 mt-5">Other Players</h3>
 
         <div className="player-card-section-cards">
-          {team.Players.map((item, index) => (
+          {otherPlayers.map((item, index) => (
             <div
               className="card"
               key={index}
@@ -219,7 +219,7 @@ const PlayerStats = (props) => {
               </div>
               {item.Name}
               <div>{item.Position}</div>
-              <div className="no">No. {index + 1}</div>
+              <div className="no">No. {item.Jersey_no}</div>
             </div>
           ))}
         </div>

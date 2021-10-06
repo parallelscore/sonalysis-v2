@@ -76,6 +76,7 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
                   name="photo"
                   id="clubLogo"
                   className="logo-file"
+                  accept="image/*"
                   onChange={handleOnchange}
                 />
               </div>

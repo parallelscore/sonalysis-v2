@@ -3,7 +3,7 @@ import './index.scss';
 import EditPen from '../../assets/icons/edit-pen.svg';
 import EditCsvPlayer from '../EditPlayerCsv';
 
-const PlayerCard = ({ player, removePlayer, addPlayer }) => {
+const PlayerCard = ({ player, removePlayer, index, editPlayer }) => {
   console.log('yes', { player });
   const [showModal, setShowModal] = useState(false);
   return (
@@ -33,7 +33,8 @@ const PlayerCard = ({ player, removePlayer, addPlayer }) => {
       {showModal && (
         <EditCsvPlayer
           setShowModal={setShowModal}
-          addPlayer=""
+          editPlayer={editPlayer}
+          index={index}
           player={player}
         />
       )}
