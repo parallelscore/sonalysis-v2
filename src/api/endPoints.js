@@ -1,6 +1,6 @@
 
 import {baseURL} from "./request";
-
+const cloudinaryName ="parallelscore"
 
 export default {
   register: `${baseURL}/users/sign_up`,
@@ -22,4 +22,5 @@ export default {
   createManyPlayers: `${baseURL}/player/many`,
   createPlayer: `${baseURL}/player`,
   deleteClub: (clubId) =>`${baseURL}/club/${clubId}`,
+  cloudinaryPost: `https://api.cloudinary.com/v1_1/${cloudinaryName}/upload`
 };

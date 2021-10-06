@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
@@ -14,23 +14,46 @@ import { LoopingRhombusesSpinner } from "react-epic-spinners";
 import EditPlayer from "../../../../../component/EditPlayer";
 import PlayerCard from "../../../../../component/PlayerCard";
 import axios from "axios";
-
 import "./index.scss";
 import moment from "moment";
+import * as XLSX from "xlsx";
+import CSVReader from "react-csv-reader";
+import CsvPlayerCard from "./../../../../../component/csvCard/index";
 
 const StepTwo = ({ handleChangeStep, clubDetail }) => {
   const { profile, upload }: any = useSelector((state) => state);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { allUploadData, getLoading, getError } = upload;
-
   const [playersData, setPlayersData]: any = useState([]);
-
   const [tab, setTab] = useState(1);
   const [showEditModal, setShowEditModal] = useState(false);
 
+  const [csvData, setCsvData] = useState([]);
+
+  const handleForce = (data, fileInfo) => {
+    setCsvData(data);
+    setPlayersData([...playersData, ...data]);
+    console.log("hForce", data);
+  };
+  console.log("updatedPd", playersData);
+
+  const papaparseOptions = {
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+    transformHeader: (header) => header.toLowerCase().replace(/\W/g, "_"),
+  };
+
   function addPlayer(player) {
     setPlayersData([player, ...playersData]);
+    setShowEditModal(false);
+  }
+
+  function editPlayer(index, player) {
+
+    const otherPlayers = playersData.filter((item, i) => i !== index);
+    setPlayersData([player, ...otherPlayers]);
     setShowEditModal(false);
   }
   console.log({ playersData });
@@ -69,7 +92,7 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
 
             postCall(endPoint.createPlayer, data).then((res) => {
               setIsLoading(false);
-              if (res.status === 200) {
+              if (res?.status === 200) {
                 // cookie.set("auth", res.data.data.auth_token);
                 // return window.location.replace("/app")
                 swal("Success", "Players created successfully!", "success");
@@ -84,10 +107,10 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
         }
       });
 
-      return 
+      return;
     });
     setTimeout(() => {
-      window.location.replace("/app/player-library")
+      window.location.replace("/app/player-library");
     }, 3000);
   }
 
@@ -105,6 +128,9 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
       }
     });
   }
+
+  const csvValue = csvData.map((d) => d);
+  console.log({csvValue});
 
   return (
     <div className="step-two">
@@ -141,12 +167,13 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
           <label htmlFor="csvFile" className="upload-player pt-2 px-3 csv-btn">
             Upload players from CSV file
           </label>{" "}
-          <button className="btn players-add">2</button>
-          <input
-            type="file"
-            name="csvFile"
-            id="csvFile"
-            className="logo-file"
+          <button className="btn players-add">{csvData.length}</button>
+          <CSVReader
+            cssClass="react-csv-input"
+            inputId="csvFile"
+            label="Select CSV    "
+            onFileLoaded={handleForce}
+            parserOptions={papaparseOptions}
           />
         </div>
       </div>
@@ -154,7 +181,12 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
       <div className="player-card-section-cards mt-5">
         {playersData.map((playeri, index) => (
           <div key={index}>
-            <PlayerCard player={playeri} removePlayer={removePlayer} />
+            <CsvPlayerCard
+              player={playeri}
+              removePlayer={removePlayer}
+              editPlayer={editPlayer}
+              index={index}
+            />
           </div>
         ))}
       </div>
@@ -189,6 +221,13 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
           setShowModal={setShowEditModal}
           addPlayer={addPlayer}
           clubDetail={clubDetail}
+        />
+      )}
+      {showEditModal && (
+        <EditPlayer
+          setShowModal={setShowEditModal}
+          addPlayer={addPlayer}
+          clubDetail={csvValue}
         />
       )}
     </div>

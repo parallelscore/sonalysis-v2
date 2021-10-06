@@ -1,7 +1,8 @@
 import axios from "axios"
 import cookie from "js-cookie"
-export const baseURL = "https:api.sonalysis.io";
+// export const baseURL = "https:api.sonalysis.io";
 // export const baseURL = "http://localhost:3001";
+export const baseURL = "http://api.sonalysis.io:3001";
 
 const logOut = (error) => {
     if (error.response?.status === 401) {
@@ -15,7 +16,6 @@ const logOut = (error) => {
   const config = {
     onUploadProgress: progressEvent => {
       const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
-      console.log({percentCompleted});
     },
         headers: {
         'Content-Type': 'application/json',

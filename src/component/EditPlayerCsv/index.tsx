@@ -17,47 +17,28 @@ export interface CardProps {
   charts?: any;
 }
 
-const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
+const EditModal = ({ setShowModal, editPlayer, clubDetail, index, player }: any) => {
   const [singlePlayer, setSinglePlayer] = useState(player);
-  console.log(singlePlayer);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [videoFile, setVideoFile] = useState<any>('');
-  const dispatch = useDispatch();
-  const { upload }: any = useSelector((state) => state);
   const [files, setFiles]: any = useState({
     photo: '',
   });
   const [filePhoto, setFilePhoto] = useState('');
 
-  const [playerData, setPlayerData] = useState({
-    name: '',
-    photo: '',
-    club_name: clubDetail?.name || '',
-    position: '',
-    jersey_no: '',
-    reason: '',
-    status: 'pending',
-    club_id: clubDetail?._id || '',
-  });
-
   const handleOnchange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log({ name });
     if (name == 'photo') {
       name == 'photo' && setFilePhoto(URL.createObjectURL(e.target.files[0]));
-      return setPlayerData({ ...playerData, [name]: e.target.files[0] });
+      return setSinglePlayer({ ...singlePlayer, [name]: e.target.files[0] });
     }
-    return setPlayerData({ ...playerData, [name]: value });
+    return setSinglePlayer({ ...singlePlayer, [name]: value });
   };
 
-  const addData = (data) => {
-    setSinglePlayer([playerData, data]);
+  const editPlayerFunc = (index, singlePlayer) => {
+    editPlayer(index, singlePlayer)
     setShowModal(false);
   };
-  //This is the bupdated player
-  console.log({ singlePlayer });
 
   return (
     <Modal>
@@ -68,15 +49,15 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
             <form className=" col-lg-10 mt-5 mx-auto">
               <div className="form-group col-lg-4 mx-auto">
                 <label htmlFor="clubLogo" className="logo">
-                  {filePhoto && <img src={filePhoto} alt="logo" />}
-                  {!filePhoto && 'Upload Image'}
+                  {(filePhoto||singlePlayer.photo) && <img src={filePhoto || URL.createObjectURL(singlePlayer.photo)} alt="logo" />}
+                  {(!filePhoto && !singlePlayer.photo) && 'Upload Image'}
                 </label>
                 <input
                   type="file"
                   name="photo"
+                  accept="image/*"
                   id="clubLogo"
                   className="logo-file"
-                  accept="image/*"
                   onChange={handleOnchange}
                 />
               </div>
@@ -88,7 +69,7 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
                       type="text"
                       name="name"
                       className="form-control"
-                      value={playerData?.name}
+                      value={singlePlayer?.name}
                       id="clubName"
                       placeholder="Enter player name"
                       onChange={handleOnchange}
@@ -99,7 +80,7 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
                     <input
                       type="text"
                       name="jersey_no"
-                      value={playerData?.jersey_no}
+                      value={singlePlayer?.jersey_no}
                       className="form-control"
                       id="Abbrivation"
                       placeholder="eg. 9"
@@ -113,7 +94,7 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
                     type="text"
                     name="position"
                     className="form-control"
-                    value={playerData?.position}
+                    value={singlePlayer?.position}
                     id="Location"
                     placeholder="Enter position"
                     onChange={handleOnchange}
@@ -123,7 +104,7 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
             </form>
           </>
           <div className="d-flex min-cancel justify-content-between mt-5 col-lg-9 mx-auto">
-            <button onClick={() => addData(playerData)} className="">
+            <button onClick={() => editPlayerFunc(index, singlePlayer)} className="">
               Done
             </button>
             <button className="cancel" onClick={() => setShowModal(false)}>

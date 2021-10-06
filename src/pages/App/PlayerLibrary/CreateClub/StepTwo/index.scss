@@ -47,7 +47,7 @@
       .logo-file {
         display: none;
       }
-      
+
       .upload-player {
         margin-top: 1em;
         background: #131313;
@@ -60,7 +60,7 @@
         text-align: center;
         // padding-top: 8px;
         cursor: pointer;
-        
+
         color: #fff;
       }
       .csv-btn {
@@ -87,12 +87,12 @@
       width: 131px;
       height: 34px;
     }
-    .analyzing{
-      border: 1px solid #A0A0A0;
+    .analyzing {
+      border: 1px solid #a0a0a0;
       box-sizing: border-box;
       border-radius: 5px;
       background-color: transparent;
-      color: #A0A0A0;
+      color: #a0a0a0;
       font-style: italic;
       width: 131px;
       height: 34px;
@@ -111,7 +111,7 @@
     .pending {
       color: #ffbb33;
     }
-    img{
+    img {
       margin-right: 2em;
     }
   }
@@ -119,24 +119,27 @@
     display: flex;
     flex-wrap: wrap;
   }
-  .btn-primary{
-    background: #515151;
-opacity: 0.7;
-border-radius: 5px;
-border: none;
-width: 154px;
-height: 53px;
+  .react-csv-input{
+    display: none;
   }
-  .btn-color{
+  .btn-primary {
+    background: #515151;
+    opacity: 0.7;
+    border-radius: 5px;
+    border: none;
+    width: 154px;
+    height: 53px;
+  }
+  .btn-color {
     color: #fff;
     background: #811aff;
   }
-  .btn-secondary{
+  .btn-secondary {
     background: transparent;
     border: none;
     font-size: 20px;
   }
-  .players-add{
+  .players-add {
     background: #515151;
     height: 48px;
     margin-left: 1em;

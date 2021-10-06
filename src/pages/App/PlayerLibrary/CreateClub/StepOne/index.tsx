@@ -23,9 +23,9 @@ const StepOne = ({ handleChangeStep, setClubDetail }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [files, setFiles]:any = useState({
-    logo:"",
-    video:""
+  const [files, setFiles]: any = useState({
+    logo: "",
+    video: "",
   });
   const [fileLogo, setFileLogo] = useState("");
   const [clubData, setClubData] = useState({
@@ -45,77 +45,74 @@ const StepOne = ({ handleChangeStep, setClubDetail }) => {
   const handleOnchange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log({name})
-    if(name=="logo"|| name=="video" ){
-      name=="logo" && setFileLogo(URL.createObjectURL(e.target.files[0]))
-      return setFiles({...files, [name]: e.target.files[0]});
+    console.log({ name });
+    if (name == "logo" || name == "video") {
+      name == "logo" && setFileLogo(URL.createObjectURL(e.target.files[0]));
+      return setFiles({ ...files, [name]: e.target.files[0] });
     }
     setClubData({ ...clubData, [name]: value });
   };
 
   function getLink() {
-    getCall(endPoint.getS3Link)
-    .then(async (resLink) => {
+    getCall(endPoint.getS3Link).then(async (resLink) => {
       if (resLink.status === 200) {
         console.log({ resLink });
         const { filename, signedUrl } = resLink.data.data;
-        console.log({filename, signedUrl})
+        console.log({ filename, signedUrl });
         const responseFetch = await axios.put(signedUrl, files.video);
         if (responseFetch.status === 200) {
-
-          setClubData({ ...clubData, ["video_url"]: filename })
-          getImgLink(filename)
-          return true
+          setClubData({ ...clubData, ["video_url"]: filename });
+          getImgLink(filename);
+          return true;
         }
-        return false
+        return false;
+      }
+    });
   }
-})}
 
   function getImgLink(file) {
-    getCall(endPoint.getS3ImgLink)
-    .then(async (resLink) => {
+    getCall(endPoint.getS3ImgLink).then(async (resLink) => {
       if (resLink.status === 200) {
         console.log({ resLink });
         const { filename, signedUrl } = resLink.data.data;
-        console.log({filename, signedUrl})
+        console.log({ filename, signedUrl });
         const responseFetch = await axios.put(signedUrl, files.video);
         if (responseFetch.status === 200) {
-          setClubData({ ...clubData, ["logo"]: filename })
-          createClub(file, filename)
-          return true
+          setClubData({ ...clubData, ["logo"]: filename });
+          createClub(file, filename);
+          return true;
         }
-        return false
+        return false;
+      }
+    });
   }
-})}
 
   useEffect(() => {
     dispatch(fetchLocation());
   }, []);
 
-   async function handleSubmit (e){
+  async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
     setErrorMessage("");
-    const link : any = await getLink()
-
-  };
+    const link: any = await getLink();
+  }
 
   function createClub(imgName, videoName) {
-    clubData.video_url = videoName
-    clubData.logo = imgName
+    clubData.video_url = videoName;
+    clubData.logo = imgName;
 
     postCall(endPoint.createClub, clubData).then((res) => {
       setIsLoading(false);
-      if (res.status === 200) {
-       console.log("res.data.data",res.data.data)
-        setClubDetail(res.data.data)
+      if (res?.status === 200) {
+        console.log("res.data.data", res.data.data);
+        setClubDetail(res.data.data);
         swal("Success", "Club created successfully!", "success");
-        handleChangeStep(2)
+        handleChangeStep(2);
       }
       setErrorMessage(res.data.message);
       setInterval(() => setErrorMessage(""), 8000);
     });
-    
   }
 
   return (
@@ -124,8 +121,8 @@ const StepOne = ({ handleChangeStep, setClubDetail }) => {
         <div className="d-flex justify-content-between align-item-center">
           <div className="form-group col-lg-4">
             <label htmlFor="clubLogo" className="logo">
-              {fileLogo&&<img src={fileLogo}  alt="logo"/>}
-              {!fileLogo&&"Upload Your Logo"}
+              {fileLogo && <img src={fileLogo} alt="logo" />}
+              {!fileLogo && "Upload Your Logo"}
             </label>
             <input
               type="file"
@@ -201,40 +198,41 @@ const StepOne = ({ handleChangeStep, setClubDetail }) => {
         </div>
       ) : (
         <div>
-          {
-              files?.video &&<div className="col-lg-6 table-row d-flex align-items-center p-3 mt-5">
-                <div className="col-5 d-flex align-items-center">
-                  <div className="mr-2 ml-3">
-                    <img src={EmptyFile} alt="empty-file" />
-                  </div>{" "}
-                  <div className="pl-5 ml-5">{files?.video?.name}</div>
-                </div>
-                <div
-                  className={`col-2 pending status`}
-                >
-                 Pending
-                </div>
-                <div
-                  className="col-2 delete"
-                  // onClick={() =>
-                  //   // handleVideoDelete({ id: item._id, name: item.filename })
-                  // }
-                >
-                  Remove
-                </div>
+          {files?.video && (
+            <div className="col-lg-6 table-row d-flex align-items-center p-3 mt-5">
+              <div className="col-5 d-flex align-items-center">
+                <div className="mr-2 ml-3">
+                  <img src={EmptyFile} alt="empty-file" />
+                </div>{" "}
+                <div className="pl-5 ml-5">{files?.video?.name}</div>
               </div>
-            }
+              <div className={`col-2 pending status`}>Pending</div>
+              <div
+                className="col-2 delete"
+                // onClick={() =>
+                //   // handleVideoDelete({ id: item._id, name: item.filename })
+                // }
+              >
+                Remove
+              </div>
+            </div>
+          )}
         </div>
       )}
       <button
         className="btn btn-primary mt-5"
-        onClick={handleSubmit }
+        onClick={handleSubmit}
         disabled={isLoading}
       >
-        
-        NEXT { isLoading && <div className="spinner-border text-light spinner-border-sm" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>}
+        NEXT{" "}
+        {isLoading && (
+          <div
+            className="spinner-border text-light spinner-border-sm"
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        )}
       </button>
     </div>
   );
