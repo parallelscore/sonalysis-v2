@@ -53,7 +53,7 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
     }
     const data = new FormData();
     data.append("file", videoFile);
-    data.append("upload_preset", " ");
+    data.append("upload_preset", "sonalysis-upload");
     dispatch(
       createUploadRequest(
         data,

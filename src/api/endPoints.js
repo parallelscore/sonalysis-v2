@@ -1,6 +1,6 @@
 
 import {baseURL} from "./request";
-const cloudinaryName ="parallelscore"
+const cloudinaryName ="Parallelscore"
 
 export default {
   register: `${baseURL}/users/sign_up`,
