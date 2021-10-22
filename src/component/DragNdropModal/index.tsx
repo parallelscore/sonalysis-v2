@@ -9,6 +9,7 @@ import { createUploadRequest } from "../../store/upload/actions";
 import { postCall, getCall } from "../../api/request";
 import endPoint from "../../api/endPoints";
 import swal from "sweetalert";
+import DragAndDrop from "../DragAndDropComp";
 
 export interface CardProps {
   number?: number;
@@ -21,6 +22,10 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [loadingURL, setSetLoadingURL] = useState(false);
   const [videoFile, setVideoFile] = useState<any>("");
+  const [dragFile, setDragFile] = useState<any>({
+    files: [
+    ]
+  });
   const dispatch = useDispatch();
   const { upload }: any = useSelector((state) => state);
   const { postLoading, postError, progress } = upload;
@@ -40,6 +45,12 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
   const onTargetClick = () => {
     // fileInputRef.current.click()
   };
+
+
+ const handleDrop = (files) => {
+   console.log("yes ",files[0])
+  handleSubmit(files[0], "local")
+  }
 
   const handleOnchange = (e) => {
     const file = e.target.files[0];
@@ -109,6 +120,7 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
               It helps if the video is a high quality video as it gives a more
               precise analysis
             </div>
+            <DragAndDrop handleDrop={handleDrop} >
             <div className="drop-zone">
               <img src={EmptyFile} alt="drop and drop" className="mt-5" />
               <div className="text mb-5 mt-3">
@@ -129,6 +141,7 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
               />
               <FileDrop onTargetClick={onTargetClick} />
             </div>
+            </DragAndDrop>
             <button
               className="primary mt-3"
               onClick={() => handleSubmit(videoFile, "local")}
@@ -231,6 +244,7 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
             >
               Minimize
             </button>
+            
             {/* <button className="cancel" onClick={() => setOpenDragNdropModal(false)}>
               Cancel
             </button> */}

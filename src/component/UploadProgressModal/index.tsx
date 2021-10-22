@@ -58,7 +58,7 @@ const DragNdrop = ({
             <button onClick={() => setOpenProgressModal(false)}>
               Minimize
             </button>
-            {!updatedUploadData.model_data.isFootballVideo ? (
+            {/* {!updatedUploadData.model_data.isFootballVideo ? (
               <button
                 className="cancel"
                 onClick={() => setOpenProgressModal(false)}
@@ -77,7 +77,7 @@ const DragNdrop = ({
               >
                 Delete
               </button>
-            )}
+            )} */}
           </div>
         </div>
       </div>

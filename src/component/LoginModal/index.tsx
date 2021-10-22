@@ -1,14 +1,13 @@
 
-import React, { useState } from "react";
+import  { useState } from "react";
 import "./index.scss"
 import Modal from "../layouts/Modal"
 import CancelIcon from "../../assets/icons/cancel.svg"
-import { useFormik } from 'formik';
-import {Redirect, withRouter} from "react-router-dom"
+import {withRouter} from "react-router-dom"
 import { postCall } from "../../api/request"
-import swal from 'sweetalert';
+
 import EyeIcon from "../../assets/icons/eye-hide.svg"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, } from "react-redux"
 import cookie from "js-cookie";
 import endPoint from "../../api/endPoints"
 import { getProfileRequest } from "../../store/profile/actions"

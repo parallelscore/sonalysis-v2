@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import "./index.scss"
 import Navbar from "../../component/Navbar"
 import MouseIcon from "../../assets/images/mouse.svg"
-import DataAnalysyic from "../../assets/images/analysis.svg"
+import DataAnalysyic from "../../assets/images/analysis.jpg"
 import Recruitment from "../../assets/images/recruitment.svg"
 import Footer from "../../component/Footer"
 import SignUpModal from "../../component/SignUpModal"
 import LoginModal from "../../component/LoginModal"
-import {Link} from "react-router-dom"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 

@@ -1,11 +1,11 @@
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./index.scss"
 import Modal from "../layouts/Modal"
 import CancelIcon from "../../assets/icons/cancel.svg"
 import EyeIcon from "../../assets/icons/eye-hide.svg"
 import endPoint from "../../api/endPoints"
-import { postCall, getCall } from "../../api/request"
+import { postCall} from "../../api/request"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchLocation } from "../../store/locations/actions"
 import swal from 'sweetalert';

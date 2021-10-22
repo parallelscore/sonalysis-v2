@@ -1,21 +1,13 @@
 
-import React, { useState } from "react";
+import { useState } from "react";
 import "./index.scss"
-import { NavLink } from "react-router-dom"
 import Logo from "../../assets/icons/logo.svg"
 import Facebook from "../../assets/icons/facebook.svg"
 import Twitter from "../../assets/icons/twitter.svg"
 import LinkedIn from "../../assets/icons/LinkedIn.svg"
 
-export interface CardProps {
-  number?: number;
-  desc?: string;
-  image?: string;
-  charts?: any;
-}
 
-const NavBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const Footer = () => {
   return (
     <div className="footer">
       <div className="container">
@@ -117,4 +109,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar
+export default Footer
