@@ -151,7 +151,7 @@ const AnalyzedMatch = (props) => {
 
   return (
     <div className="analyzed-match">
-      <div className="d-flex mt-5 mb-5 mr-3 back" onClick={() => props.history.goBack()}><img src={Back} alt="back arrow" />{" "} Back to Recent Uploads</div>
+      <div className="d-flex mt-5 mb-5 mr-3 back" onClick={() => props.history.push("/app/analytics/all-video")}><img src={Back} alt="back arrow" />{" "} Back to Recent Uploads</div>
       <h3 className="mb-4">Video Analytics</h3>
       <div className="tab-section col-10">
         <div className={`tab ${tab === 1 && "active-tab"}`} onClick={() => setTab(1)}>Analyzed Video</div>

@@ -7,6 +7,7 @@ import Recruitment from "../../assets/images/recruitment.svg"
 import Footer from "../../component/Footer"
 import SignUpModal from "../../component/SignUpModal"
 import LoginModal from "../../component/LoginModal"
+import ComingSoonModal from "../../component/ComingSoonModal"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -20,6 +21,7 @@ export interface CardProps {
 const Home = () => {
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
 
   useEffect(() => {
     AOS.init({
@@ -41,6 +43,7 @@ const Home = () => {
     <div className="home">
       <Navbar handleLoginOpenModal={handleLoginOpenModal} />
       <div className="home-hero " >
+        {isComingSoonOpen&&<ComingSoonModal isClose={()=>setIsComingSoonOpen(!isComingSoonOpen)}/>}
           {isSignUpOpen && <SignUpModal setIsSignUpOpen={setIsSignUpOpen}  handleLoginOpenModal={handleLoginOpenModal} />}
           {isLoginOpen && < LoginModal setIsLoginOpen={setIsLoginOpen} handleSignUpOpenModal={handleSignUpOpenModal}/>}
         <div className="container" data-aos='zoom-in'>
@@ -90,7 +93,7 @@ const Home = () => {
       </div>
       <div className="home-analysis py-5">
         <h2> <span>Start Your Analysis</span> Experience Now</h2>
-        <div className="home-analysis-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.</div>
+        {/* <div className="home-analysis-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.</div> */}
       </div>
       <div className="home-coach py-5" id="started">
         <div className="container d-lg-flex justify-content-between">
@@ -103,13 +106,13 @@ const Home = () => {
           <div className="home-coach-card mb-5">
             <div className="home-coach-card-title">Get started as</div>
             <h2>A PLAYER</h2>
-            <button onClick={handleSignUpOpenModal}>START</button>
+            <button onClick={()=>setIsComingSoonOpen(true)}>START</button>
 
           </div>
           <div className="home-coach-card mb-5">
             <div className="home-coach-card-title">Get started as</div>
             <h2>AN ANALYIST</h2>
-            <button onClick={handleSignUpOpenModal}>START</button>
+            <button onClick={()=>setIsComingSoonOpen(true)}>START</button>
 
           </div>
         </div>
@@ -132,7 +135,7 @@ const Home = () => {
 
                 </div>
                 <div className="home-feature-card-text mt-4">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.
+                Leverage on the use of an AI powered system in extracting analytical insights from your games. 
                 </div>
               </div>
 
@@ -144,7 +147,7 @@ const Home = () => {
                   Recruitment
                 </div>
                 <div className="home-feature-card-text mt-4">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.
+                Make actionable decision in recruiting professional players for your games with our AI generated player stats.
                 </div>
               </div>
 
@@ -157,7 +160,7 @@ const Home = () => {
                   <span>Reel</span>
                 </div>
                 <div className="home-feature-card-text mt-4">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.
+                Export action reels from soccer games in seconds with our AI powered machine.
                 </div>
               </div>
 
@@ -168,9 +171,9 @@ const Home = () => {
 
               <h2>Start Analyzing Your
                 Game Today!</h2>
-              <div className="home-game-left-text mt-5">
+              {/* <div className="home-game-left-text mt-5">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.
-              </div>
+              </div> */}
             </div>
             <div className="col-lg-6">
               <button onClick={handleSignUpOpenModal} className="mt-5 mt-lg-0 ml-5">GET STARTED</button>

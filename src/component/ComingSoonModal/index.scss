@@ -1,0 +1,22 @@
+@import "../../assets//styles/variable.scss";
+
+.soon {
+  background-color: #131313;
+
+  span {
+    color: #ffd601;
+  }
+
+  form {
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      margin: 0 auto;
+      margin-top: 3em;
+      background-color: #811AFF;
+    }
+    margin-bottom: 2em;
+  }
+}

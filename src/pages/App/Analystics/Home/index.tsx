@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import ComingSoonModal from "../../../../component/ComingSoonModal"
 import {Link} from "react-router-dom"
 import "./index.scss"
 
 
 const Analytics = () => {
+  const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
 
   return (
     <div className="analytics d-flex flex-column flex-lg-row justify-content-evenly ">
+      {isComingSoonOpen&&<ComingSoonModal isClose={()=>setIsComingSoonOpen(!isComingSoonOpen)}/>}
     <div className="left-card col-lg-4 d-flex flex-column align-items-center justify-content-end">
       <div className="name">
       Data
@@ -35,7 +38,7 @@ const Analytics = () => {
       <div className="textt col-8 text-center">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.
       </div>
-      <button className=" ">
+      <button onClick={()=>setIsComingSoonOpen(true)}>
         OPEN
       </button>
     </div>
