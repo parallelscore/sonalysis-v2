@@ -33,7 +33,8 @@ const Analytics = () => {
     "https://drive.google.com/file/d/1htoCdTxcZJL2Pt8Ae6P4AB_O90MeT52X/view?usp=sharing"
   );
   const [isVidoURLModalOpen, setIsVidoURLModalOpen] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [editItem, setIsEditItem] = useState({});
 
   useEffect(() => {
     const socket = io(`${baseURL}`);
@@ -52,6 +53,10 @@ const Analytics = () => {
     dispatch(fetchUploadRequest(userId, page, analyzed));
   };
 
+  const handleShowEditing = (item)=>{
+    setIsEditOpen(true)
+    setIsEditItem(item)
+  }
   const showVideoModal = (url)=>{
     setIsVidoURLModalOpen(true)
     setvideoURL(url)
@@ -102,7 +107,7 @@ const Analytics = () => {
   return (
     <div className="all-video">
       {isVidoURLModalOpen&&<VideoModal vidoeURL={videoURL} isClose={()=>setIsVidoURLModalOpen(false)}/>}
-      {isLoginOpen && <EditUploadVideoModal  setIsLoginOpen={setIsLoginOpen}/>}
+      {isEditOpen && <EditUploadVideoModal  setIsEditOpen={setIsEditOpen} editItem={editItem}/>}
       <div className="top-hero col-lg-8">
         <h2 className="col-lg-7 text-center mx-auto mb-4">
           Start Your Analysis by uploading a video
@@ -161,7 +166,7 @@ const Analytics = () => {
                       <div className="mr-2 ml-3 " onClick={()=>showVideoModal(item.last_media_url)}>
                         <img src={EmptyFile} alt="empty-file" className="btn" />
                       </div>{" "}
-                      <div className="pl-5 ml-5 btn text-white" onClick={()=>setIsLoginOpen(true)}>{item.filename}</div>
+                      <div className=" text-wrap pl-5 ml-5 btn text-white wrap" onClick={()=>handleShowEditing(item) }>{item.filename==="URL upload"?item.last_media_url:item.filename}</div>
                     </div>
                     <div
                       className={`col-2 ${

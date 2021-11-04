@@ -10,6 +10,9 @@ import { postCall, getCall } from "../../api/request";
 import endPoint from "../../api/endPoints";
 import swal from "sweetalert";
 import DragAndDrop from "../DragAndDropComp";
+import {
+  fetchUploadRequest,
+} from "../../store/upload/actions";
 
 export interface CardProps {
   number?: number;
@@ -34,13 +37,10 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
     filename: "",
     originalFilename: "URL upload",
   });
-  console.log({ postLoading, progress, videoURlUpload });
+  const { profile }: any = useSelector((state) => state);
+
 
   const fileInputRef = useRef(null);
-  const onFileInputChange = (event) => {
-    const { files } = event.target;
-    // do something with your files...
-  };
 
   const onTargetClick = () => {
     // fileInputRef.current.click()
@@ -48,13 +48,19 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
 
 
  const handleDrop = (files) => {
-   console.log("yes ",files[0])
   handleSubmit(files[0], "local")
   }
 
   const handleOnchange = (e) => {
     const file = e.target.files[0];
     setVideoFile(file);
+  };
+
+  const handleFetchUploadData = () => {
+    const userId = profile._id;
+    const page = 1;
+    const analyzed="all";
+    dispatch(fetchUploadRequest(userId, page, analyzed));
   };
 
   const handleSubmit = (videoFile, videoUploadType) => {
@@ -70,7 +76,8 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
         data,
         handleChangeTab,
         setOpenDragNdropModal,
-        videoUploadType
+        videoUploadType,
+        handleFetchUploadData
       )
     );
   };
@@ -85,9 +92,11 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
         setSetLoadingURL(false);
         if (response.status === 200) {
           setOpenDragNdropModal(false);
+          handleFetchUploadData()
           swal("Video sent successfully", {
             icon: "success",
           });
+          
         }
         if (response.status === 404 || response.status === 403) {
           swal("Oops! something happen, try again", {

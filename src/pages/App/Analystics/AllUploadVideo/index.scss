@@ -107,6 +107,10 @@
       img{
         margin-right: 2em;
       }
+      .text-wrap{
+        max-width: 300px;
+        word-wrap: break-word;
+      }
     }
 
     .no-file{

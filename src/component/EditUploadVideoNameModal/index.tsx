@@ -4,13 +4,18 @@ import "./index.scss"
 import Modal from "../layouts/Modal"
 import CancelIcon from "../../assets/icons/cancel.svg"
 import {withRouter} from "react-router-dom"
-import { postCall } from "../../api/request"
+import { putCall } from "../../api/request"
+
 
 import EyeIcon from "../../assets/icons/eye-hide.svg"
-import { useDispatch, } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import cookie from "js-cookie";
 import endPoint from "../../api/endPoints"
+import swal from "sweetalert";
 import { getProfileRequest } from "../../store/profile/actions"
+import {
+  fetchUploadRequest,
+} from "../../store/upload/actions";
 
 
 export interface CardProps {
@@ -20,41 +25,49 @@ export interface CardProps {
   charts?: any;
 }
 
-const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
+const Editing = ({setIsEditOpen, handleSignUpOpenModal, editItem}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [showPassword, setshowPassword] = useState(false);
   const [userData, setUserData] = useState({
-    email: "",
-    password: ""
+    filename: "",
   });
-
+  const { profile }: any = useSelector((state) => state);
   const dispatch = useDispatch()
-
+ console.log({editItem})
 
   const handleOnchange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setUserData({ ...userData, [name]: value })
+    console.log({userData})
   }
+
+  const handleFetchUploadData = () => {
+    const userId = profile._id;
+    const page = 1;
+    const analyzed="all";
+    dispatch(fetchUploadRequest(userId, page, analyzed));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true)
-    // setErrorMessage("")
-    // postCall(endPoint.login, userData)
-    //   .then((res) => {
-    //     setIsLoading(false)
-    //     console.log({ res })
-    //     if (res?.status === 200) {
-    //       cookie.set("auth", res.data.data.auth_token);
-    //       dispatch(getProfileRequest(res.data.data.user))
-    //       window.location.replace("/app")
-    //       return 
-    //     }
-    //     setErrorMessage(res.data.message)
-    //     setInterval(()=>setErrorMessage(""),8000)
-    //   })
+    setErrorMessage("")
+    putCall(endPoint.updateUploadById(editItem._id), userData)
+      .then((res) => {
+        setIsLoading(false)
+        console.log({ res })
+        if (res?.status === 200) {
+          setIsEditOpen(false)
+          handleFetchUploadData()
+          swal("Video renaming was successfully", {
+            icon: "success",
+          });
+          return 
+        }
+        setErrorMessage(res.data.message)
+        setInterval(()=>setErrorMessage(""),8000)
+      })
   }
   return (
     <Modal>
@@ -65,11 +78,12 @@ const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
           <div className="video-right col-lg-4 p-5">
             <div className="cancel-img ">
 
-              <img src={CancelIcon} alt="icon" className="ml-auto"  onClick={()=>setIsLoginOpen(false)}/>
+              <img src={CancelIcon} alt="icon" className="ml-auto"  onClick={()=>setIsEditOpen(false)}/>
             </div>
             <br />
             
-            
+            <div className="login-left-text mb-3">Do you want to change "{editItem.filename==="URL upload"?editItem.last_media_url:editItem.filename}"?</div>
+
             <form onSubmit={handleSubmit}>
               {errorMessage&&<div className="alert alert-danger mt-3" role="alert">
                 {errorMessage}
@@ -96,4 +110,4 @@ const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
   );
 };
 
-export default withRouter(Login)
+export default withRouter(Editing)

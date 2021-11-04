@@ -11,6 +11,7 @@ export default {
   getAllUsers: `${baseURL}/users`,
   getUploadsByUserId: (userId, page=1, analyzed) => `${baseURL}/upload/users/${userId}?page=${page}&analyzed=${analyzed}`,
   getUploadById: (uploadId) => `${baseURL}/upload/${uploadId}`,
+  updateUploadById: (uploadId) => `${baseURL}/upload/${uploadId}`,
   postUpload: `${baseURL}/upload/update-link`,
   getS3Link: `${baseURL}/upload/presigned-upload-url`,
   deleteVideo: (videoId) =>`${baseURL}/upload/${videoId}`,

@@ -31,7 +31,8 @@ export const createUploadRequest = (
   file,
   handleChangeTab,
   setOpenDragNdropModal,
-  videoUploadType
+  videoUploadType,
+  handleFetchUploadData
 ) => {
   return async (dispatch) => {
     dispatch(postUploadRequest());
@@ -68,6 +69,7 @@ export const createUploadRequest = (
         .then((response) => {
           if (response.status === 200) {
             dispatch(postUploadequest(response.data.data));
+            handleFetchUploadData()
             handleChangeTab(1, "all");
             setOpenDragNdropModal(false);
           }
