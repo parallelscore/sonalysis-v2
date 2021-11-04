@@ -18,7 +18,7 @@ const Analytics = () => {
       Analytics
       </h2>
       <div className="textt col-8 text-center">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.
+      Leverage on the use of an AI powered system in extracting analytical insights from your games.
       </div>
       <Link to="/app/analytics/all-video">
 
@@ -36,7 +36,7 @@ const Analytics = () => {
       Comparison
       </h2>
       <div className="textt col-8 text-center">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor, nullam id aliquam.
+      Leverage on the use of an AI powered system in extracting analytical insights from your games.
       </div>
       <button onClick={()=>setIsComingSoonOpen(true)}>
         OPEN
