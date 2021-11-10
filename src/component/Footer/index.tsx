@@ -7,7 +7,7 @@ import Twitter from "../../assets/icons/twitter.svg"
 import LinkedIn from "../../assets/icons/LinkedIn.svg"
 
 
-const Footer = () => {
+const Footer = ({handleLoginOpenModal,handleSignUpOpenModal,setIsComingSoonOpen}) => {
   return (
     <div className="footer">
       <div className="container">
@@ -18,16 +18,16 @@ const Footer = () => {
             </div>
 
             <ul className="">
-              <li>
+              <li className="cursor">
                 Home
               </li>
-              <li>
+              <li className="cursor" onClick={()=>setIsComingSoonOpen(true)}>
                 About
-              </li>
-              <li>
+              </li >
+              <li className="cursor" onClick={()=>setIsComingSoonOpen(true)}>
                 Blog
               </li>
-              <li>
+              <li className="cursor" onClick={()=>setIsComingSoonOpen(true)}>
                 Contact us
               </li>
             </ul>
@@ -38,13 +38,13 @@ const Footer = () => {
             </div>
 
             <ul className="">
-              <li>
+              <li className="cursor" onClick={()=>setIsComingSoonOpen(true)}>
                 Request a Demo
               </li>
-              <li>
+              <li onClick={handleLoginOpenModal} className="cursor" >
                 Login
               </li>
-              <li>
+              <li className="cursor" onClick={()=>setIsComingSoonOpen(true)}>
                 Pricing
               </li>
             </ul>
@@ -55,10 +55,10 @@ const Footer = () => {
             </div>
 
             <ul className="">
-              <li>
+              <li className="cursor" onClick={handleSignUpOpenModal}>
                 Getting started
               </li>
-              <li>
+              <li className="cursor" onClick={()=>setIsComingSoonOpen(true)}>
                 FAQs
               </li>
             </ul>
@@ -99,8 +99,8 @@ const Footer = () => {
         </div>
         <div className="col-lg-3">
         <div className="d-flex justify-content-between">
-        <div>Terms & Conditions</div>
-        <div>Privacy Policy</div>
+        <div className="cursor" onClick={()=>setIsComingSoonOpen(true)}>Terms & Conditions</div>
+        <div className="cursor" onClick={()=>setIsComingSoonOpen(true)}>Privacy Policy</div>
         </div>
         </div>
       </div>

@@ -182,7 +182,7 @@ const Home = () => {
         </div>
 
       </div>
-      <Footer />
+      <Footer handleLoginOpenModal={handleLoginOpenModal} handleSignUpOpenModal={handleSignUpOpenModal} setIsComingSoonOpen={setIsComingSoonOpen}/>
     </div>
 
   );

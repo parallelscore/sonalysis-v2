@@ -56,17 +56,21 @@ const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
         setInterval(()=>setErrorMessage(""),8000)
       })
   }
+
+  const stopPropagation = (e)=>{
+    e.stopPropagation()
+  }
   return (
-    <Modal>
+    <Modal isClose={()=>setIsLoginOpen(false)}>
 
       <div className="container">
-        <div className="login col-lg-9 mx-auto">
+        <div className="login col-lg-9 mx-auto" onClick={stopPropagation}>
           <div className="login-left col-5 d-none d-lg-flex">
             <div className="login-left-title">continue as</div>
             <h1 className="p-0">
               A COACH
             </h1>
-            <div className="login-left-text ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus rhoncus lectus posuere elit et. Odio sapien cras molestie viverra vestibulum. Eros pulvinar lacinia fermentum tincidunt fames etiam lorem.</div>
+            {/* <div className="login-left-text ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus rhoncus lectus posuere elit et. Odio sapien cras molestie viverra vestibulum. Eros pulvinar lacinia fermentum tincidunt fames etiam lorem.</div> */}
           </div>
           <div className="login-right col-lg-7 p-5">
             <div className="cancel-img ">
@@ -88,7 +92,7 @@ const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
                   Email
 
                 </label>
-                <input type="email" placeholder="jimhalpert@gmail.com" name="email" onChange={handleOnchange} />
+                <input type="email" placeholder="jimhalpert@gmail.com" name="email" onChange={handleOnchange} required />
               </div>
               <div className="mt-4">
                 <label htmlFor="password">
@@ -96,7 +100,7 @@ const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
                 </label>
                 <div className="password-container d-flex align-items-center justify-content-center">
 
-                <input type={showPassword?"text":"password"} placeholder="**********" name="password" onChange={handleOnchange} />
+                <input type={showPassword?"text":"password"} placeholder="**********" name="password" onChange={handleOnchange} required/>
                 <img src={EyeIcon} alt="show password" className="hide-eye" onClick={()=>setshowPassword(!showPassword)} />
                 </div>
               </div>
@@ -104,7 +108,7 @@ const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
                 <span className="visually-hidden">Loading...</span>
               </div>}
               </button>
-              <div className="get-start mt-2">Don’t have an account? <span onClick={handleSignUpOpenModal}>Get Started</span></div>
+              <div className="get-start mt-2">Don’t have an account? <span onClick={handleSignUpOpenModal} className="cursor">Get Started</span></div>
             </form>
           </div>
         </div>

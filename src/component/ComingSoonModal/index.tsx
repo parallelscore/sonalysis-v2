@@ -4,9 +4,12 @@ import { withRouter } from "react-router-dom";
 
 
 const CommingSoon = ({ isClose }) => {
+  const stopPropagation = (e)=>{
+    e.stopPropagation()
+  }
   return (
-    <Modal>
-      <div className="soon col-lg-4 mx-auto">
+    <Modal isClose={isClose}>
+      <div className="soon col-lg-4 mx-auto" onClick={stopPropagation}>
         <h2 className="pt-4 text-center">
           <span>Coming</span> soon
         </h2>

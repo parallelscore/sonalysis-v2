@@ -58,16 +58,19 @@ const SignUp = ({ setIsSignUpOpen, handleLoginOpenModal }) => {
         setInterval(() => setErrorMessage(""), 8000)
       })
   }
+  const stopPropagation = (e)=>{
+    e.stopPropagation()
+  }
   return (
-    <Modal>
-      <div className="container">
-        <div className="signup col-lg-9 mx-auto">
+    <Modal isClose={()=>setIsSignUpOpen(false)}>
+      <div className="container" >
+        <div className="signup col-lg-9 mx-auto" onClick={stopPropagation}>
           <div className="signup-left col-5 d-none d-lg-flex">
             <div className="signup-left-title">Get started as</div>
             <h1 className="p-0">
               A COACH
             </h1>
-            <div className="signup-left-text ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus rhoncus lectus posuere elit et. Odio sapien cras molestie viverra vestibulum. Eros pulvinar lacinia fermentum tincidunt fames etiam lorem.</div>
+            {/* <div className="signup-left-text ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus rhoncus lectus posuere elit et. Odio sapien cras molestie viverra vestibulum. Eros pulvinar lacinia fermentum tincidunt fames etiam lorem.</div> */}
           </div>
           <div className="signup-right col-lg-7 p-5">
             <div className="cancel-img ">
@@ -87,20 +90,20 @@ const SignUp = ({ setIsSignUpOpen, handleLoginOpenModal }) => {
                 <label htmlFor="fullName">
                   Full Name
                 </label>
-                <input type="text" name="fullName" id="fullName" placeholder="First and Last Name" onChange={handleOnchange} />
+                <input type="text" name="fullName" id="fullName" placeholder="First and Last Name" onChange={handleOnchange} required/>
               </div>
               <div className="mt-4">
                 <label htmlFor="email">
                   Email
 
                 </label>
-                <input type="email" name="email" id="email" placeholder="jimhalpert@gmail.com" onChange={handleOnchange} />
+                <input type="email" name="email" id="email" placeholder="jimhalpert@gmail.com" onChange={handleOnchange}  required/>
               </div>
               <div className="mt-4">
                 <label htmlFor="Country">
                   Country
                 </label>
-                <select name="country" id="country" onChange={handleOnchange}>
+                <select name="country" id="country" onChange={handleOnchange} required>
                   <option value="">Please select a country</option>
                   {
                     data?.map((country, index)=>(
@@ -114,7 +117,7 @@ const SignUp = ({ setIsSignUpOpen, handleLoginOpenModal }) => {
                   Soccer club
 
                 </label>
-                <input type="text" name="club" id="club" placeholder="Enter name of the club" onChange={handleOnchange} />
+                <input type="text" name="club" id="club" placeholder="Enter name of the club" onChange={handleOnchange} required />
               </div>
               <div className="mt-4">
                 <label htmlFor="password">
@@ -122,7 +125,7 @@ const SignUp = ({ setIsSignUpOpen, handleLoginOpenModal }) => {
                 </label>
                 <div className="password-container d-flex align-items-center justify-content-center">
 
-                  <input type={showPassword ? "text" : "password"} placeholder="**********" name="password" onChange={handleOnchange} />
+                  <input type={showPassword ? "text" : "password"} placeholder="**********" name="password" onChange={handleOnchange} required />
                   <img src={EyeIcon} alt="show password" className="hide-eye" onClick={() => setshowPassword(!showPassword)} />
                 </div>
               </div>
@@ -131,7 +134,7 @@ const SignUp = ({ setIsSignUpOpen, handleLoginOpenModal }) => {
               </div>}
               </button>
 
-              <div className="get-start mt-2">Already have an account?  <span onClick={handleLoginOpenModal}>Login</span></div>
+              <div className="get-start mt-2">Already have an account?  <span onClick={handleLoginOpenModal} className="cursor">Login</span></div>
             </form>
 
           </div>
