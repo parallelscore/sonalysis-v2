@@ -8,7 +8,7 @@ const VideoModal = ({ isClose, vidoeURL }) => {
   const url = vidoeURL.replace("watch?v=", "v/")
   
   useEffect(()=>{
-    const vid: any = document.getElementById("playBackVideo")
+    const vid = document.getElementById("playBackVideo")
     vid.load();
     setTimeout(() => {
       if (vid) {

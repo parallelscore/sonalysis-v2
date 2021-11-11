@@ -54,14 +54,14 @@ const Analytics = () => {
     dispatch(fetchUploadRequest(userId, page, analyzed));
   };
 
-  const handleShowEditing = (item)=>{
-    setIsEditOpen(true)
-    setIsEditItem(item)
-  }
-  const showVideoModal = (url)=>{
-    setIsVidoURLModalOpen(true)
-    setvideoURL(url)
-  }
+  const handleShowEditing = (item) => {
+    setIsEditOpen(true);
+    setIsEditItem(item);
+  };
+  const showVideoModal = (url) => {
+    setIsVidoURLModalOpen(true);
+    setvideoURL(url);
+  };
 
   const handleVideoDelete = ({ id, name }) => {
     swal({
@@ -107,8 +107,18 @@ const Analytics = () => {
 
   return (
     <div className="all-video">
-      {isVidoURLModalOpen&&<VideoModal vidoeURL={videoURL} isClose={()=>setIsVidoURLModalOpen(false)}/>}
-      {isEditOpen && <EditUploadVideoModal  setIsEditOpen={setIsEditOpen} editItem={editItem}/>}
+      {isVidoURLModalOpen && (
+        <VideoModal
+          vidoeURL={videoURL}
+          isClose={() => setIsVidoURLModalOpen(false)}
+        />
+      )}
+      {isEditOpen && (
+        <EditUploadVideoModal
+          setIsEditOpen={setIsEditOpen}
+          editItem={editItem}
+        />
+      )}
       <div className="top-hero col-lg-8">
         <h2 className="col-lg-7 text-center mx-auto mb-4">
           Start Your Analysis by uploading a video
@@ -164,10 +174,29 @@ const Analytics = () => {
                 allUploadData?.data?.map((item, id) => (
                   <div className="table-row d-flex align-items-center p-3 mt-4">
                     <div className="col-5 d-flex align-items-center">
-                      <div className="mr-2 ml-3 " onClick={()=>showVideoModal(item.last_media_url)}>
-                        <img src={EmptyFile} alt="empty-file" className="btn" />
+                      <div
+                        className="mr-2 ml-3 "
+                        onClick={() => showVideoModal(item.last_media_url)}
+                      >
+                        <video
+                          width="100%"
+                          height="340"
+                          controls={false}
+                          id="playBackVideo"
+                          className="video-preview"
+                        >
+                          <source src={item.last_media_url} type="video/mp4" />
+                          <source src={item.last_media_url} type="video/ogg" />
+                          Your browser does not support the video tag.
+                        </video>
+                        {/* <img src={EmptyFile} alt="empty-file" className="btn" /> */}
                       </div>{" "}
-                      <div className=" text-wrap pl-5 ml-5 btn text-white wrap" onClick={()=>handleShowEditing(item) }>{item.filename}</div>
+                      <div
+                        className=" text-wrap pl-5 ml-5 btn text-white wrap"
+                        onClick={() => handleShowEditing(item)}
+                      >
+                        {item.filename}
+                      </div>
                     </div>
                     <div
                       className={`col-2 ${
@@ -193,7 +222,7 @@ const Analytics = () => {
                         handleVideoDelete({ id: item._id, name: item.filename })
                       }
                     >
-                      <img src={DeleteIcon} alt="delete icon"/>
+                      <img src={DeleteIcon} alt="delete icon" />
                     </div>
                   </div>
                 ))}
