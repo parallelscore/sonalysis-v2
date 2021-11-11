@@ -8,7 +8,7 @@ import EmptyFile from "../../../../assets/icons/empty-file.svg"
 import NoClub from "../../../../assets/images/no-club.svg"
 import DragNdropModal from "../../../../component/DragNdropModal"
 import UploadProgressModal from "../../../../component/UploadProgressModal"
-
+import DeleteIcon from "../../../../assets/icons/deleteIcon.png";
 
 import { fetchUploadRequest, deleteRequest } from "../../../../store/upload/actions"
 import moment from "moment"
@@ -163,7 +163,7 @@ const AllClubs = () => {
 
                   <div className="col-lg-10 table-row d-flex align-items-center p-3 mt-4">
                     <div className="col-5 d-flex align-items-center">
-                      <div className="mr-2 ml-3"><img src={EmptyFile} alt="empty-file" /></div> <div className="pl-5 ml-5">{item.name}</div>
+                      {/* <div className="mr-2 ml-3"><img src={EmptyFile} alt="empty-file" /></div> <div className="pl-5 ml-5">{item.name}</div> */}
                     </div>
                     <div className={`col-2 ${item.analyzed ? "success" : "pending"} status`}>
                       {item.analyzed ? "Success" : "Pending"}
@@ -175,7 +175,7 @@ const AllClubs = () => {
                       <button className={item.analyzed ? "view" : "analyzing"} onClick={() => handleRedirect(item.analyzed, item)}>{item.analyzed ? "View analytics" : item.model_data.isFootballVideo? "Not a football" : "Analyzing"}</button>
                     </div> */}
                     <div className="col-2 delete" onClick={() => handleVideoDelete({ id: item._id, name: item.name })}>
-                      Delete
+                    <img src={DeleteIcon} alt="delete icon"/>
                     </div>
                   </div>
                 ))

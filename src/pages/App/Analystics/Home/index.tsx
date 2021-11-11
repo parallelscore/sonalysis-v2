@@ -36,7 +36,7 @@ const Analytics = () => {
       Comparison
       </h2>
       <div className="textt col-8 text-center">
-      Leverage on the use of an AI powered system in extracting analytical insights from your games.
+      Leverage on the use of an AI powered system in extracting analytical insights to compare players.
       </div>
       <button onClick={()=>setIsComingSoonOpen(true)}>
         OPEN

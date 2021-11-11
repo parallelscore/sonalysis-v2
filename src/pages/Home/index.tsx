@@ -65,7 +65,7 @@ const Home = () => {
           </button>
           </a>
           <div className="home-hero-navigate">
-            <img src={MouseIcon} alt="navigate" />
+          <a href="#about"><img src={MouseIcon} alt="navigate" /></a>
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@ const Home = () => {
 
           </div>
           <div className="home-about-right col-lg-6 ml-5">
-            <div className="home-about-right-title">about sonalysis</div>
+            <div className="home-about-right-title" id="about">about sonalysis</div>
             <h2 className=" home-about-right-header "> <span>Who</span>  We <br />Are</h2>
             <div className="home-about-right-text col-lg-8">
               <p>

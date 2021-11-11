@@ -16,14 +16,17 @@ const DragNdrop = ({
     (item) => item._id === singleData._id
   )[0];
 
+  const stopPropagation = (e)=>{
+    e.stopPropagation()
+  }
   return (
-    <Modal>
+    <Modal isClose={() => setOpenProgressModal(false)}>
       <div className="container">
-        <div className="drop-n-drop col-lg-6 mx-auto p-5">
-          {updatedUploadData.model_data.isFootballVideo ? (
+        <div className="drop-n-drop col-lg-6 mx-auto p-5" onClick={stopPropagation}>
+          {/* {Number(updatedUploadData.statusText.split("%")[0])>0 ? ( */}
             <div className="progress-section mt-5">
               {/* <h4>Your video is being analysed</h4> */}
-              <div className="text mb-5">Your video is being analysed</div>
+              <h3 className="text mb-5">{updatedUploadData.text}</h3>
               <div className="d-flex justify-content-between">
                 <div className="folder-section">
                   <img src={FolderIcon} alt="" /> {updatedUploadData.filename}
@@ -51,9 +54,9 @@ const DragNdrop = ({
                 ></div>
               </div>
             </div>
-          ) : (
-            <div>The video is not a football match</div>
-          )}
+          {/* ) : (
+            <div>{updatedUploadData.text}</div>
+          )} */}
           <div className="d-flex min-cancel justify-content-between mt-5 col-lg-9 mx-auto">
             <button onClick={() => setOpenProgressModal(false)}>
               Minimize

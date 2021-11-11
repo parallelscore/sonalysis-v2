@@ -18,6 +18,7 @@ import { baseURL } from "../../../../api/request";
 import { io } from "socket.io-client";
 import VideoModal from "../../../../component/videoModal ";
 import EditUploadVideoModal from "../../../../component/EditUploadVideoNameModal";
+import DeleteIcon from "../../../../assets/icons/deleteIcon.png";
 
 const Analytics = () => {
   const { profile, upload }: any = useSelector((state) => state);
@@ -113,7 +114,7 @@ const Analytics = () => {
           Start Your Analysis by uploading a video
         </h2>
         <div className="text mb-4">
-          Get to see materics based on teams and players
+          Get to see metrics based on teams and players
         </div>
         <button onClick={() => handleOpenModal(false)}>
           <img src={UploadIcon} alt="upload icon" className="mr-1" /> Upload a
@@ -166,7 +167,7 @@ const Analytics = () => {
                       <div className="mr-2 ml-3 " onClick={()=>showVideoModal(item.last_media_url)}>
                         <img src={EmptyFile} alt="empty-file" className="btn" />
                       </div>{" "}
-                      <div className=" text-wrap pl-5 ml-5 btn text-white wrap" onClick={()=>handleShowEditing(item) }>{item.filename==="URL upload"?item.last_media_url:item.filename}</div>
+                      <div className=" text-wrap pl-5 ml-5 btn text-white wrap" onClick={()=>handleShowEditing(item) }>{item.filename}</div>
                     </div>
                     <div
                       className={`col-2 ${
@@ -187,12 +188,12 @@ const Analytics = () => {
                       </button>
                     </div>
                     <div
-                      className="col-2 delete"
+                      className="col-1 delete"
                       onClick={() =>
                         handleVideoDelete({ id: item._id, name: item.filename })
                       }
                     >
-                      Delete
+                      <img src={DeleteIcon} alt="delete icon"/>
                     </div>
                   </div>
                 ))}

@@ -133,6 +133,9 @@ const AnalyzedMatch = (props) => {
 
   const team: any = clubTeam === "TeamB" ? TeamB : TeamA
 
+  const actionArr =  [ "object_detection", "name", "team",  "color", "position",  "jerseynumber"]
+  console.log("selectOptionArr",selectOptionArr)
+
   const handleVideoChange = (e) => {
     const vid: any = document.getElementById("playBackVideo")
     vid.load();
@@ -165,7 +168,7 @@ const AnalyzedMatch = (props) => {
           <div className="text">
             Analyzed Video <span className="ml-5">View:</span>
             <select name="" id="" value={selectedVideo} onChange={handleVideoChange}>
-              {selectOptionArr.map((item) => (
+              {actionArr.map((item) => (
                 <option value={item}>{item}</option>
               ))}
             </select>

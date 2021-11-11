@@ -33,7 +33,7 @@ const Editing = ({setIsEditOpen, handleSignUpOpenModal, editItem}) => {
   });
   const { profile }: any = useSelector((state) => state);
   const dispatch = useDispatch()
- console.log({editItem})
+
 
   const handleOnchange = (e) => {
     const name = e.target.name;
@@ -82,7 +82,7 @@ const Editing = ({setIsEditOpen, handleSignUpOpenModal, editItem}) => {
             </div>
             <br />
             
-            <div className="login-left-text mb-3">Do you want to change "{editItem.filename==="URL upload"?editItem.last_media_url:editItem.filename}"?</div>
+            <div className="login-left-text mb-3">Do you want to change "{editItem.filename}"?</div>
 
             <form onSubmit={handleSubmit}>
               {errorMessage&&<div className="alert alert-danger mt-3" role="alert">

@@ -10,6 +10,7 @@ import { fetchUploadRequest, deleteRequest } from "../../../store/upload/actions
 import moment from "moment"
 import { LoopingRhombusesSpinner } from 'react-epic-spinners'
 import swal from 'sweetalert';
+import DeleteIcon from "../../../assets/icons/deleteIcon.png";
 
 const Analytics = () => {
   const { profile, upload }: any = useSelector((state) => state);
@@ -113,7 +114,7 @@ const Analytics = () => {
                       <button className={item.analyzed ? "view" : "analyzing"} onClick={() => window.location.replace(`/app/highlight-reels/actions/${item._id}`)}>{item.analyzed ? "View Actions" :  "Analyzing"}</button>
                     </div>
                     <div className="col-2 delete" onClick={()=>handleVideoDelete({id:item._id, name:item.filename})}>
-                      Delete
+                    <img src={DeleteIcon} alt="delete icon"/>
                     </div>
                   </div>
                 ))
