@@ -1,5 +1,4 @@
-
-import "./index.scss"
+import './index.scss';
 import {
   withRouter,
   Route,
@@ -7,14 +6,14 @@ import {
   Redirect,
   useRouteMatch,
 } from 'react-router-dom';
-import DashboardLayout from "../../component/layouts/DashboardLayout"
-import Analytics from "./Analystics"
-import Dashboard from "./Dashboard"
-import Recruitment from "./Recruitment"
-import Hightlight from "./Highlight/index"
-import Actions from "./Highlight/hight"
+import DashboardLayout from '../../component/layouts/DashboardLayout';
+import Analytics from './Analystics';
+import Dashboard from './Dashboard';
+import Recruitment from './Recruitment';
+import Hightlight from './Highlight/index';
+import Actions from './Highlight/hight';
 
-import PlayerLibrary from "./PlayerLibrary"
+import PlayerLibrary from './PlayerLibrary';
 
 export interface CardProps {
   number?: number;
@@ -36,11 +35,10 @@ const App = (props) => {
             <Redirect to={`${path}/dashboard`} />
           </Route>
           <Route path={`${path}/dashboard`}>
-            <Dashboard/>
+            <Dashboard />
           </Route>
           <Route path={`${path}/analytics`}>
             <Analytics />
-           
           </Route>
           <Route exact path={`${path}/recruitment`}>
             <Recruitment />
@@ -48,19 +46,16 @@ const App = (props) => {
           <Route exact path={`${path}/highlight-reels`}>
             <Hightlight />
           </Route>
-          <Route  path={`${path}/highlight-reels/actions/:id`}>
+          <Route path={`${path}/highlight-reels/actions/:id`}>
             <Actions />
           </Route>
-          <Route  path={`${path}/player-library`}>
+          <Route path={`${path}/player-library`}>
             <PlayerLibrary />
           </Route>
         </Switch>
-
       </DashboardLayout>
-
     </div>
-
   );
 };
 
-export default withRouter(App)
+export default withRouter(App);
