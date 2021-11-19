@@ -80,15 +80,15 @@ const PlayerStats = (props) => {
               <div className="positions mt-3 ">
                 <div className="postion">
                   <div className="title">Position</div>
-                  <div className="">{playerDetails.Position}</div>
+                  <div className="">{playerDetails.Position||"N/A"}</div>
                 </div>
                 <div className="postion">
                   <div className="title">Jersey Number</div>
-                  <div className="">{playerDetails.Jersey_no}</div>
+                  <div className="">{playerDetails.Jersey_no||"N/A"}</div>
                 </div>
                 <div className="postion">
                   <div className="title">Team</div>
-                  <div className="">{playerDetails.Team}</div>
+                  <div className="">{playerDetails.Team||"N/A"}</div>
                 </div>
               </div>
               <div className="circular-progress-bar mt-5 mb-5 d-flex justify-content-evenly">

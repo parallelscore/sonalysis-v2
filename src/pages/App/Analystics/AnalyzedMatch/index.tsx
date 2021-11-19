@@ -20,7 +20,7 @@ const AnalyzedMatch = (props) => {
   const uploadData = upload.allUploadData.data.filter((item) => item._id === id)[0]
   const { url, TeamA, TeamB } = uploadData.model_data
 
-  console.log({ url, TeamA, TeamB }, uploadData.model_data)
+  console.log({ url, TeamA, TeamB }, {uploadData})
 
   // useEffect(()=>{
   //   setSelectedVideo("object_detection") 
@@ -260,7 +260,7 @@ const AnalyzedMatch = (props) => {
                       {item.Position}
                     </div>
                     <div className="no">
-                      No. {index + 1}
+                      No. {item.Jersey_no}
                     </div>
 
                   </Link>

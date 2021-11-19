@@ -9,11 +9,12 @@ color: white !important;
         align-items: center;
         .nav-item{
             
+            color: #fff;
             .nav-link{
                 font-style: normal;
                 font-weight: 600;
                 font-size: 14px;
-                color: #fff !important;
+                color: #fff;
                 text-transform: uppercase;
                 margin-right: 2em;
                 margin-top: 2em;
@@ -28,6 +29,9 @@ color: white !important;
                     background-color: transparent;
                     color: #FFFFFF;
                 }
+            }
+            .activeClass{
+                color: #811AFF ;
             }
 
         }

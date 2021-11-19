@@ -36,6 +36,8 @@ const Analytics = () => {
   const [isVidoURLModalOpen, setIsVidoURLModalOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editItem, setIsEditItem] = useState({});
+  const [displayData, setDisplaydata]= useState(allUploadData.data?.slice(0, 5))
+  console.log({displayData},)
 
   useEffect(() => {
     const socket = io(`${baseURL}`);
@@ -44,11 +46,15 @@ const Analytics = () => {
       uploadProgress && dispatch(updateUpload(uploadProgress));
     });
   }, []);
-
+  
   useEffect(() => {
     const userId = profile._id;
     handleFetchData({ userId, page: 1, analyzed: "all" });
   }, []);
+  
+  // useEffect(() => {
+  //   setDisplaydata(allUploadData.data?.slice(0, 5))
+  // },[displayData])
 
   const handleFetchData = ({ userId, page = 1, analyzed }) => {
     dispatch(fetchUploadRequest(userId, page, analyzed));
@@ -171,7 +177,8 @@ const Analytics = () => {
           ) : (
             <div>
               {allUploadData?.data &&
-                allUploadData?.data?.map((item, id) => (
+                displayData.map((item, id) => (
+                
                   <div className="table-row d-flex align-items-center p-3 mt-4">
                     <div className="col-5 d-flex align-items-center">
                       <div
@@ -225,7 +232,10 @@ const Analytics = () => {
                       <img src={DeleteIcon} alt="delete icon" />
                     </div>
                   </div>
-                ))}
+                   
+                  
+                  ))}
+                  {(allUploadData?.data && allUploadData?.data.length!==displayData.length)  &&<button className="load" onClick={()=>setDisplaydata(allUploadData?.data)}>Load {allUploadData?.data.length} more uploads</button>}
 
               {!allUploadData?.data?.length && (
                 <div className="no-file col-8 mx-auto mt-5">
@@ -244,6 +254,7 @@ const Analytics = () => {
             </div>
           )}
         </div>
+        
       </div>
       {openProgressModal && (
         <UploadProgressModal
@@ -259,6 +270,7 @@ const Analytics = () => {
           handleChangeTab={handleChangeTab}
         />
       )}
+     
     </div>
   );
 };

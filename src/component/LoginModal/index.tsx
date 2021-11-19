@@ -6,7 +6,8 @@ import CancelIcon from "../../assets/icons/cancel.svg"
 import {withRouter} from "react-router-dom"
 import { postCall } from "../../api/request"
 
-import EyeIcon from "../../assets/icons/eye-hide.svg"
+import EyeIcon from "../../assets/icons/eye-close.png"
+import EyeIconOpen from "../../assets/icons/eye-open.png"
 import { useDispatch, } from "react-redux"
 import cookie from "js-cookie";
 import endPoint from "../../api/endPoints"
@@ -101,7 +102,7 @@ const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
                 <div className="password-container d-flex align-items-center justify-content-center">
 
                 <input type={showPassword?"text":"password"} placeholder="**********" name="password" onChange={handleOnchange} required/>
-                <img src={EyeIcon} alt="show password" className="hide-eye" onClick={()=>setshowPassword(!showPassword)} />
+                <img src={!showPassword ?EyeIcon:EyeIconOpen } alt="show password" className="hide-eye" onClick={() => setshowPassword(!showPassword)} />
                 </div>
               </div>
               <button disabled={isLoading}>Login {isLoading && <div className="spinner-border text-light spinner-border-sm" role="status">

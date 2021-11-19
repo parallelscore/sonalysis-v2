@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.scss';
 import Home from "./pages/Home"
+import About from "./pages/AboutUs"
+import ComingSoonPage from "./component/ComingSoonPage"
 import AppDashboard from "./pages/App"
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./store";
@@ -21,6 +23,15 @@ function App() {
             <Switch>
               <Route path="/app" >
                 <AppDashboard />
+              </Route>
+              <Route exact path="/about-us" >
+                <About />
+              </Route>
+              <Route exact path="/contact" >
+                <ComingSoonPage/>
+              </Route>
+              <Route exact path="/blog" >
+                <ComingSoonPage/>
               </Route>
               <Route exact path="/" >
                 <Home />

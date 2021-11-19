@@ -5,6 +5,7 @@ import Logo from "../../assets/icons/logo.svg"
 import Facebook from "../../assets/icons/facebook.svg"
 import Twitter from "../../assets/icons/twitter.svg"
 import LinkedIn from "../../assets/icons/LinkedIn.svg"
+import { Link   } from "react-router-dom"
 
 
 const Footer = ({handleLoginOpenModal,handleSignUpOpenModal,setIsComingSoonOpen}) => {
@@ -19,16 +20,17 @@ const Footer = ({handleLoginOpenModal,handleSignUpOpenModal,setIsComingSoonOpen}
 
             <ul className="">
               <li className="cursor">
-                Home
+                
+               <Link to="/"> Home </Link>
               </li>
-              <li className="cursor" onClick={()=>setIsComingSoonOpen(true)}>
-                About
+              <li className="cursor" >
+              <Link to="/about-us"> About</Link>
               </li >
-              <li className="cursor" onClick={()=>setIsComingSoonOpen(true)}>
-                Blog
+              <li className="cursor" >
+              <Link to="/blog"> Blog</Link>
               </li>
-              <li className="cursor" onClick={()=>setIsComingSoonOpen(true)}>
-                Contact us
+              <li className="cursor" >
+              <Link to="/contact"> Contact us </Link>
               </li>
             </ul>
           </div>
