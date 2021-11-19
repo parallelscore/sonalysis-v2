@@ -1,6 +1,8 @@
 import React from 'react';
 import DropdownComponent from './DropdownComponent';
+import ImageCard from './ImageCard/ImageCard';
 import './index.scss';
+import ScoreArea from './ScoreArea/ScoreArea';
 const index = () => {
   return (
     <div className="mt-5 ml-4 mr-4">
@@ -28,8 +30,79 @@ const index = () => {
           <div>
             <button>Compare</button>
           </div>
-          <div style={{ display: 'flex' }}>
-            <div className="score-area">SCORE CHART AREA </div>
+          <div>
+            <div className="score-area">
+              <div className="score-area__wrapper">
+                <div>
+                  <div
+                    className="score-area__wrapper__inner"
+                    // style={{
+                    //   display: 'flex',
+                    //   justifyContent: 'space-around',
+                    //   alignItems: 'center',
+                    //   width: '68vw',
+                    //   padding: '5vh',
+                    // }}
+                  >
+                    <div className="score-area__wrapper-text">
+                      <ImageCard
+                        player="Player 1"
+                        position="Position"
+                        number={3}
+                      />
+                    </div>
+
+                    <div className="score-area__wrapper-text">
+                      <ImageCard
+                        player="Player 1"
+                        position="Position"
+                        number={13}
+                      />
+                    </div>
+                  </div>
+                  <div className="comparison">
+                    <div className="comparison__wrapper">
+                      <h3 className="comparison__wrapper-text">
+                        {' '}
+                        Comparison Stats{' '}
+                      </h3>
+
+                      <div className="comparison__score-area">
+                        <div className="comparison__score-area-left">
+                          <div>
+                            <ScoreArea
+                              title="Ball possession"
+                              longPass="Long pass acc."
+                              shortPass="Short pass acc."
+                              speed="Speed"
+                              stat={0}
+                            />
+                          </div>
+                        </div>
+                        <div className="comparison__score-area-right">
+                          <ScoreArea
+                            title="Ball possession"
+                            longPass="Long pass acc."
+                            shortPass="Short pass acc."
+                            speed="Speed"
+                            stat={0}
+                          />
+                        </div>
+                      </div>
+                      <div className="comparison__score-area-stats">
+                        <div>
+                          <p>1</p>
+                          <p>1</p>
+                          <p>1</p>
+                          <p>1</p>
+                          <p>1</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -41,8 +41,68 @@
 
 .score-area {
   margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    border-radius: 12px;
+
+    &__inner {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 68vw;
+      padding: 5vh;
+    }
+
+    &-text {
+      text-align: center;
+    }
+
+    &-img {
+      width: 10vw;
+      height: 10vw;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #242424;
+    }
+  }
 }
 
 .dropdown-wrapper {
   margin: 3vh 0;
+}
+
+.comparison {
+  display: flex;
+
+  &__wrapper {
+    margin: auto;
+
+    &-text {
+      text-align: center;
+      padding: 2vh;
+    }
+  }
+
+  &__score-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 4vw;
+
+    &-right {
+      margin-left: 10vw;
+    }
+  }
+
+  &__score-area-stats {
+    display: flex;
+    justify-content: center;
+  }
 }
