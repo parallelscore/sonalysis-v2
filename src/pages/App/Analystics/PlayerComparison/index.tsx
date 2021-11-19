@@ -7,7 +7,7 @@ const index = () => {
   return (
     <div className="mt-5 ml-4 mr-4">
       <div>
-        <button>Back to analytics</button>
+        <button className="back">&#8592; Back to analytics</button>
 
         <div>
           <h3 className="pt-4">Select players to compare</h3>
@@ -28,22 +28,13 @@ const index = () => {
             <DropdownComponent title="Player name or number" />
           </div>
           <div>
-            <button>Compare</button>
+            <button className="compare">Compare</button>
           </div>
           <div>
             <div className="score-area">
               <div className="score-area__wrapper">
                 <div>
-                  <div
-                    className="score-area__wrapper__inner"
-                    // style={{
-                    //   display: 'flex',
-                    //   justifyContent: 'space-around',
-                    //   alignItems: 'center',
-                    //   width: '68vw',
-                    //   padding: '5vh',
-                    // }}
-                  >
+                  <div className="score-area__wrapper__inner">
                     <div className="score-area__wrapper-text">
                       <ImageCard
                         player="Player 1"

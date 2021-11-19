@@ -3,3 +3,9 @@ export type DropdownProps = {
   category?: string;
   size?: string;
 };
+
+export type ImageCardProps = {
+  player: string;
+  position: string;
+  number: number;
+};
