@@ -13,6 +13,7 @@ import AnalyzedMatch from './AnalyzedMatch';
 import PlayerDetail from './PlayerDetail';
 import MatchStats from './MatchStats';
 import PlayerComparison from './PlayerComparison';
+import PlayerVideoComparison from './playerVideoComparison';
 export interface CardProps {
   number?: number;
   desc?: string;
@@ -49,6 +50,9 @@ const Analystic = (props) => {
 
         <Route path={`${path}/player-comparison`}>
           <PlayerComparison />
+        </Route>
+        <Route path={`${path}/player-video-comparison`}>
+          <PlayerVideoComparison />
         </Route>
       </Switch>
     </div>
