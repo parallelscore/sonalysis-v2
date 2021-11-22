@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DropdownComponent from '../PlayerComparison/DropdownComponent';
 import './index.scss';
 import mockVideo from './../../../../assets/images/Group 1134.png';
 
-const index = () => {
+const videoData = [
+  { id: 1, name: 'Video 1', image: mockVideo },
+  { id: 2, name: 'Video 2', image: mockVideo },
+  { id: 3, name: 'Video 3', image: mockVideo },
+  { id: 4, name: 'Video 4', image: mockVideo },
+  { id: 5, name: 'Video 5', image: mockVideo },
+  { id: 6, name: 'Video 6', image: mockVideo },
+  { id: 7, name: 'Video 7', image: mockVideo },
+  { id: 8, name: 'Video 8', image: mockVideo },
+  { id: 9, name: 'Video 9', image: mockVideo },
+  { id: 10, name: 'Video 10', image: mockVideo },
+  { id: 11, name: 'Video 11', image: mockVideo },
+  { id: 12, name: 'Video 12', image: mockVideo },
+];
+
+const PlayerVideoComparison = () => {
+  const [selectedVideo, setSelectedVideo] = useState(videoData);
+
+  const handleSelectVideo = (id: number) => {
+    setSelectedVideo(videoData.filter((video) => video.id === id));
+  };
+
+  const videoId = selectedVideo.map((video) => video.id);
+  console.log(videoId);
+
   return (
     <div>
       <div>
@@ -16,7 +40,6 @@ const index = () => {
               <h4>Selected Videos</h4>
               <DropdownComponent
                 title="Player name or number"
-                // category="Competition"
                 size="large"
               />{' '}
             </div>
@@ -50,15 +73,22 @@ const index = () => {
             <div className="score-area">
               <div className="score-area__wrapper">
                 <div className="videoUploads">
-                  <img src={mockVideo} />
-                  <img src={mockVideo} />
-                  <img src={mockVideo} />
-                  <img src={mockVideo} />
-                  <img src={mockVideo} />
-                  <img src={mockVideo} />
-                  <img src={mockVideo} />
-                  <img src={mockVideo} />
-                  <img src={mockVideo} />
+                  {videoData.map((video) => (
+                    <div key={video.id}>
+                      <div className="uploadImage">
+                        <img
+                          onClick={() => handleSelectVideo(video.id)}
+                          alt={video.name}
+                          src={video.image}
+                        />
+                        <span
+                          className={`${
+                            video.id === Number(videoId) && 'uploadMark'
+                          }`}
+                        ></span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -69,4 +99,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default PlayerVideoComparison;

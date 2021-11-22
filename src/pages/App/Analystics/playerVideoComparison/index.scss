@@ -31,3 +31,18 @@
     }
   }
 }
+
+.uploadImage {
+  position: relative;
+}
+
+.uploadMark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: rgb(58, 30, 185);
+  border-radius: 50%;
+  text-align: center;
+}
