@@ -1,71 +1,71 @@
 @import '../../assets//styles/variable.scss';
 
 .edit-player {
-  background: #131313;
-  border-radius: 25px;
-  // text-align: center;
-  button {
-    background-color: #a257ff;
-    color: #fff;
-    border-radius: 16px;
-  }
-  .min-cancel {
+    background: #131313;
+    border-radius: 25px;
+    // text-align: center;
     button {
-      background-color: transparent;
-      color: #fff;
+        background-color: #a257ff;
+        color: #fff;
+        border-radius: 16px;
     }
-    .cancel {
-      color: #ff4444;
+    .min-cancel {
+        button {
+            background-color: transparent;
+            color: #fff;
+        }
+        .cancel {
+            color: #ff4444;
+        }
     }
-  }
 
-  .edit-player {
-    background: #222222;
-    border: 1px dashed #a257ff;
-    border-radius: 10px;
-    // width: 328px;
-    // height: 178px;
-    margin: 0 auto;
-    margin-top: 2em;
-  }
-  .text {
-    label,
-    span {
-      color: #ffd601;
-      cursor: pointer;
+    .edit-player {
+        background: #222222;
+        border: 1px dashed #a257ff;
+        border-radius: 10px;
+        // width: 328px;
+        // height: 178px;
+        margin: 0 auto;
+        margin-top: 2em;
     }
-  }
-  .input-container {
-    margin-top: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    input {
-      display: block;
-      border: none;
-      width: 300px;
-      height: 30px;
-      padding-left: 0.5em;
+    .text {
+        label,
+        span {
+            color: #ffd601;
+            cursor: pointer;
+        }
     }
-    button {
-      height: 30px;
-      border-radius: 0;
-      width: 109px;
-      border: none;
+    .input-container {
+        margin-top: 2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        input {
+            display: block;
+            border: none;
+            width: 300px;
+            height: 30px;
+            padding-left: 0.5em;
+        }
+        button {
+            height: 30px;
+            border-radius: 0;
+            width: 109px;
+            border: none;
+        }
     }
-  }
-  .progress-section {
-    .progress-outer {
-      margin-top: 1em;
-      background: #c4c4c4;
-      height: 7px;
-      border-radius: 10px;
+    .progress-section {
+        .progress-outer {
+            margin-top: 1em;
+            background: #c4c4c4;
+            height: 7px;
+            border-radius: 10px;
+        }
+        .progress-inner {
+            background: #a257ff;
+            height: 7px;
+            border-radius: 10px;
+        }
     }
-    .progress-inner {
-      background: #a257ff;
-      height: 7px;
-      border-radius: 10px;
-    }
-  }
 }

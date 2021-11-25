@@ -1,30 +1,30 @@
-import cookie from "js-cookie"
-import data from "../assets/data";
-export const BASE_URL = "https:api.sonalysis.io";
-
+import cookie from 'js-cookie';
+import data from '../assets/data';
+export const BASE_URL = 'https:api.sonalysis.io';
 
 export const logOut = () => {
     cookie.remove('auth');
     window.location.replace('/');
-}
+};
 
 export const playerPositions = {
-    GK: "Goalkeeper",
-    CB: "Defender",
-    SW: "Goalkeeper",
-    FB: "Defender",
-    WB: "Defender",
-    CM: "Midfielder",
-    DM: "Midfielder",
-    AM: "Midfielder",
-    WM: "Midfielder",
-    CF: "Forward",
-    SS: "Forward",
-    W: "Forward",
+    GK: 'Goalkeeper',
+    CB: 'Defender',
+    SW: 'Goalkeeper',
+    FB: 'Defender',
+    WB: 'Defender',
+    CM: 'Midfielder',
+    DM: 'Midfielder',
+    AM: 'Midfielder',
+    WM: 'Midfielder',
+    CF: 'Forward',
+    SS: 'Forward',
+    W: 'Forward',
 };
 
 const getTeamValue = () => {
-    const team = data.TeamA
-}
+    const team = data.TeamA;
+    return team
+};
 
-getTeamValue()
+getTeamValue();
