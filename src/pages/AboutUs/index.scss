@@ -1,170 +1,167 @@
 .about {
-  &-hero {
-    background-image: url(../../assets/images/about-us-bg.png);
-    min-height: 90vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: #fff;
-    text-align: center;
-    h1 {
-      // font-weight: bold;
-      padding-top: 5em;
-    }
-    &-text {
-      font-size: 24px;
-      line-height: 28px;
-    }
-
-  }
-  &-about {
-    padding: 4em 0;
-    background: linear-gradient(0deg, #131313, #131313);
-    &-left {
-      background-image: url(../../assets/images/about.jpg);
-      background-repeat: no-repeat;
-      background-size: contain;
-      min-height: 400px;
-    }
-    &-right {
-      font-size: 18px;
-      line-height: 21px;
-      color: #ffffff;
-      // margin-left: 2em;
-      &-title {
-        color: #898989;
-        text-transform: uppercase;
-      }
-      &-header {
-        font-weight: 600;
-        // font-size: 45px;
-        // line-height: 50px;
-        margin-top: 0.5em;
-        margin-bottom: 0.8em;
-        span {
-          color: #ffd601;
+    &-hero {
+        background-image: url(../../assets/images/about-us-bg.png);
+        min-height: 90vh;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: #fff;
+        text-align: center;
+        h1 {
+            // font-weight: bold;
+            padding-top: 5em;
         }
-      }
+        &-text {
+            font-size: 24px;
+            line-height: 28px;
+        }
     }
-    .second{
-      margin-top: 12em;
-      min-height: 400px;
+    &-about {
+        padding: 4em 0;
+        background: linear-gradient(0deg, #131313, #131313);
+        &-left {
+            background-image: url(../../assets/images/about.jpg);
+            background-repeat: no-repeat;
+            background-size: contain;
+            min-height: 400px;
+        }
+        &-right {
+            font-size: 18px;
+            line-height: 21px;
+            color: #ffffff;
+            // margin-left: 2em;
+            &-title {
+                color: #898989;
+                text-transform: uppercase;
+            }
+            &-header {
+                font-weight: 600;
+                // font-size: 45px;
+                // line-height: 50px;
+                margin-top: 0.5em;
+                margin-bottom: 0.8em;
+                span {
+                    color: #ffd601;
+                }
+            }
+        }
+        .second {
+            margin-top: 12em;
+            min-height: 400px;
+        }
     }
-  }
-  &-analysis {
-    // height: 300px;
-    // background-image: url(../../assets/images/start-analysis.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    // opacity: 0.1;
-    text-align: center;
-    color: #fff;
-    h2 {
-      margin-bottom: 0.4em;
-      span {
-        color: #ffd601;
-      }
+    &-analysis {
+        // height: 300px;
+        // background-image: url(../../assets/images/start-analysis.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        // opacity: 0.1;
+        text-align: center;
+        color: #fff;
+        h2 {
+            margin-bottom: 0.4em;
+            span {
+                color: #ffd601;
+            }
+        }
     }
-  }
-  &-coach {
-    background: linear-gradient(0deg, #131313, #131313);
-    &-card {
-      width: 339px;
-      height: 596px;
-      border-radius: 3px;
-      background-image: url(../../assets/images/coach.jpg);
-      background-repeat: no-repeat;
-      background-size: cover;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      color: #fff;
-      cursor: pointer;
-      h2 {
-        font-weight: 600;
-        font-size: 30px;
-        margin-top: 0.3em;
-      }
-   
+    &-coach {
+        background: linear-gradient(0deg, #131313, #131313);
+        &-card {
+            width: 339px;
+            height: 596px;
+            border-radius: 3px;
+            background-image: url(../../assets/images/coach.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            color: #fff;
+            cursor: pointer;
+            h2 {
+                font-weight: 600;
+                font-size: 30px;
+                margin-top: 0.3em;
+            }
+        }
+        &-card:hover {
+            transform: scale(1.1);
+            transition: ease-out 1s;
+            button {
+                width: 154px;
+                height: 45px;
+                background: #811aff;
+                border-radius: 5px;
+                border: none;
+                color: white;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 21px;
+                margin-top: 1em;
+                opacity: 1;
+                margin-bottom: 2em;
+            }
+        }
+        &-card:nth-child(2) {
+            // background-image: url(../../assets/images/player.jpg);
+        }
+        &-card:nth-child(3) {
+            // background-image: url(../../assets/images/analyst.jpg);
+        }
     }
-    &-card:hover {
-      transform: scale(1.1);
-      transition: ease-out 1s;
-      button {
-        width: 154px;
-        height: 45px;
-        background: #811aff;
-        border-radius: 5px;
-        border: none;
-        color: white;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 21px;
-        margin-top: 1em;
-        opacity: 1;
-        margin-bottom: 2em;
-      }
+    &-feature {
+        color: #fff;
+        background: linear-gradient(0deg, #131313, #131313);
+
+        h2 {
+            margin-top: 0.5em;
+            span {
+                color: #ffd601;
+            }
+        }
+        .name {
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        // &-card {
+        //   display: flex;
+        //   justify-content: center;
+        //   align-items: center;
+        //   text-align: center;
+        //   width: 363px;
+        //   height: 324px;
+        //   background: #000000;
+        //   border-radius: 3px;
+        //   padding: 0 2em;
+        //   &-title {
+        //     font-size: 30px;
+        //     line-height: 35px;
+        //     color: #ffffff;
+        //     font-weight: 600;
+        //     span {
+        //       font-weight: bold;
+        //     }
+        //   }
+        // }
     }
-    &-card:nth-child(2) {
-      // background-image: url(../../assets/images/player.jpg);
+    &-game {
+        margin-top: 7em;
+        background-image: url(../../assets/images/game.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-bottom: -4em;
+        z-index: 1;
+        position: relative;
+        button {
+            background: #811aff;
+            border-radius: 5px;
+            width: 242px;
+            height: 57px;
+            border: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 18px;
+        }
     }
-    &-card:nth-child(3) {
-      // background-image: url(../../assets/images/analyst.jpg);
-    }
-  }
-  &-feature {
-    color: #fff;
-    background: linear-gradient(0deg, #131313, #131313);
-    
-    h2 {
-      margin-top: 0.5em;
-      span {
-        color: #ffd601;
-      }
-    }
-    .name{
-      font-weight: 600;
-      margin-top: 5px;
-    }
-    // &-card {
-    //   display: flex;
-    //   justify-content: center;
-    //   align-items: center;
-    //   text-align: center;
-    //   width: 363px;
-    //   height: 324px;
-    //   background: #000000;
-    //   border-radius: 3px;
-    //   padding: 0 2em;
-    //   &-title {
-    //     font-size: 30px;
-    //     line-height: 35px;
-    //     color: #ffffff;
-    //     font-weight: 600;
-    //     span {
-    //       font-weight: bold;
-    //     }
-    //   }
-    // }
-  }
-  &-game {
-    margin-top: 7em;
-    background-image: url(../../assets/images/game.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-bottom: -4em;
-    z-index: 1;
-    position: relative;
-    button {
-      background: #811aff;
-      border-radius: 5px;
-      width: 242px;
-      height: 57px;
-      border: none;
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 18px;
-      
-    }
-  }
 }

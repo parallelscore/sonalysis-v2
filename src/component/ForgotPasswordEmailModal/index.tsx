@@ -5,12 +5,9 @@ import CancelIcon from '../../assets/icons/cancel.svg';
 import { withRouter } from 'react-router-dom';
 import { postCall } from '../../api/request';
 
-import EyeIcon from '../../assets/icons/eye-close.png';
-import EyeIconOpen from '../../assets/icons/eye-open.png';
-import { useDispatch } from 'react-redux';
-import cookie from 'js-cookie';
 import endPoint from '../../api/endPoints';
-import { getProfileRequest } from '../../store/profile/actions';
+
+import swal from 'sweetalert';
 
 export interface CardProps {
     number?: number;
@@ -19,20 +16,16 @@ export interface CardProps {
     charts?: any;
 }
 
-const Login = ({
+const ForgotPassword = ({
     setIsLoginOpen,
-    handleSignUpOpenModal,
-    handleForgotEmailModal,
+    handleLoginOpenModal,
+    handleEmailCode,
 }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [showPassword, setshowPassword] = useState(false);
     const [userData, setUserData] = useState({
         email: '',
-        password: '',
     });
-
-    const dispatch = useDispatch();
 
     const handleOnchange = (e) => {
         const name = e.target.name;
@@ -44,12 +37,16 @@ const Login = ({
         e.preventDefault();
         setIsLoading(true);
         setErrorMessage('');
-        postCall(endPoint.login, userData).then((res) => {
+        postCall(endPoint.sendResetPasswordEmail, userData).then((res) => {
             setIsLoading(false);
             if (res?.status === 200) {
-                cookie.set('auth', res.data.data.auth_token);
-                dispatch(getProfileRequest(res.data.data.user));
-                window.location.replace('/app');
+                swal(
+                    'Success',
+                    `Email has been sent to ${userData.email}`,
+                    'success'
+                );
+                handleEmailCode();
+                setErrorMessage('');
                 return;
             }
             setErrorMessage(res.data.message);
@@ -64,15 +61,15 @@ const Login = ({
         <Modal isClose={() => setIsLoginOpen(false)}>
             <div className='container'>
                 <div
-                    className='login col-lg-9 mx-auto'
+                    className='email col-lg-9 mx-auto'
                     onClick={stopPropagation}
                 >
-                    <div className='login-left col-5 d-none d-lg-flex'>
-                        <div className='login-left-title'>continue as</div>
-                        <h1 className='p-0'>A COACH</h1>
-                        {/* <div className="login-left-text ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus rhoncus lectus posuere elit et. Odio sapien cras molestie viverra vestibulum. Eros pulvinar lacinia fermentum tincidunt fames etiam lorem.</div> */}
+                    <div className='email-left col-5 d-none d-lg-flex'>
+                        <div className='email-left-title'>RECOVER YOUR</div>
+                        <h2 className='p-0'>PASSWORD</h2>
+                        {/* <div className="email-left-text ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut purus rhoncus lectus posuere elit et. Odio sapien cras molestie viverra vestibulum. Eros pulvinar lacinia fermentum tincidunt fames etiam lorem.</div> */}
                     </div>
-                    <div className='login-right col-lg-7 p-5'>
+                    <div className='email-right col-lg-7 p-5'>
                         <div className='cancel-img '>
                             <img
                                 src={CancelIcon}
@@ -83,11 +80,11 @@ const Login = ({
                         </div>
                         <br />
                         <h4>
-                            <span>Continue</span> Your Analysis, Coach
+                            <span>Recover </span> Your Password
                         </h4>
-                        <div className='login-right-text'>
-                            Welcome back and get to see what has been happening
-                            since you’ve been gone
+                        <div className='email-right-text'>
+                            Enter your email below to recover your forgotten
+                            password
                         </div>
                         <form onSubmit={handleSubmit}>
                             {errorMessage && (
@@ -102,40 +99,16 @@ const Login = ({
                                 <label htmlFor='email'>Email</label>
                                 <input
                                     type='email'
+                                    id='email'
                                     placeholder='jimhalpert@gmail.com'
                                     name='email'
                                     onChange={handleOnchange}
                                     required
                                 />
                             </div>
-                            <div className='mt-4'>
-                                <label htmlFor='password'>Password</label>
-                                <div className='password-container d-flex align-items-center justify-content-center'>
-                                    <input
-                                        type={
-                                            showPassword ? 'text' : 'password'
-                                        }
-                                        placeholder='**********'
-                                        name='password'
-                                        onChange={handleOnchange}
-                                        required
-                                    />
-                                    <img
-                                        src={
-                                            !showPassword
-                                                ? EyeIcon
-                                                : EyeIconOpen
-                                        }
-                                        alt='show password'
-                                        className='hide-eye'
-                                        onClick={() =>
-                                            setshowPassword(!showPassword)
-                                        }
-                                    />
-                                </div>
-                            </div>
+
                             <button disabled={isLoading}>
-                                Login{' '}
+                                Recover Password{' '}
                                 {isLoading && (
                                     <div
                                         className='spinner-border text-light spinner-border-sm'
@@ -147,22 +120,13 @@ const Login = ({
                                     </div>
                                 )}
                             </button>
-                            <div className='get-start mt-2'>
-                                Don’t have an account?{' '}
+                            <div className='get-start mt-3'>
+                                Already have an account?{' '}
                                 <span
-                                    onClick={handleSignUpOpenModal}
+                                    onClick={handleLoginOpenModal}
                                     className='cursor'
                                 >
-                                    Get Started
-                                </span>
-                            </div>
-                            <div className='get-start mt-4'>
-                                {' '}
-                                <span
-                                    onClick={handleForgotEmailModal}
-                                    className='cursor'
-                                >
-                                    Forgot Password?
+                                    Login
                                 </span>
                             </div>
                         </form>
@@ -173,4 +137,4 @@ const Login = ({
     );
 };
 
-export default withRouter(Login);
+export default withRouter(ForgotPassword);
