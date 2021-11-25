@@ -38,14 +38,12 @@ const StepOne = ({ handleChangeStep, setClubDetail }) => {
     status: "pending",
     coach_id: profile._id,
   });
-  console.log({ clubData, files });
   const { allUploadData, getLoading, getError } = upload;
 
   const handleVideoDelete = ({ id, name }) => {};
   const handleOnchange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log({ name });
     if (name == "logo" || name == "video") {
       name == "logo" && setFileLogo(URL.createObjectURL(e.target.files[0]));
       return setFiles({ ...files, [name]: e.target.files[0] });
@@ -56,9 +54,7 @@ const StepOne = ({ handleChangeStep, setClubDetail }) => {
   function getLink() {
     getCall(endPoint.getS3Link).then(async (resLink) => {
       if (resLink.status === 200) {
-        console.log({ resLink });
         const { filename, signedUrl } = resLink.data.data;
-        console.log({ filename, signedUrl });
         const responseFetch = await axios.put(signedUrl, files.video);
         if (responseFetch.status === 200) {
           setClubData({ ...clubData, ["video_url"]: filename });
@@ -73,9 +69,7 @@ const StepOne = ({ handleChangeStep, setClubDetail }) => {
   function getImgLink(file) {
     getCall(endPoint.getS3ImgLink).then(async (resLink) => {
       if (resLink.status === 200) {
-        console.log({ resLink });
         const { filename, signedUrl } = resLink.data.data;
-        console.log({ filename, signedUrl });
         const responseFetch = await axios.put(signedUrl, files.video);
         if (responseFetch.status === 200) {
           setClubData({ ...clubData, ["logo"]: filename });
@@ -105,7 +99,6 @@ const StepOne = ({ handleChangeStep, setClubDetail }) => {
     postCall(endPoint.createClub, clubData).then((res) => {
       setIsLoading(false);
       if (res?.status === 200) {
-        console.log("res.data.data", res.data.data);
         setClubDetail(res.data.data);
         swal("Success", "Club created successfully!", "success");
         handleChangeStep(2);

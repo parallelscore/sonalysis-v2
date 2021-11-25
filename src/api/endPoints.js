@@ -9,6 +9,10 @@ export default {
   getUserById: (userId) => `${baseURL}/users/${userId}`,
   location: "https://api.pace.africa/v1/locations",
   getAllUsers: `${baseURL}/users`,
+  sendResetPasswordEmail: `${baseURL}/users/email`,
+  confirmResetPasswordCode: (code) => `${baseURL}/users/code/${code}`,
+  changePassword: (userId) => `${baseURL}/users/${userId}`,
+
   getUploadsByUserId: (userId, page=1, analyzed) => `${baseURL}/upload/users/${userId}?page=${page}&analyzed=${analyzed}`,
   getUploadById: (uploadId) => `${baseURL}/upload/${uploadId}`,
   updateUploadById: (uploadId) => `${baseURL}/upload/${uploadId}`,

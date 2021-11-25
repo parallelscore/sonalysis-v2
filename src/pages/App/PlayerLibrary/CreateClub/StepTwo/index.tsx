@@ -34,9 +34,7 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
   const handleForce = (data, fileInfo) => {
     setCsvData(data);
     setPlayersData([...playersData, ...data]);
-    console.log("hForce", data);
   };
-  console.log("updatedPd", playersData);
 
   const papaparseOptions = {
     header: true,
@@ -56,8 +54,7 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
     setPlayersData([player, ...otherPlayers]);
     setShowEditModal(false);
   }
-  console.log({ playersData });
-
+  
   const removePlayer = (name) => {
     const result = playersData.filter((player) => player.name != name);
     setPlayersData(result);
@@ -74,9 +71,7 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
       let photoName = "";
       getCall(endPoint.getS3ImgLink).then(async (resLink) => {
         if (resLink.status === 200) {
-          console.log({ resLink });
           const { filename, signedUrl } = resLink.data.data;
-          console.log({ filename, signedUrl });
           const responseFetch = await axios.put(signedUrl, item.photo);
           if (responseFetch.status === 200) {
             const data = {
@@ -117,9 +112,7 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
   async function getImgLink(file) {
     getCall(endPoint.getS3ImgLink).then(async (resLink) => {
       if (resLink.status === 200) {
-        console.log({ resLink });
         const { filename, signedUrl } = resLink.data.data;
-        console.log({ filename, signedUrl });
         const responseFetch = await axios.put(signedUrl, file);
         if (responseFetch.status === 200) {
           return filename;
@@ -130,7 +123,6 @@ const StepTwo = ({ handleChangeStep, clubDetail }) => {
   }
 
   const csvValue = csvData.map((d) => d);
-  console.log({csvValue});
 
   return (
     <div className="step-two">

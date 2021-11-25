@@ -44,10 +44,8 @@ const AllClubs = () => {
     getCall(endPoint.getClubsByCoachId(profile._id, status))
     .then(async (res) => {
       if (res?.status === 200) {
-        console.log({ res });
         const result = res.data.data;
         setClubData(result)
-        console.log({result})
         setIsLoading(false)
         return false
   }
@@ -78,7 +76,6 @@ const AllClubs = () => {
   }
 
   const handleChangeTab = (tab, status) => {
-    console.log({ tab, status })
     const userId = profile._id;
     setTab(tab)
     getAllClubs(status)
@@ -87,7 +84,6 @@ const AllClubs = () => {
   const deleteClub = async(clubId)=>{
     await deleteCall(endPoint.deleteClub(clubId))
       .then((response) => {
-        console.log("response.data.data", response.data);
         if (response.status === 200) {
           
         }

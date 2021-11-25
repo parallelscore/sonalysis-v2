@@ -19,11 +19,9 @@ const AnalyzedMatch = (props) => {
   const uploadData = upload.allUploadData.data.filter(
     (item) => item._id === id
   )[0];
-  console.log({ uploadData });
+
   const { url, TeamA, TeamB, actions } = uploadData.model_data;
 
-  console.log({ url, TeamA, TeamB, actions });
-  console.log("actions", Object.values(actions));
 
   const actionDisplay = Object.values(actions);
   const actionUniqueArr: any = [];
@@ -31,7 +29,7 @@ const AnalyzedMatch = (props) => {
     !actionUniqueArr.includes(item[0]) && actionUniqueArr.push(item[0]);
   });
   const filterAction = actionDisplay.filter((item:any)=>item[0]===actionName)
-  console.log("actionDisplay", actionUniqueArr);
+
 
   const videoURL = `https://sonalysis-service.s3.amazonaws.com/${uploadData.last_media_url}`;
 

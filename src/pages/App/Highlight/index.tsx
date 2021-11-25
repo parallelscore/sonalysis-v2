@@ -57,7 +57,6 @@ const Analytics = () => {
   }
 
   const handleChangeTab = (tab, analyzed) => {
-    console.log({ tab, analyzed })
     const userId = profile._id;
     setTab(tab)
     handleFetchData({ userId, page: 1, analyzed })

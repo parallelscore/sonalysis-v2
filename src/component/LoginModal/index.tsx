@@ -21,7 +21,7 @@ export interface CardProps {
   charts?: any;
 }
 
-const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
+const Login = ({setIsLoginOpen, handleSignUpOpenModal, handleForgotEmailModal}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setshowPassword] = useState(false);
@@ -46,7 +46,6 @@ const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
     postCall(endPoint.login, userData)
       .then((res) => {
         setIsLoading(false)
-        console.log({ res })
         if (res?.status === 200) {
           cookie.set("auth", res.data.data.auth_token);
           dispatch(getProfileRequest(res.data.data.user))
@@ -110,6 +109,7 @@ const Login = ({setIsLoginOpen, handleSignUpOpenModal}) => {
               </div>}
               </button>
               <div className="get-start mt-2">Don’t have an account? <span onClick={handleSignUpOpenModal} className="cursor">Get Started</span></div>
+              <div className="get-start mt-4"> <span onClick={handleForgotEmailModal} className="cursor">Forgot Password?</span></div>
             </form>
           </div>
         </div>

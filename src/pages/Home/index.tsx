@@ -7,6 +7,9 @@ import Recruitment from "../../assets/images/recruitment.svg"
 import Footer from "../../component/Footer"
 import SignUpModal from "../../component/SignUpModal"
 import LoginModal from "../../component/LoginModal"
+import ForgotPasswordEmailModal from "../../component/ForgotPasswordEmailModal"
+import EmailCodeModal from "../../component/EmailCodeModal"
+import NewPasswordModal from "../../component/NewPasswordModal"
 import ComingSoonModal from "../../component/ComingSoonModal"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -21,7 +24,12 @@ export interface CardProps {
 const Home = () => {
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isForgotEmail, setIsForgotEmail] = useState(false);
+  const [isEmailCode, setIsEmailCode] = useState(false);
+  const [isNewPassword, setIsNewPassword] = useState(false);
   const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
+  const [resetUserData, setResetUserData] = useState({});
+
 
   useEffect(() => {
     AOS.init({
@@ -35,9 +43,30 @@ const Home = () => {
     setIsLoginOpen(false)
     setIsSignUpOpen(true)
   }
+  const handleForgotEmailModal = () => {
+    setIsLoginOpen(false)
+    setIsForgotEmail(true)
+  }
   const handleLoginOpenModal = () => {
     setIsSignUpOpen(false)
+    setIsForgotEmail(false)
+    setIsEmailCode(false)
+    setIsNewPassword(false)
     setIsLoginOpen(true)
+  }
+  const handleEmailCode = ()=>{
+    setIsForgotEmail(false)
+    setIsSignUpOpen(false)
+    setIsForgotEmail(false)
+    setIsNewPassword(false)
+    setIsEmailCode(true)
+  }
+  const handleNewPassword = (data)=>{
+    setIsForgotEmail(false)
+    setIsSignUpOpen(false)
+    setIsForgotEmail(false)
+    setIsNewPassword(true)
+    setResetUserData(data)
   }
   return (
     <div className="home">
@@ -45,7 +74,10 @@ const Home = () => {
       <div className="home-hero " >
         {isComingSoonOpen&&<ComingSoonModal isClose={()=>setIsComingSoonOpen(!isComingSoonOpen)}/>}
           {isSignUpOpen && <SignUpModal setIsSignUpOpen={setIsSignUpOpen}  handleLoginOpenModal={handleLoginOpenModal} />}
-          {isLoginOpen && < LoginModal setIsLoginOpen={setIsLoginOpen} handleSignUpOpenModal={handleSignUpOpenModal}/>}
+          {isLoginOpen && < LoginModal setIsLoginOpen={setIsLoginOpen} handleSignUpOpenModal={handleSignUpOpenModal} handleForgotEmailModal={handleForgotEmailModal}/>}
+          {isForgotEmail && < ForgotPasswordEmailModal setIsLoginOpen={setIsForgotEmail} handleLoginOpenModal={handleLoginOpenModal} handleForgotEmailModal={handleForgotEmailModal} handleEmailCode={handleEmailCode}/>}
+          {isEmailCode && < EmailCodeModal setIsLoginOpen={setIsForgotEmail} handleLoginOpenModal={handleLoginOpenModal} handleForgotEmailModal={handleForgotEmailModal} handleNewPassword={handleNewPassword}/>}
+          {isNewPassword && < NewPasswordModal setIsLoginOpen={setIsForgotEmail} handleLoginOpenModal={handleLoginOpenModal} handleForgotEmailModal={handleForgotEmailModal} resetUserData={resetUserData}/>}
         <div className="container" data-aos='zoom-in'>
 
           <h1 className="col-lg-6  mx-auto">

@@ -37,7 +37,7 @@ const Analytics = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [editItem, setIsEditItem] = useState({});
   const [displayData, setDisplaydata]= useState(allUploadData.data?.slice(0, 5))
-  console.log({displayData},)
+
 
   useEffect(() => {
     const socket = io(`${baseURL}`);
@@ -93,7 +93,6 @@ const Analytics = () => {
   };
 
   const handleChangeTab = (tab, analyzed) => {
-    console.log({ tab, analyzed });
     const userId = profile._id;
     setTab(tab);
     handleFetchData({ userId, page: 1, analyzed });
@@ -235,7 +234,7 @@ const Analytics = () => {
                    
                   
                   ))}
-                  {(allUploadData?.data && allUploadData?.data.length!==displayData.length)  &&<button className="load" onClick={()=>setDisplaydata(allUploadData?.data)}>Load {allUploadData?.data.length} more uploads</button>}
+                  {(allUploadData?.data && allUploadData?.data.length!==displayData.length)  &&<button className="load" onClick={()=>setDisplaydata(allUploadData?.data)}>Load {allUploadData?.data.length-5} more uploads</button>}
 
               {!allUploadData?.data?.length && (
                 <div className="no-file col-8 mx-auto mt-5">

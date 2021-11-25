@@ -118,7 +118,6 @@ export const fetchUploadRequest = (userId, page, analyzed) => {
     dispatch(getUploadRequest());
     getCall(endPoints.getUploadsByUserId(userId, page, analyzed))
       .then((response) => {
-        console.log("response.data.data", response.data);
         if (response.status === 200) {
           dispatch(getUploadequest(response.data.data));
         }
@@ -166,7 +165,6 @@ export const deleteRequest = (videoId) => {
     dispatch(deleteUploadRequest());
     await deleteCall(endPoints.deleteVideo(videoId))
       .then((response) => {
-        console.log("response.data.data", response.data);
         if (response.status === 200) {
           dispatch(deleteUploadequest(response.data.data));
         }

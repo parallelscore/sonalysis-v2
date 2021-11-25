@@ -25,7 +25,6 @@ export const playerPositions = {
 
 const getTeamValue = () => {
     const team = data.TeamA
-    console.log({ data })
 }
 
 getTeamValue()

@@ -4,7 +4,6 @@ import EditPen from '../../assets/icons/edit-pen.svg';
 import EditCsvPlayer from '../EditPlayerCsv';
 
 const PlayerCard = ({ player, removePlayer, index, editPlayer }) => {
-  console.log('yes', { player });
   const [showModal, setShowModal] = useState(false);
   return (
     <div className="player-card">

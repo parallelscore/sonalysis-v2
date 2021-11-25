@@ -37,13 +37,11 @@ export const createUploadRequest = (
     getCall(endPoints.getS3Link)
       .then(async (resLink) => {
         if (resLink.status === 200) {
-          console.log({ resLink });
           const { filename, signedUrl } = resLink.data.data;
           const postDatadata = {
             filename,
             originalFilename: file.name || file.get("file").name,
           };
-          console.log({ postDatadata, file });
           const config = {
             onUploadProgress: function (progressEvent) {
               var percentCompleted = Math.round(
@@ -124,7 +122,6 @@ export const fetchUploadRequest = (userId, page, analyzed) => {
     dispatch(getUploadRequest());
     getCall(endPoints.getUploadsByUserId(userId, page, analyzed))
       .then((response) => {
-        console.log("response.data.data", response.data);
         if (response.status === 200) {
           dispatch(getUploadequest(response.data.data));
         }
@@ -172,7 +169,6 @@ export const deleteRequest = (videoId) => {
     dispatch(deleteUploadRequest());
     await deleteCall(endPoints.deleteVideo(videoId))
       .then((response) => {
-        console.log("response.data.data", response.data);
         if (response.status === 200) {
           dispatch(deleteUploadequest(response.data.data));
         }

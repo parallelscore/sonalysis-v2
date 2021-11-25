@@ -109,7 +109,6 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
         swal("Oops! something happen, try again", {
           icon: "error",
         });
-        console.log("error");
       });
   };
 

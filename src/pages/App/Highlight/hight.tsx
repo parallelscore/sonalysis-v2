@@ -21,10 +21,10 @@ const AnalyzedMatch = (props) => {
   let { id } = useParams();
   // let id = "6144bd73b397ec753b3819dd";
   const uploadData = upload.allUploadData.data.filter((item) => item._id === id)[0]
-  console.log({ uploadData })
+
   const { url, TeamA, TeamB, highlightreels } = uploadData.model_data
 
-  console.log({ url, TeamA, TeamB })
+
 
 
 

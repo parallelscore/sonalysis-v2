@@ -19,7 +19,6 @@ export interface CardProps {
 
 const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
   const [singlePlayer, setSinglePlayer] = useState(player);
-  console.log(singlePlayer);
 
   const [isOpen, setIsOpen] = useState(false);
   const [videoFile, setVideoFile] = useState<any>('');
@@ -44,7 +43,6 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
   const handleOnchange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log({ name });
     if (name == 'photo') {
       name == 'photo' && setFilePhoto(URL.createObjectURL(e.target.files[0]));
       return setPlayerData({ ...playerData, [name]: e.target.files[0] });
@@ -57,7 +55,6 @@ const EditModal = ({ setShowModal, addPlayer, clubDetail, player }: any) => {
     setShowModal(false);
   };
   //This is the bupdated player
-  console.log({ singlePlayer });
 
   return (
     <Modal>

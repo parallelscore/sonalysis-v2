@@ -39,7 +39,6 @@ const Editing = ({setIsEditOpen, handleSignUpOpenModal, editItem}) => {
     const name = e.target.name;
     const value = e.target.value;
     setUserData({ ...userData, [name]: value })
-    console.log({userData})
   }
 
   const handleFetchUploadData = () => {
@@ -56,7 +55,6 @@ const Editing = ({setIsEditOpen, handleSignUpOpenModal, editItem}) => {
     putCall(endPoint.updateUploadById(editItem._id), userData)
       .then((res) => {
         setIsLoading(false)
-        console.log({ res })
         if (res?.status === 200) {
           setIsEditOpen(false)
           handleFetchUploadData()

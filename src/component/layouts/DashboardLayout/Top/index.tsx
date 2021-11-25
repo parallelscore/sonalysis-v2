@@ -14,7 +14,6 @@ export interface CardProps {
 
 const Top = () => {
   const { profile }: any = useSelector((state) => state);
-  console.log({profile})
   return (
     <div className="top">
       <div className="left">
