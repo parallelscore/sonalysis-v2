@@ -111,6 +111,8 @@ const Analytics = () => {
             : setOpenProgressModal(true);
     };
 
+    const activeTab = "active-tab"
+
     return (
         <div className='all-video'>
             {isVidoURLModalOpen && (
@@ -146,19 +148,19 @@ const Analytics = () => {
                     <h3 className='mb-4'>Video Uploads</h3>
                     <div className='tab-section'>
                         <div
-                            className={`tab ${tab === 1 && 'active-tab'}`}
+                            className={`tab ${tab === 1 && activeTab}`}
                             onClick={() => handleChangeTab(1, 'all')}
                         >
                             All
                         </div>
                         <div
-                            className={`tab ${tab === 2 && 'active-tab'}`}
+                            className={`tab ${tab === 2 && activeTab}`}
                             onClick={() => handleChangeTab(2, true)}
                         >
                             Complete
                         </div>
                         <div
-                            className={`tab ${tab === 3 && 'active-tab'}`}
+                            className={`tab ${tab === 3 && activeTab}`}
                             onClick={() => handleChangeTab(3, false)}
                         >
                             Incomplete
