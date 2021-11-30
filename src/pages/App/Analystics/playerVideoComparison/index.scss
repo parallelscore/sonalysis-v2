@@ -1,0 +1,48 @@
+.videoUploads {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.selectedVideoArea {
+  background: #000000;
+  padding: 3rem 1rem;
+}
+
+.ml {
+  margin-left: 2rem;
+}
+
+.uploadsSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__items {
+    margin-left: auto;
+    &__search {
+      background: #242424;
+      width: 279px;
+      height: 41px;
+      border-radius: 5px;
+      border: none;
+      text-align: center;
+      color: #fff;
+      font-weight: 500;
+    }
+  }
+}
+
+.uploadImage {
+  position: relative;
+}
+
+.uploadMark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: rgb(58, 30, 185);
+  border-radius: 50%;
+  text-align: center;
+}

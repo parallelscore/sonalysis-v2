@@ -1,0 +1,23 @@
+.scoreArea {
+  display: flex;
+  justify-content: center;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__textArea {
+    border-top: 3px solid #27282c;
+    border-bottom: 3px solid #27282c;
+    padding: 2vh;
+    display: flex;
+    justify-content: space-between;
+
+    &-stat {
+      margin-left: 12vw;
+    }
+  }
+}

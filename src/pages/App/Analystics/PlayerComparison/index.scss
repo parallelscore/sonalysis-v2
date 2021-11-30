@@ -1,0 +1,143 @@
+.dropdown-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-primary {
+  border-color: #242424 !important;
+
+  &:active {
+    background-color: #242424 !important;
+  }
+}
+
+.dropdown-item {
+  width: 19vw;
+}
+
+.btn-primary {
+  background-color: #242424;
+  border-color: none !important;
+  width: 19vw;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #242424;
+    border-color: #242424 !important;
+  }
+
+  &:focus {
+    background-color: #242424;
+    border-color: #242424 !important;
+  }
+  &:active {
+    background-color: #242424;
+    border-color: #242424 !important;
+  }
+}
+
+.btn-check:active + .btn-primary,
+.btn-check:checked + .btn-primary,
+.btn-primary.active,
+.btn-primary:active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: #242424;
+  border-color: none !important;
+  box-shadow: #242424;
+}
+
+.margin-right {
+  margin-right: 3vw;
+}
+
+.score-area {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4vh;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    border-radius: 12px;
+
+    &__inner {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 68vw;
+      padding: 5vh;
+    }
+
+    &-text {
+      text-align: center;
+    }
+
+    &-img {
+      width: 10vw;
+      height: 10vw;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #242424;
+    }
+  }
+}
+
+.dropdown-wrapper {
+  margin: 3vh 0;
+}
+
+.comparison {
+  display: flex;
+
+  &__wrapper {
+    margin: auto;
+
+    &-text {
+      text-align: center;
+      padding: 2vh;
+    }
+  }
+
+  &__score-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 4vw;
+
+    &-right {
+      margin-left: 10vw;
+    }
+  }
+
+  &__score-area-stats {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.compare {
+  background: #515151;
+  padding: 1.5vh 4vw;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 600;
+  margin: 1vh 0 3vh 0;
+
+  &:hover {
+    background: #4b4b4b;
+  }
+}
+
+.back {
+  border: none;
+  outline: none;
+  background: none;
+  color: #fff;
+  font-weight: 600;
+}

@@ -10,6 +10,8 @@ import AllUploadVideo from './AllUploadVideo';
 import AnalyzedMatch from './AnalyzedMatch';
 import PlayerDetail from './PlayerDetail';
 import MatchStats from './MatchStats';
+import PlayerComparison from './PlayerComparison';
+import PlayerVideoComparison from './playerVideoComparison';
 export interface CardProps {
     number?: number;
     desc?: string;
@@ -22,30 +24,37 @@ const Analystic = (props) => {
         match: { path },
     } = props;
 
-    return (
-        <div className=''>
-            <Switch>
-                <Route exact path={path}>
-                    <Redirect to={`${path}/home`} />
-                </Route>
-                <Route exact path={`${path}/home`}>
-                    <Home />
-                </Route>
-                <Route exact path={`${path}/all-video`}>
-                    <AllUploadVideo />
-                </Route>
-                <Route path={`${path}/stats/:id`}>
-                    <MatchStats />
-                </Route>
-                <Route path={`${path}/match/:id`}>
-                    <AnalyzedMatch />
-                </Route>
-                <Route path={`${path}/player/:id`}>
-                    <PlayerDetail />
-                </Route>
-            </Switch>
-        </div>
-    );
+  return (
+    <div className="">
+      <Switch>
+        <Route exact path={path}>
+          <Redirect to={`${path}/home`} />
+        </Route>
+        <Route exact path={`${path}/home`}>
+          <Home />
+        </Route>
+        <Route exact path={`${path}/all-video`}>
+          <AllUploadVideo />
+        </Route>
+        <Route path={`${path}/stats/:id`}>
+          <MatchStats />
+        </Route>
+        <Route path={`${path}/match/:id`}>
+          <AnalyzedMatch />
+        </Route>
+        <Route path={`${path}/player/:id`}>
+          <PlayerDetail />
+        </Route>
+
+        <Route path={`${path}/player-comparison`}>
+          <PlayerComparison />
+        </Route>
+        <Route path={`${path}/player-video-comparison`}>
+          <PlayerVideoComparison />
+        </Route>
+      </Switch>
+    </div>
+  );
 };
 
 export default withRouter(Analystic);
