@@ -1,12 +1,29 @@
-# Getting Started with Create React App
+# About
+Sonalysis Coach platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
+To clone the project:
+```bash
+git clone git@github.com:parallelscore/sonalysis-v2.git
+```
+`cd` into the `sonalysis-v2` directory
+```bash
+cd sonalysis-v2
+```
 
-## Available Scripts
+create a `.env` file with actual values similar to the `.env.example` file.
 
-In the project directory, you can run:
+install project dependencies
+```
+yarn install
+```
 
-### `yarn start`
+
+
+open another terminal, and run the project
+```bash
+yarn start
+```
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,11 +31,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
+```bash
+yarn test
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
+Launches the test runner in the interactive watch mode.
 ### `yarn build`
 
 Builds the app for production to the `build` folder.\
@@ -27,7 +44,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
 
 ### `yarn eject`
 

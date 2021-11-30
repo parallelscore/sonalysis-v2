@@ -1,38 +1,39 @@
-@import "../../assets//styles/variable.scss";
+@import '../../assets//styles/variable.scss';
 
-
-.navbar{
-background-color: #27282C;
-color: white !important;
+.navbar {
+    background-color: #27282c;
+    color: white !important;
     .navbar-collapse {
         flex-grow: 0;
         align-items: center;
-        .nav-item{
-            
-            .nav-link{
+        .nav-item {
+            color: #fff;
+            .nav-link {
                 font-style: normal;
                 font-weight: 600;
                 font-size: 14px;
-                color: #fff !important;
+                color: #fff;
                 text-transform: uppercase;
                 margin-right: 2em;
                 margin-top: 2em;
-                button{
+                button {
                     text-transform: uppercase;
-                    border: 1.5px solid #FFFFFF;
+                    border: 1.5px solid #ffffff;
                     padding: 8px 20px;
                     box-sizing: border-box;
                     border-radius: 3px;
                     font-weight: 600;
                     margin-top: -1em;
                     background-color: transparent;
-                    color: #FFFFFF;
+                    color: #ffffff;
                 }
             }
-
+            .activeClass {
+                color: #811aff;
+            }
         }
     }
-    .navbar-toggler{
+    .navbar-toggler {
         background-color: #fff !important;
     }
 }

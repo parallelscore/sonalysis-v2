@@ -1,12 +1,10 @@
 import './index.scss';
 import {
-  withRouter,
-  Route,
-  Switch,
-  Redirect,
-  useRouteMatch,
+    withRouter,
+    Route,
+    Switch,
+    Redirect,
 } from 'react-router-dom';
-import { useEffect } from 'react';
 import Home from './Home';
 import AllUploadVideo from './AllUploadVideo';
 import AnalyzedMatch from './AnalyzedMatch';
@@ -15,16 +13,16 @@ import MatchStats from './MatchStats';
 import PlayerComparison from './PlayerComparison';
 import PlayerVideoComparison from './playerVideoComparison';
 export interface CardProps {
-  number?: number;
-  desc?: string;
-  image?: string;
-  charts?: any;
+    number?: number;
+    desc?: string;
+    image?: string;
+    charts?: any;
 }
 
 const Analystic = (props) => {
-  const {
-    match: { path },
-  } = props;
+    const {
+        match: { path },
+    } = props;
 
   return (
     <div className="">

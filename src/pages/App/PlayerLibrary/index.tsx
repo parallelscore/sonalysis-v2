@@ -3,10 +3,7 @@ import {
   withRouter,
   Route,
   Switch,
-  Redirect,
-  useRouteMatch,
 } from 'react-router-dom';
-import {useEffect} from "react"
 import AllClub from "./AllClub"
 import CreateClub from "./CreateClub"
 

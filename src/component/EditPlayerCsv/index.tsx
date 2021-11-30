@@ -1,14 +1,7 @@
-import React, { useState, useRef } from 'react';
+import { useState} from 'react';
 import './index.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { postCall, getCall } from '../../api/request';
-import endPoint from '../../api/endPoints';
 import Modal from '../layouts/Modal';
-import FolderIcon from '../../assets/icons/folder.svg';
-import { FileDrop } from 'react-file-drop';
-import EmptyFile from '../../assets/icons/empty-file.svg';
-import { createUploadRequest } from '../../store/upload/actions';
-import axios from 'axios';
+
 
 export interface CardProps {
   number?: number;
@@ -20,16 +13,13 @@ export interface CardProps {
 const EditModal = ({ setShowModal, editPlayer, clubDetail, index, player }: any) => {
   const [singlePlayer, setSinglePlayer] = useState(player);
 
-  const [files, setFiles]: any = useState({
-    photo: '',
-  });
   const [filePhoto, setFilePhoto] = useState('');
 
   const handleOnchange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    if (name == 'photo') {
-      name == 'photo' && setFilePhoto(URL.createObjectURL(e.target.files[0]));
+    if (name === 'photo') {
+      name === 'photo' && setFilePhoto(URL.createObjectURL(e.target.files[0]));
       return setSinglePlayer({ ...singlePlayer, [name]: e.target.files[0] });
     }
     return setSinglePlayer({ ...singlePlayer, [name]: value });
@@ -49,7 +39,7 @@ const EditModal = ({ setShowModal, editPlayer, clubDetail, index, player }: any)
             <form className=" col-lg-10 mt-5 mx-auto">
               <div className="form-group col-lg-4 mx-auto">
                 <label htmlFor="clubLogo" className="logo">
-                  {(filePhoto||singlePlayer.photo) && <img src={filePhoto || URL.createObjectURL(singlePlayer.photo)} alt="logo" />}
+                  {(filePhoto || singlePlayer.photo) && <img src={filePhoto || URL.createObjectURL(singlePlayer.photo)} alt="logo" />}
                   {(!filePhoto && !singlePlayer.photo) && 'Upload Image'}
                 </label>
                 <input
