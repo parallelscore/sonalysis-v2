@@ -5,6 +5,7 @@ export default {
     register: `${baseURL}/users/sign_up`,
     login: `${baseURL}/users/login`,
     logout: `${baseURL}/users/logout`,
+    subscribe: `${baseURL}/newsletter`,
     getUserById: (userId) => `${baseURL}/users/${userId}`,
     location: 'https://api.pace.africa/v1/locations',
     getAllUsers: `${baseURL}/users`,

@@ -1,0 +1,69 @@
+@import '../../assets//styles/variable.scss';
+
+.choose {
+    background: #131313;
+    // min-height: 500px;
+    padding: 50px;
+    border-radius: 30px;
+    .cancel-img {
+        width: 20px;
+        height: 20px;
+        margin-left: auto;
+        margin-right: 20px;
+        cursor: pointer;
+        img {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .title {
+        font-weight: 550;
+        font-size: 28px;
+    }
+
+    .cards {
+        &-left {
+            background-image: url(../../assets/images/comparison.jpg);
+            height: 350px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            text-align: center;
+            border-radius: 5px !important;
+            // border: 1px dashed #131313;
+            &:hover {
+                border: 1px dashed #811aff;
+                box-sizing: border-box;
+                cursor: pointer;
+            }
+            .player {
+                font-weight: 500;
+                font-size: 24px;
+            }
+            .player-top {
+                margin-top: 7em !important;
+            }
+        }
+        &-right {
+            background: #222222;
+            border-radius: 10px;
+            .player-top {
+                margin-top: 7em !important;
+                font-weight: 500;
+                font-size: 24px;
+            }
+            &:hover {
+                border: 1px dashed #811aff;
+                box-sizing: border-box;
+                cursor: pointer;
+            }
+        }
+        .active-card {
+            border: 1px dashed #811aff;
+        }
+    }
+
+    .button-active {
+        background-color: #811aff !important;
+    }
+}

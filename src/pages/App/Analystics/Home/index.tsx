@@ -1,13 +1,16 @@
 import  { useState } from 'react';
 import ComingSoonModal from '../../../../component/ComingSoonModal';
+import ChooseModal from "../../../../component/ChooseModal"
 import { Link } from 'react-router-dom';
 import './index.scss';
 
 const Analytics = () => {
     const [isComingSoonOpen, setIsComingSoonOpen] = useState(false);
+    const [isChooseOpen, setIsChooseOpen] = useState(false);
 
     return (
         <div className='analytics d-flex flex-column flex-lg-row justify-content-evenly '>
+            {isChooseOpen && <ChooseModal setIsChooseOpen={setIsChooseOpen}/>}
             {isComingSoonOpen && (
                 <ComingSoonModal
                     isClose={() => setIsComingSoonOpen(!isComingSoonOpen)}
@@ -31,7 +34,7 @@ const Analytics = () => {
                     Leverage on the use of an AI powered system in extracting
                     analytical insights to compare players.
                 </div>
-                <button onClick={() => setIsComingSoonOpen(true)}>OPEN</button>
+                <button onClick={() => setIsChooseOpen(true)}>OPEN</button>
             </div>
         </div>
     );

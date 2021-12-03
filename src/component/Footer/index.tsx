@@ -1,16 +1,44 @@
-
+import { useState } from 'react';
 import './index.scss';
 import Logo from '../../assets/icons/logo.svg';
 import Facebook from '../../assets/icons/facebook.svg';
 import Twitter from '../../assets/icons/twitter.svg';
 import LinkedIn from '../../assets/icons/LinkedIn.svg';
 import { Link } from 'react-router-dom';
+import { postCall } from '../../api/request';
+import endPoint from '../../api/endPoints';
+import swal from 'sweetalert';
 
 const Footer = ({
     handleLoginOpenModal,
     handleSignUpOpenModal,
     setIsComingSoonOpen,
 }) => {
+    const [userData, setUserData] = useState<string>('');
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        postCall(endPoint.subscribe, { email: userData })
+            .then((res) => {
+                setIsLoading(false);
+                if (res?.status === 200) {
+                    swal(
+                        'Success',
+                        `Thanks for subcribing to our news letter`,
+                        'success'
+                    );
+                    return;
+                }
+                swal('Error', `Oops! something went wrong try again`, 'error');
+            })
+            .catch((e) =>{
+                setIsLoading(false);
+                swal('Error', `Oops! something went wrong try again`, 'error')
+            });
+    };
+
     return (
         <div className='footer'>
             <div className='container'>
@@ -76,14 +104,32 @@ const Footer = ({
                         </ul>
                     </div>
                     <div className='col-lg-3'>
-                        <div className='footer-title'>SUBSCRIBE</div>
-                        <form>
+                        <label className='footer-title' htmlFor='email'>
+                            SUBSCRIBE
+                        </label>
+                        <form onSubmit={handleSubmit}>
                             <input
-                                type='text'
+                                type='email'
                                 placeholder='Enter your email address'
+                                name='email'
                                 className='px-3'
+                                id='email'
+                                required
+                                onChange={(e) => setUserData(e.target.value)}
                             />
-                            <button className='px-4'>SEND</button>
+                            <button className='px-4' disabled={isLoading}>
+                                SEND
+                                {isLoading && (
+                                    <div
+                                        className='spinner-border  spinner-border-sm'
+                                        role='status'
+                                    >
+                                        <span className='visually-hidden'>
+                                            Loading...
+                                        </span>
+                                    </div>
+                                )}
+                            </button>
                         </form>
                         <div className='footer-social d-flex justify-content-between mt-4'>
                             <div>
