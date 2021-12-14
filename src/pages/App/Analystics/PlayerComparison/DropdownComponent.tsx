@@ -16,7 +16,8 @@ const DropdownComponent = ({ title, category, size }: DropdownProps) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+          <Dropdown.Item>Action</Dropdown.Item>
+          <Dropdown.Item >Action</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </div>

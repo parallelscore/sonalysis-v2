@@ -210,7 +210,7 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
                             </button>
                         </div>
                     </>
-                    {postLoading && (
+                    {!postLoading && (
                         <div className='progress-section mt-5'>
                             {progress.percentCompleted === 100 ? (
                                 <h4>Finalizing your video upload</h4>
@@ -228,7 +228,7 @@ const DragNdrop = ({ setOpenDragNdropModal, handleChangeTab }) => {
                                 </div>
                                 <div className='infor-section'>
                                     <div className='completed'>
-                                        {progress.percentCompleted}% Completed
+                                        {10}% Completed
                                     </div>
                                     <div className='size'>
                                         {Number(
