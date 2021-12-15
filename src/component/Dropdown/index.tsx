@@ -17,7 +17,6 @@ const DropdownComponent = ({ title, category, size, items, select }: DropdownPro
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {console.log('items', items)}
           {items?.map(item => (<Dropdown.Item eventKey={item} key={item} href="#/action-1">{item}</Dropdown.Item>))}
           {(!items || !items.length) && <Dropdown.Item href="#/action-1">Action</Dropdown.Item>}
         </Dropdown.Menu>

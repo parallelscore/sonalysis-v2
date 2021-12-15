@@ -77,12 +77,7 @@ const PlayerVideoComparison = (props) => {
     let currentPlayerInfo2 = getPlayerInfo(selectedComparisonVideos[1], playerName);
     const comparisonList = new Array(2).fill('');
 
-    console.log('currentPlayerInfo', currentPlayerInfo)
-    console.log('currentPlayerInfo2', currentPlayerInfo2)
-
     const games = [getData(currentPlayerInfo), getData(currentPlayerInfo2)];
-
-    console.log('games', games)
 
     return (
         <div className='mt-5'>

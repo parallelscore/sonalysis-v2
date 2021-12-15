@@ -38,7 +38,6 @@ const PlayerVideoComparison = (props) => {
     };
 
     const getPlayers = (selected_items) => {
-        console.log('selected_items', selected_items)
         const model_data = data.filter(datum => selected_items.includes(datum._id));
         // const TeamA 
         const player_items = model_data.reduce((curr_datum, datum) => {
@@ -46,8 +45,6 @@ const PlayerVideoComparison = (props) => {
             const model_team_data = model_data?.TeamA?.Players.concat(model_data?.TeamB?.Players || []);
             return curr_datum.concat(model_team_data)
         }, [])
-
-        console.log('player_items', player_items)
 
         const dict = {}
         const player_names: string[] =  []
@@ -58,13 +55,9 @@ const PlayerVideoComparison = (props) => {
             // if (dict[item] && !player_names.includes(item)) player_names.push(String(item))
             else dict[item] = 1;
         }
-        // const player_names: string[] =  []
-        console.log('dict', dict)
-        console.log('player_names1', player_names)
         Object.keys(dict).map(key => {
             if (dict[key] > 1) player_names.push(key)
         })
-        console.log('player_names', player_names)
         if (!player_names || !player_names.length) setSelectedPlayer('Player name or number')
         setAppearance({ ...appearance, ...dict })
         setPlayers([ ...player_names ])
