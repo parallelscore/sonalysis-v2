@@ -125,7 +125,7 @@ const PlayerVideoComparison = (props) => {
 
                     <div className="Video__hightlights">
                         {comparisonList.map((arr, ind) => (
-                            <div className="Display__min_width margin-y-xs">
+                            <div key={`match-breakdown-${ind}`} className="Display__min_width margin-y-xs">
                             {matchBreakdown.map(({ key, topic }) => (
                                     <div key={`${key}-${ind}`}>
                                         <ProgressBar className="" progress={getObjectValue(currentPlayerInfo[key])} />
@@ -141,11 +141,11 @@ const PlayerVideoComparison = (props) => {
                     </div>
 
                     <div className="Video__hightlights">
-                        {comparisonList.map((arr) => (
-                            <div className="Display__min_width margin-y-xs">
+                        {comparisonList.map((arr, ind) => (
+                            <div key={`hightlight-${ind}`} className="Display__min_width margin-y-xs">
                                 <div className="flex-between-display margin-y-xs">
                                     {hightlightsData.map(({ key, topic, image }) => (
-                                        <Badge className="margin-y-xs" image={image} text={getObjectValue(currentPlayerInfo[key])} topic={topic} />
+                                        <Badge key={`${key}-${ind}`} className="margin-y-xs" image={image} text={getObjectValue(currentPlayerInfo[key])} topic={topic} />
                                     ))}
                                 </div>
                             </div>

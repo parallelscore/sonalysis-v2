@@ -15,9 +15,9 @@ const VideoSelectedGroup = ({ remove, videos, selectedItems }) => {
             {selectedItems.length ?
                 selectedItems.map((selectedItem) => 
                     <VideoItem
-                    key={getResource(selectedItem)?._id}
-                    item={getResource(selectedItem)}
-                    remove={() => remove(selectedItem)}
+                        key={`video-item-${selectedItem}`}
+                        item={getResource(selectedItem)}
+                        remove={() => remove(selectedItem)}
                     />
                 )
             :

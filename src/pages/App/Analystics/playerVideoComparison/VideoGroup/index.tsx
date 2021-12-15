@@ -16,7 +16,7 @@ const VideoGroup = ({ onSelect, selectedVideos }) => {
             {/* <div className='score-area__wrapper'> */}
             <div className='videoUploads1'>
                 {data.map((datum) => (
-                    <Item item={datum} selectedVideos={selectedVideos} select={() => onSelect(datum._id)} />
+                    <Item key={`video-uploaded-item-${datum._id}`} item={datum} selectedVideos={selectedVideos} select={() => onSelect(datum._id)} />
                 ))}
                 {/* </div> */}
             </div>
