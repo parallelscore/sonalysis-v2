@@ -5,13 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Dropdown from 'component/Dropdown';
 import VideoGroup from './VideoGroup';
 import VideoSelectedGroup from 'pages/App/Analystics/PlayerVideoComparison/VideoSelectedGroup';
-import mockVideo from 'assets/images/Group 1134.png';
-import AllVideos from 'constants/videos-resources.json'
-import { fetchUploadRequest, setSelectedComparisonVideos, setSelectedComparisonPlayer } from 'store/upload/actions';
+import { setSelectedComparisonVideos, setSelectedComparisonPlayer } from 'store/upload/actions';
 
 import './index.scss';
 
-const allVideos = AllVideos.map( eachVid => ({ ...eachVid, image: mockVideo, }));
 // interface resourceDef { image?: string; id?: number; name?: string; team?: string; video?: string; }
 
 const PlayerVideoComparison = (props) => {
@@ -21,7 +18,7 @@ const PlayerVideoComparison = (props) => {
     const [matchInfo, setMatchInfo] = useState<{}[]>([]);
     const [selectedPlayer, setSelectedPlayer] = useState<string>('Player name or number');
     const [errorMessage, setErrorMessage] = useState<string>('');
-    const { profile, upload: { allUploadData } }: any = useSelector((state) => state);
+    const { upload: { allUploadData } }: any = useSelector((state) => state);
 
     const {
         match: { path },
@@ -29,13 +26,6 @@ const PlayerVideoComparison = (props) => {
 
     const { data } = allUploadData;
     const dispatch = useDispatch();
-
-    const handleFetchUploadData = () => {
-        const userId = profile._id;
-        const page = 1;
-        const analyzed = 'all';
-        dispatch(fetchUploadRequest(userId, page, analyzed));
-    };
 
     const getPlayers = (selected_items) => {
         const model_data = data.filter(datum => selected_items.includes(datum._id));

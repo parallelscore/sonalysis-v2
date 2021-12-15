@@ -68,9 +68,7 @@ const getData = (data) => {
 
 const PlayerVideoComparison = (props) => {
     const { upload }: any = useSelector((state) => state);
-    const { allUploadData, selectedComparisonVideos, selectedComparisonPlayer } = upload
-
-    const { data } = allUploadData;
+    const { selectedComparisonVideos, selectedComparisonPlayer } = upload
 
     const playerName = selectedComparisonPlayer.split('-')[0].trim()
     let currentPlayerInfo = getPlayerInfo(selectedComparisonVideos[0], playerName);
