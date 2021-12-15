@@ -11,7 +11,7 @@ import AnalyzedMatch from './AnalyzedMatch';
 import PlayerDetail from './PlayerDetail';
 import MatchStats from './MatchStats';
 import PlayerComparison from './PlayerComparison';
-import PlayerVideoComparison from './PlayerVideoComparison';
+import PlayerVideoComparison from './playerVideoComparison';
 import PlayerVideoComparisonResult from './VideoComparisonResult';
 export interface CardProps {
     number?: number;

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Dropdown from 'component/Dropdown';
 import VideoGroup from './VideoGroup';
-import VideoSelectedGroup from 'pages/App/Analystics/PlayerVideoComparison/VideoSelectedGroup';
+import VideoSelectedGroup from './VideoSelectedGroup';
 import { setSelectedComparisonVideos, setSelectedComparisonPlayer } from 'store/upload/actions';
 
 import './index.scss';

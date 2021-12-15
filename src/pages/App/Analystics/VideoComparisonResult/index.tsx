@@ -124,7 +124,7 @@ const PlayerVideoComparison = (props) => {
                                         <ProgressBar className="" progress={getObjectValue(currentPlayerInfo[key])} />
                                         <div className="flex-between-display margin-y-xs">
                                             <h3 className="paragraph-text medium-emphasis">{topic}</h3>
-                                            <h3 className="paragraph-text">{getObjectValue(currentPlayerInfo[key])}%</h3>
+                                            <h3 className="paragraph-text">{getObjectValue(currentPlayerInfo[key]).toFixed(1)}%</h3>
                                         </div>
                                     </div>
                                 ))}
