@@ -87,6 +87,11 @@ const PlayerVideoComparison = (props) => {
         setSelectedVideos([...initialVideos ]);
     }
 
+    const isAccurateToCompare = () => {
+        const isLen = selectedVideos.length
+        return ((isLen && selectedPlayer) && selectedPlayer !== 'Player name or number')
+    }
+
     const compareFunc = () => {
         setErrorMessage('')
         const isLen = selectedVideos.length
@@ -99,7 +104,10 @@ const PlayerVideoComparison = (props) => {
     }
 
     const cancelFunc = () => {
-
+        setSelectedComparisonPlayer([])
+        setErrorMessage('')
+        setSelectedVideos([])
+        setSelectedPlayer('Player name or number')
     }
 
     const onSelect = ({ target }) => {
@@ -127,7 +135,7 @@ const PlayerVideoComparison = (props) => {
                     </div>
 
                     <div>
-                        <button onClick={compareFunc} className='compare heading-text'>Compare</button>{' '}
+                        <button onClick={compareFunc} className={`compare${isAccurateToCompare() ? '-active' : ''} heading-text`}>Compare</button>{' '}
                         <button onClick={cancelFunc} className='back ml heading-text'> cancel</button>
                     </div>
                     <div>
