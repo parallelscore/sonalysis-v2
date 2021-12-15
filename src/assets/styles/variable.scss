@@ -6,7 +6,9 @@ $lightGray: #898989;
 $deepGray: #555555;
 $darkGray: #27282C;
 $black: #131313;
-
+$color-black: #000000;
+$color-healthy: #47DC40;
+$color-primary-dark: #201133;
 
 
 // :export {
@@ -19,3 +21,15 @@ $black: #131313;
 //   darkGray:$darkGray;
 //   black: $black;
 // }
+
+
+// styles
+$medium-emphasis: rgba($mainWhite, 0.6);
+$high-emphasis: rgba($mainWhite, 0.87);
+
+$border-radius: 4px;
+
+// font
+$font-stack: 'Work Sans', sans-serif;
+$base-font-size: 87.5%; // 14px - mobile
+$base-line-height: 125%;

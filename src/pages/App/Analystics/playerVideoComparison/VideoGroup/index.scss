@@ -1,4 +1,4 @@
-@import '../../../../assets/styles/variable';
+@import '../../../../../assets/styles/variable';
 
 .videoUploads1 {
     display: flex;
@@ -83,9 +83,4 @@
     background: rgb(58, 30, 185);
     border-radius: 50%;
     text-align: center;
-}
-
-.error-message-text {
-    color: red;
-    font-size: 11px;
 }

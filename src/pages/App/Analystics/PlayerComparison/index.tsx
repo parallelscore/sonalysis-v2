@@ -5,7 +5,7 @@ import './index.scss';
 import ScoreArea from './ScoreArea/ScoreArea';
 const index = () => {
   return (
-    <div className="mt-5 ml-4 mr-4">
+    <div className="Player__Comparison mt-5 ml-4 mr-4">
       <div>
         <button className="back">&#8592; Back to analytics</button>
 

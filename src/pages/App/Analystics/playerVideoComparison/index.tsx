@@ -1,105 +1,128 @@
 import React, { useState } from 'react';
-import DropdownComponent from '../PlayerComparison/DropdownComponent';
-import './index.scss';
 import { withRouter } from 'react-router-dom';
-import mockVideo from './../../../../assets/images/Group 1134.png';
 
-const videoData = [
-    {
-        id: 1,
-        name: 'Video 1',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 2,
-        name: 'Video 2',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 3,
-        name: 'Video 3',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 4,
-        name: 'Video 4',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 5,
-        name: 'Video 5',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 6,
-        name: 'Video 6',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 7,
-        name: 'Video 7',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 8,
-        name: 'Video 8',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 9,
-        name: 'Video 9',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 10,
-        name: 'Video 10',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 11,
-        name: 'Video 11',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-    {
-        id: 12,
-        name: 'Video 12',
-        image: mockVideo,
-        team: "Manchester United vs Chelsea",
-        video: 'https://sonalysis-asset.s3.amazonaws.com/3106328c-61c4-42fc-a86c-f339d5efa21b.mp4',
-    },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import Dropdown from 'component/Dropdown';
+import VideoGroup from './VideoGroup';
+import VideoSelectedGroup from 'pages/App/Analystics/PlayerVideoComparison/VideoSelectedGroup';
+import mockVideo from 'assets/images/Group 1134.png';
+import AllVideos from 'constants/videos-resources.json'
+import { fetchUploadRequest, setSelectedComparisonVideos, setSelectedComparisonPlayer } from 'store/upload/actions';
+
+import './index.scss';
+
+const allVideos = AllVideos.map( eachVid => ({ ...eachVid, image: mockVideo, }));
+// interface resourceDef { image?: string; id?: number; name?: string; team?: string; video?: string; }
 
 const PlayerVideoComparison = (props) => {
-    const [selectedVideo, setSelectedVideo] = useState(videoData);
+    const [selectedVideos, setSelectedVideos] = useState<(string | number)[]>([]);
+    const [players, setPlayers] = useState<(string | number)[]>([]);
+    const [appearance, setAppearance] = useState<{}>({});
+    const [matchInfo, setMatchInfo] = useState<{}[]>([]);
+    const [selectedPlayer, setSelectedPlayer] = useState<string>('Player name or number');
+    const [errorMessage, setErrorMessage] = useState<string>('');
+    const { profile, upload: { allUploadData } }: any = useSelector((state) => state);
 
-    const handleSelectVideo = (id: number) => {
-        setSelectedVideo(videoData.filter((video) => video.id === id));
+    const {
+        match: { path },
+    } = props;
+
+    const { data } = allUploadData;
+    const dispatch = useDispatch();
+
+    const handleFetchUploadData = () => {
+        const userId = profile._id;
+        const page = 1;
+        const analyzed = 'all';
+        dispatch(fetchUploadRequest(userId, page, analyzed));
     };
 
-    const videoId = selectedVideo.map((video) => video.id);
-    console.log(videoId);
+    const getPlayers = (selected_items) => {
+        console.log('selected_items', selected_items)
+        const model_data = data.filter(datum => selected_items.includes(datum._id));
+        // const TeamA 
+        const player_items = model_data.reduce((curr_datum, datum) => {
+            const { model_data } = datum;
+            const model_team_data = model_data?.TeamA?.Players.concat(model_data?.TeamB?.Players || []);
+            return curr_datum.concat(model_team_data)
+        }, [])
+
+        console.log('player_items', player_items)
+
+        const dict = {}
+        const player_names: string[] =  []
+        for (let i = 0; i < player_items.length; i++) {
+            const { Name: name, Team: team } = player_items[i];
+            const item = `${name} - ${team}`
+            if (dict[item]) dict[item] = dict[item] + 1;
+            // if (dict[item] && !player_names.includes(item)) player_names.push(String(item))
+            else dict[item] = 1;
+        }
+        // const player_names: string[] =  []
+        console.log('dict', dict)
+        console.log('player_names1', player_names)
+        Object.keys(dict).map(key => {
+            if (dict[key] > 1) player_names.push(key)
+        })
+        console.log('player_names', player_names)
+        if (!player_names || !player_names.length) setSelectedPlayer('Player name or number')
+        setAppearance({ ...appearance, ...dict })
+        setPlayers([ ...player_names ])
+    }
+
+    const getMatchInfo = (selected_items) => {
+        const model_data = data.filter(datum => selected_items.includes(datum._id));
+        const dMatchInfos = model_data.map(datum => ({
+            team: `${datum?.model_data?.TeamA.Players[0]?.Team} vs ${datum?.model_data?.TeamB.Players[0]?.Team}`,
+            _id: datum._id,
+            video: datum.last_media_url,
+            ...datum?.model_data,
+            TeamA: datum?.model_data?.TeamA?.Players,
+            TeamB: datum?.model_data?.TeamB?.Players,
+        }));
+
+        setMatchInfo(dMatchInfos)
+        dispatch(setSelectedComparisonVideos(dMatchInfos));
+    }
+
+    const handleSelectVideo = (id: number) => {
+        let initialVideos = [...selectedVideos];
+        const existedID = initialVideos.find( initVid => initVid === id);
+        initialVideos = initialVideos.filter( initVid => initVid !== id);
+
+        if (!existedID && selectedVideos.length >= 2) return
+        initialVideos = [...initialVideos, ...(existedID ? [] : [id]) ]
+        setSelectedVideos([ ...initialVideos ]);
+        getPlayers(initialVideos);
+        getMatchInfo(initialVideos)
+    };
+
+    const removeItem = (ID) => {
+        let initialVideos = [...selectedVideos];
+        initialVideos = initialVideos.filter( initVid => initVid !== ID);
+
+        setSelectedVideos([...initialVideos ]);
+    }
+
+    const compareFunc = () => {
+        setErrorMessage('')
+        const isLen = selectedVideos.length
+        if ((isLen && selectedPlayer) && selectedPlayer !== 'Player name or number') {
+            dispatch(setSelectedComparisonPlayer(selectedPlayer))
+            props.history.push(`${path}-result`);
+        } else {
+            setErrorMessage('Oops! Please select the two videos to compare and the player')
+        }
+    }
+
+    const cancelFunc = () => {
+
+    }
+
+    const onSelect = ({ target }) => {
+        setErrorMessage('')
+        if (target.text) setSelectedPlayer(target.text)
+    }
 
     return (
         <div className='mt-5'>
@@ -109,36 +132,20 @@ const PlayerVideoComparison = (props) => {
                 </button>
 
                 <div>
-                    <h3 className='pt-4 mt-5'>
-                        Select player and video to compare
-                    </h3>
-                    <div className='dropdown-area'>
+                    <h3 className='pt-4 mt-5'>Select player and video to compare</h3>
+                    <div className='dropdown-area mt-5'>
                         <div>
-                            <h4>Selected Videos</h4>
-                            <DropdownComponent
-                                title='Player name or number'
-                                size='large'
-                            />{' '}
+                            <h4 className="heading-text">Selected Videos</h4>
+                            <Dropdown select={onSelect} items={players} title={selectedPlayer} size='large' />{' '}
+                            <p><small className="error-message-text">{errorMessage}</small></p>
                         </div>
 
-                        <div className='mb-5'>
-                            <h4>Selected Videos</h4>
-                            <div className='selectedVideoArea'>
-                                <h6>
-                                    The videos that you select will be shown
-                                    right here
-                                </h6>
-                                <h6>
-                                    Note: Only two videos can be selected at a
-                                    time
-                                </h6>
-                            </div>
-                        </div>
+                        <VideoSelectedGroup selectedItems={selectedVideos} remove={removeItem} videos={matchInfo} />
                     </div>
 
                     <div>
-                        <button className='compare'>Compare</button>{' '}
-                        <button className='back ml'> cancel</button>
+                        <button onClick={compareFunc} className='compare heading-text'>Compare</button>{' '}
+                        <button onClick={cancelFunc} className='back ml heading-text'> cancel</button>
                     </div>
                     <div>
                         {' '}
@@ -148,68 +155,14 @@ const PlayerVideoComparison = (props) => {
                                 <input
                                     type='search'
                                     placeholder='Search for  your uploads'
-                                    className='uploadsSection__items__search'
+                                    className='uploadsSection__items__search margin-right-lg'
                                 />
-                                <button className='compare ml'>
-                                    SELECT VIDEO
+                                <button className='Selected_Video_Button'>
+                                    <span className="width-sm paragraph-text">{selectedVideos.length ? `SELECTED ${selectedVideos.length}` : "SELECT VIDEO"}</span>
                                 </button>{' '}
                             </div>
                         </div>
-                        <div className='score-area'>
-                            {/* <div className='score-area__wrapper'> */}
-                            <div className='videoUploads1'>
-                                {videoData.map((video) => (
-                                    <div key={video.id}>
-                                        <div
-                                            className='uploadImage'
-                                            onClick={() =>
-                                                handleSelectVideo(video.id)
-                                            }
-                                        >
-                                            {/* <img
-                          onClick={() => handleSelectVideo(video.id)}
-                          alt={video.name}
-                          src={video.image}
-                        /> */}
-                                            <div className='video-container mb-4'>
-                                                <video
-                                                    controls={false}
-                                                    id='playBackVideo'
-                                                    className='video-preview'
-                                                >
-                                                    <source
-                                                        src={video.video}
-                                                        type='video/mp4'
-                                                    />
-                                                    <source
-                                                        src={video.video}
-                                                        type='video/ogg'
-                                                    />
-                                                    Your browser does not
-                                                    support the video tag.
-                                                </video>
-                                                {video.id ===
-                                                    Number(videoId) && (
-                                                    <span className='uploadMark'>
-                                                        {' '}
-                                                        &#10003;
-                                                    </span>
-                                                )}
-                                                <div className='team mt-3'>
-                                                    <span>Teams:</span>{' '}
-                                                    {video.team}
-                                                </div>
-                                                <div className='team mt-2'>
-                                                    <span> Competition:</span>{' '}
-                                                    Premier League
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                                {/* </div> */}
-                            </div>
-                        </div>
+                        <VideoGroup onSelect={handleSelectVideo} selectedVideos={selectedVideos} />
                     </div>
                 </div>
             </div>

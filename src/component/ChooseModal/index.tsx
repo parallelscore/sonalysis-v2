@@ -3,13 +3,34 @@ import './index.scss';
 import Modal from '../layouts/Modal';
 import CancelIcon from '../../assets/icons/cancel.svg';
 import { withRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
+import { fetchUploadRequest } from '../../store/upload/actions';
+
+export interface CardProps {
+    number?: number;
+    desc?: string;
+    image?: string;
+    charts?: any;
+}
 
 const ChooseModal = ({ setIsChooseOpen, history }) => {
     const [select, setSelect] = useState(0);
 
+    const { profile, }: any = useSelector((state) => state);
+    const dispatch = useDispatch();
+
     const stopPropagation = (e) => {
         e.stopPropagation();
+    };
+
+    const handleFetchUploadData = () => {
+        const userId = profile._id;
+        const page = 1;
+        const analyzed = true;
+        dispatch(fetchUploadRequest(userId, page, analyzed, () => {
+            history.push('/app/analytics/player-video-comparison')
+        }));
     };
 
     const handleRedirect = () => {
@@ -17,7 +38,8 @@ const ChooseModal = ({ setIsChooseOpen, history }) => {
             return history.push('/app/analytics/player-comparison');
         }
         if (select === 2) {
-            return history.push('/app/analytics/player-video-comparison');
+            return handleFetchUploadData()
+            // return history.push('/app/analytics/player-video-comparison');
         }
         alert('here' + select);
     };
