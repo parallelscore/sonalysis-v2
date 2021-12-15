@@ -1,0 +1,88 @@
+@import "variable";
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.medium-emphasis {
+  color: $medium-emphasis;
+}
+
+.high-emphasis {
+  color: $high-emphasis;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.heading-text {
+  font-size: $base-font-size;
+}
+
+.heading-text-medium {
+  font-size: 18px;
+}
+
+.paragraph-text {
+  font-size: 12px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.tiny-image {
+  width: 30px;
+  object-fit: contain;
+}
+
+.width-sm {
+  min-width: 30px;
+}
+
+.flex-center-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.padding-x-sm {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.margin-y-xs {
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.margin-zero {
+  margin: 0;
+}
+
+.margin-b-xs {
+  margin-bottom: 4px;
+}
+
+.margin-y-zero {
+  margin-top: 0!important;
+  margin-bottom: 0!important;
+}
+
+.margin-right-lg {
+  margin-right: 35px;
+}
+
+@mixin container {
+  max-width: 1440px;
+  width: 90%;
+  margin: 0 auto;
+}

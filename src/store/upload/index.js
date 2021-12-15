@@ -1,7 +1,9 @@
 import * as actions from './actionsTypes';
 
 const defaultState = {
-    allUploadData: [],
+    allUploadData: { data: [] },
+    selectedComparisonVideos: [],
+    selectedComparisonPlayer: {},
     singleUploadData: [],
     postLoading: false,
     postError: false,
@@ -26,6 +28,10 @@ const uploadActions = (state = defaultState, action) => {
             return { ...state, getLoading: true };
         case actions.GET_UPLOAD_SUCCESS:
             return { ...state, allUploadData: action.data, getLoading: false };
+        case actions.SELECT_COMPARISON_VIDEOS:
+            return { ...state, selectedComparisonVideos: action.data, getLoading: false };
+        case actions.SELECT_COMPARISON_PLAYER:
+            return { ...state, selectedComparisonPlayer: action.data, getLoading: false };
         case actions.GET_UPLOAD_ERROR:
             return { ...state, getLoading: false, error: false };
         case actions.DELETE_UPLOAD_REQUEST:

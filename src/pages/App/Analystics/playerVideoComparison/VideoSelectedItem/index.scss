@@ -1,0 +1,36 @@
+// @import '../../assets/styles/variable';
+@import '../../../../../assets/styles/variable';
+
+.videoUploads1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border-color: transparent !important;
+}
+
+.Selected__video__wrapper {
+    min-height: 140px;
+}
+
+.Selected__Video_Area {
+    background: #000000;
+    padding: 1rem 1rem;
+    max-width: 350px;
+    border-radius: $border-radius;
+    justify-content: space-between;
+    >h6:first-child {
+        color: rgba(255, 255, 255, 0.6);
+    }
+}
+
+.Remove__item_icon {
+    font-size: 12px;
+    margin-top: -15px;
+    cursor: pointer;
+    background-color: transparent;
+    color: $high-emphasis;
+}
+
+.ml {
+    margin-left: 2rem;
+}

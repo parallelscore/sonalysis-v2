@@ -27,6 +27,20 @@ const postUploadError = (message) => {
     };
 };
 
+export const setSelectedComparisonVideos = (items) => {
+    return {
+        type: actions.SELECT_COMPARISON_VIDEOS,
+        data: items,
+    };
+};
+
+export const setSelectedComparisonPlayer = (items) => {
+    return {
+        type: actions.SELECT_COMPARISON_PLAYER,
+        data: items,
+    };
+};
+
 export const createUploadRequest = (
     file,
     handleChangeTab,
@@ -113,12 +127,14 @@ const getUploadError = (message) => {
     };
 };
 
-export const fetchUploadRequest = (userId, page, analyzed) => {
+export const fetchUploadRequest = (userId, page, analyzed, cb) => {
     // alert("here")
     return (dispatch) => {
         dispatch(getUploadRequest());
+        if (cb) cb('true')
         getCall(endPoints.getUploadsByUserId(userId, page, analyzed))
             .then((response) => {
+                if (cb) cb(true)
                 if (response.status === 200) {
                     dispatch(getUploadequest(response.data.data));
                 }
@@ -132,6 +148,7 @@ export const fetchUploadRequest = (userId, page, analyzed) => {
                 }
             })
             .catch(() => {
+                if (cb) cb(true)
                 dispatch(
                     getUploadError({
                         type: 'confused',
