@@ -5,6 +5,7 @@ export type DropdownProps = {
 };
 
 export type ImageCardProps = {
+  avatar:string
   player: string;
   position: string;
   number: number;

@@ -19,12 +19,14 @@ export interface CardProps {
 
 const SignUp = ({ setIsSignUpOpen, handleLoginOpenModal }) => {
     const {
-        location: { data = [], },
+        location: { data = [] },
     }: any = useSelector((state) => state);
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessagePassword, setErrorMessagePassword] = useState('');
     const [showPassword, setshowPassword] = useState(false);
+    const [showSuccess, setshowSuccess] = useState(false);
     const [userData, setUserData] = useState({
         email: '',
         password: '',
@@ -34,7 +36,46 @@ const SignUp = ({ setIsSignUpOpen, handleLoginOpenModal }) => {
         const name = e.target.name;
         const value = e.target.value;
         setUserData({ ...userData, [name]: value });
+        setErrorMessagePassword('');
     };
+
+    function validatePassword(password) {
+        //var p = document.getElementById('newPassword').value,
+        const errors = [];
+        if (password.length < 10) {
+            setErrorMessagePassword(
+                'Your password must be at least 10 characters'
+            );
+            return false;
+        }
+        if (password.search(/[a-z]/) < 0) {
+            setErrorMessagePassword(
+                'Your password must contain at least one lower case letter.'
+            );
+            return false;
+        }
+        if (password.search(/[A-Z]/) < 0) {
+            setErrorMessagePassword(
+                'Your password must contain at least one upper case letter.'
+            );
+            return false;
+        }
+
+        if (password.search(/[0-9]/) < 0) {
+            setErrorMessagePassword(
+                'Your password must contain at least one digit.'
+            );
+            return false;
+        }
+        if (password.search(/[!@#\$%\^&\*_]/) < 0) {
+            setErrorMessagePassword(
+                'Your password must contain at least special char from -[ ! @ # $ % ^ & * _ ]'
+            );
+            return false;
+        }
+
+        return true;
+    }
 
     useEffect(() => {
         dispatch(fetchLocation());
@@ -42,15 +83,16 @@ const SignUp = ({ setIsSignUpOpen, handleLoginOpenModal }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!validatePassword(userData.password)) {
+            return;
+        }
         setIsLoading(true);
         setErrorMessage('');
         postCall(endPoint.register, userData).then((res) => {
             setIsLoading(false);
             if (res?.status === 200) {
-                // cookie.set("auth", res.data.data.auth_token);
-                // return window.location.replace("/app")
-                swal('Success', 'Account created successfully!', 'success');
-                handleLoginOpenModal();
+                setshowSuccess(true)
+                
             }
             setErrorMessage(res.data.message);
             setInterval(() => setErrorMessage(''), 8000);
@@ -81,126 +123,162 @@ const SignUp = ({ setIsSignUpOpen, handleLoginOpenModal }) => {
                             />
                         </div>
                         <br />
-                        <h4>
-                            <span>Unlock</span> Your Full Potential
-                        </h4>
-                        <div className='signup-right-text'>
-                            Please fill in the following details to begin your
-                            rich experience
-                        </div>
-                        <form onSubmit={handleSubmit}>
-                            {errorMessage && (
-                                <div
-                                    className='alert alert-danger mt-3'
-                                    role='alert'
-                                >
-                                    {errorMessage}
+                        {!showSuccess && (
+                            <div>
+                                <h4>
+                                    <span>Unlock</span> Your Full Potential
+                                </h4>
+                                <div className='signup-right-text'>
+                                    Please fill in the following details to
+                                    begin your rich experience
                                 </div>
-                            )}
-                            <div className='mt-4'>
-                                <label htmlFor='fullName'>Full Name</label>
-                                <input
-                                    type='text'
-                                    name='fullName'
-                                    id='fullName'
-                                    placeholder='First and Last Name'
-                                    onChange={handleOnchange}
-                                    required
-                                />
-                            </div>
-                            <div className='mt-4'>
-                                <label htmlFor='email'>Email</label>
-                                <input
-                                    type='email'
-                                    name='email'
-                                    id='email'
-                                    placeholder='jimhalpert@gmail.com'
-                                    onChange={handleOnchange}
-                                    required
-                                />
-                            </div>
-                            <div className='mt-4'>
-                                <label htmlFor='Country'>Country</label>
-                                <select
-                                    name='country'
-                                    id='country'
-                                    onChange={handleOnchange}
-                                    required
-                                >
-                                    <option value=''>
-                                        Please select a country
-                                    </option>
-                                    {data?.map((country, index) => (
-                                        <option
-                                            value={country.country}
-                                            key={index}
+                                <form onSubmit={handleSubmit}>
+                                    {errorMessage && (
+                                        <div
+                                            className='alert alert-danger mt-3'
+                                            role='alert'
                                         >
-                                            {country.country}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className='mt-4'>
-                                <label htmlFor='club'>Soccer club</label>
-                                <input
-                                    type='text'
-                                    name='club'
-                                    id='club'
-                                    placeholder='Enter name of the club'
-                                    onChange={handleOnchange}
-                                    required
-                                />
-                            </div>
-                            <div className='mt-4'>
-                                <label htmlFor='password'>Password</label>
-                                <div className='password-container d-flex align-items-center justify-content-center'>
-                                    <input
-                                        type={
-                                            showPassword ? 'text' : 'password'
-                                        }
-                                        placeholder='**********'
-                                        name='password'
-                                        onChange={handleOnchange}
-                                        required
-                                    />
-                                    <img
-                                        src={
-                                            !showPassword
-                                                ? EyeIcon
-                                                : EyeIconOpen
-                                        }
-                                        alt='show password'
-                                        className='hide-eye'
-                                        onClick={() =>
-                                            setshowPassword(!showPassword)
-                                        }
-                                    />
-                                </div>
-                            </div>
-                            <button disabled={isLoading}>
-                                Create a Free Account{' '}
-                                {isLoading && (
-                                    <div
-                                        className='spinner-border text-light spinner-border-sm'
-                                        role='status'
-                                    >
-                                        <span className='visually-hidden'>
-                                            Loading...
+                                            {errorMessage}
+                                        </div>
+                                    )}
+                                    <div className='mt-4'>
+                                        <label htmlFor='fullName'>
+                                            Full Name
+                                        </label>
+                                        <input
+                                            type='text'
+                                            name='fullName'
+                                            id='fullName'
+                                            placeholder='First and Last Name'
+                                            onChange={handleOnchange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className='mt-4'>
+                                        <label htmlFor='email'>Email</label>
+                                        <input
+                                            type='email'
+                                            name='email'
+                                            id='email'
+                                            placeholder='jimhalpert@gmail.com'
+                                            onChange={handleOnchange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className='mt-4'>
+                                        <label htmlFor='Country'>Country</label>
+                                        <select
+                                            name='country'
+                                            id='country'
+                                            onChange={handleOnchange}
+                                            required
+                                        >
+                                            <option value=''>
+                                                Please select a country
+                                            </option>
+                                            {data?.map((country, index) => (
+                                                <option
+                                                    value={country.country}
+                                                    key={index}
+                                                >
+                                                    {country.country}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div className='mt-4'>
+                                        <label htmlFor='club'>
+                                            Soccer club
+                                        </label>
+                                        <input
+                                            type='text'
+                                            name='club'
+                                            id='club'
+                                            placeholder='Enter name of the club'
+                                            onChange={handleOnchange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className='mt-4'>
+                                        <label htmlFor='password'>
+                                            Password
+                                        </label>
+                                        <div className='password-container d-flex align-items-center justify-content-center'>
+                                            <input
+                                                type={
+                                                    showPassword
+                                                        ? 'text'
+                                                        : 'password'
+                                                }
+                                                placeholder='**********'
+                                                name='password'
+                                                onChange={handleOnchange}
+                                                required
+                                                onBlur={(e) =>
+                                                    validatePassword(
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                            <img
+                                                src={
+                                                    !showPassword
+                                                        ? EyeIcon
+                                                        : EyeIconOpen
+                                                }
+                                                alt='show password'
+                                                className='hide-eye'
+                                                onClick={() =>
+                                                    setshowPassword(
+                                                        !showPassword
+                                                    )
+                                                }
+                                            />
+                                        </div>
+                                        <p className='pass-error'>
+                                            {errorMessagePassword}
+                                        </p>
+                                    </div>
+                                    <button disabled={isLoading}>
+                                        Create a Free Account{' '}
+                                        {isLoading && (
+                                            <div
+                                                className='spinner-border text-light spinner-border-sm'
+                                                role='status'
+                                            >
+                                                <span className='visually-hidden'>
+                                                    Loading...
+                                                </span>
+                                            </div>
+                                        )}
+                                    </button>
+
+                                    <div className='get-start mt-2'>
+                                        Already have an account?{' '}
+                                        <span
+                                            onClick={handleLoginOpenModal}
+                                            className='cursor'
+                                        >
+                                            Login
                                         </span>
                                     </div>
-                                )}
-                            </button>
-
-                            <div className='get-start mt-2'>
-                                Already have an account?{' '}
-                                <span
-                                    onClick={handleLoginOpenModal}
-                                    className='cursor'
-                                >
-                                    Login
-                                </span>
+                                </form>
                             </div>
-                        </form>
+                        )}
+                        {showSuccess && (
+                            <div className="mt-5">
+                                <h4>
+                                    <span>Account</span> created successfully
+                                </h4>
+                                <div className='signup-right-text'>
+                                    We have sent a confirmation email to{' '}
+                                    {userData.email}
+                                </div>
+                                <button onClick={() => setIsSignUpOpen(false)}>
+                                        Close
+                                    </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

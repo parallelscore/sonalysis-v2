@@ -10,8 +10,6 @@
   }
 
   &__textArea {
-    border-top: 3px solid #27282c;
-    border-bottom: 3px solid #27282c;
     padding: 2vh;
     display: flex;
     justify-content: space-between;
@@ -19,5 +17,17 @@
     &-stat {
       margin-left: 12vw;
     }
+  }
+  .progress-outer {
+    margin-top: 1em;
+    background: #27282c;
+    height: 7px;
+    border-radius: 10px;
+    width: 100%;
+  }
+  .progress-inner {
+    background: #47DC40;
+    height: 7px;
+    border-radius: 10px;
   }
 }

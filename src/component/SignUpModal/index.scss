@@ -8,6 +8,7 @@
     margin-bottom: 50px !important;
     padding-bottom: 50px;
     padding-top: 20px;
+
     &-left {
         // height: 70vh;
         background-image: url(../../assets/images/login-coach.svg);
@@ -40,6 +41,7 @@
     }
     &-right {
         background-color: #131313;
+        min-height: 600px;
         .cancel-img {
             display: flex;
             justify-content: flex-end;
@@ -63,6 +65,9 @@
             text-align: left;
             max-width: 350px;
             margin: 2em auto;
+            .pass-error{
+                color: #a71629 !important;
+            }
             input,
             select {
                 border: 1px solid #e5e5e5;
