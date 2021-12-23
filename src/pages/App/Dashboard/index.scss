@@ -1,0 +1,21 @@
+.dashboard {
+    .first-section {
+        .first-section-card {
+            background: linear-gradient(0deg, #00d0c2, #00d0c2), #ffffff;
+            border-radius: 10px;
+            width: 249px;
+            height: 150px;
+        }
+    }
+    .total {
+        .blue-dot,.red-dot {
+            width: 7px;
+            height: 7px;
+            background: #007cff;
+            border-radius: 50%;
+        }
+        .red-dot{
+            background: #EF854B;
+        }
+    }
+}

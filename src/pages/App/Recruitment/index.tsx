@@ -1,7 +1,10 @@
 import './index.scss';
+import ComingSoonPage from 'component/ComingSoonPage';
 
 const Recruitment = () => {
-    return <div className='text-center'>Recruitment</div>;
+    return (
+        <ComingSoonPage showBtn={false}/>
+    )
 };
 
 export default Recruitment;
