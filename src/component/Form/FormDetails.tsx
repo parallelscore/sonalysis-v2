@@ -23,7 +23,7 @@ const FormDetails = ({children, coloredTitle,title, subTitle, display='flex', bu
                     {
                         hasAccount ?
                         <Text align={'center'}>
-                            Already have an account? <Link fontWeight="semibold">Login</Link>
+                            Already have an account? <Link to="/login" fontWeight="semibold">Login</Link>
                         </Text>
                         :
                         <Text align={'center'}>

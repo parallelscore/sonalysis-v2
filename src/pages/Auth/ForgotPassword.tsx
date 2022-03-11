@@ -19,7 +19,6 @@ const ForgotPassword = () => {
                 </FormControl>
             </GridItem>
         </FormDetails>
-        
     </Flex>
   )
 }

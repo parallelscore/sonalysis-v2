@@ -80,12 +80,12 @@ const NavBar = ({ handleLoginOpenModal }) => {
                         </li>
                         <li className='nav-item'>
                             <NavLink
-                                to='/'
+                                to='/login'
                                 className='nav-link'
                                 activeClassName='activeClass'
                                 aria-current='page'
                             >
-                                <button onClick={handleLoginOpenModal}>
+                                <button >
                                     Login
                                 </button>
                             </NavLink>
