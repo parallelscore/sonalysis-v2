@@ -17,6 +17,8 @@ import VerifyCode from './pages/Auth/VerifyCode';
 import ResetPassword from './pages/Auth/ResetPassword';
 import ClubAdminReg from './pages/Club-Reg/ClubAdminReg';
 import AdminSubPlan from './pages/Club-Reg/AdminSubPlan' 
+import PaymentMethod from './pages/Club-Reg/PaymentMethod' 
+
 
 function App() {
     return (
@@ -57,6 +59,9 @@ function App() {
                             </Route>
                             <Route exact path='/admin-sub-plan'>
                                 <AdminSubPlan/>
+                            </Route>
+                            <Route exact path='/payment-plan'>
+                                <PaymentMethod/>
                             </Route>
                         </Switch>
                     </Router>
