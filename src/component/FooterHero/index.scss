@@ -1,0 +1,21 @@
+.home {
+    &-game {
+        margin-top: 7em;
+        background-image: url(../../assets/images/game.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-bottom: -4em;
+        z-index: 1;
+        position: relative;
+        button {
+            background: #811aff;
+            border-radius: 5px;
+            width: 242px;
+            height: 57px;
+            border: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 18px;
+        }
+    }
+}

@@ -15,8 +15,8 @@ import { LoopingRhombusesSpinner } from 'react-epic-spinners';
 import swal from 'sweetalert';
 import { updateUpload } from '../../../../store/upload/actions';
 import { baseURL } from '../../../../api/request';
-import { io } from 'socket.io-client';
-import VideoModal from '../../../../component/videoModal ';
+// import { io } from 'socket.io-client';
+// import VideoModal from '../../component/videoModal ';
 import EditUploadVideoModal from '../../../../component/EditUploadVideoNameModal';
 import DeleteIcon from '../../../../assets/icons/deleteIcon.png';
 
@@ -41,11 +41,11 @@ const Analytics = () => {
     );
 
     useEffect(() => {
-        const socket = io(`${baseURL}`);
+        // const socket = io(`${baseURL}`);
 
-        socket.on('analyzed video', (uploadProgress) => {
-            uploadProgress && dispatch(updateUpload(uploadProgress));
-        });
+        // socket.on('analyzed video', (uploadProgress) => {
+        //     uploadProgress && dispatch(updateUpload(uploadProgress));
+        // });
     }, []);
 
     useEffect(() => {
@@ -115,12 +115,12 @@ const Analytics = () => {
 
     return (
         <div className='all-video'>
-            {isVidoURLModalOpen && (
+            {/* {isVidoURLModalOpen && (
                 <VideoModal
                     vidoeURL={videoURL}
                     isClose={() => setIsVidoURLModalOpen(false)}
                 />
-            )}
+            )} */}
             {isEditOpen && (
                 <EditUploadVideoModal
                     setIsEditOpen={setIsEditOpen}
