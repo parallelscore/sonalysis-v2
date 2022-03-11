@@ -15,7 +15,6 @@ const ClubAdminReg = () => {
        'company-email':'',
        'company-phone':'',
        'password':''
-
    })
 
    const [clubName, setClubName] = useState('')
